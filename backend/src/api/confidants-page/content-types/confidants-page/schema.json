@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "confidants_pages",
+  "info": {
+    "singularName": "confidants-page",
+    "pluralName": "confidants-pages",
+    "displayName": "Vertrouwenspersonen-pagina",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "banner": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

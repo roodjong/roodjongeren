@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "join_uses",
+  "info": {
+    "singularName": "join-us",
+    "pluralName": "join-uses",
+    "displayName": "Word lid",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "banner": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

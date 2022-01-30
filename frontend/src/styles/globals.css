@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: 'Bebas Neue Pro';
+    src: url('/fonts/BebasNeuePro-Book.woff2') format('woff2'),
+    url('/fonts/BebasNeuePro-Book.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue Pro';
+    src: url('/fonts/BebasNeuePro-Light.woff2') format('woff2'),
+    url('/fonts/BebasNeuePro-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Bebas Neue Pro';
+    src: url('/fonts/BebasNeuePro-Bold.woff2') format('woff2'),
+    url('/fonts/BebasNeuePro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@layer components {
+    .button-primary {
+        @apply bg-primary text-white text-center font-title font-bold px-6 py-3 rounded shadow-md shadow-[#0004] transition-all origin-center whitespace-nowrap;
+        @apply hover:shadow-xl hover:scale-110 hover:-skew-y-2 hover:shadow-[#0004];
+        @apply active:shadow-xl active:scale-110 active:-skew-y-2 active:shadow-[#0004];
+    }
+
+    .content {
+        @apply container mx-auto p-4;
+    }
+
+    .text-outline {
+        text-shadow: #0009 0 0 2px;
+    }
+
+    .list-star {
+        list-style-image: url("/images/list-image.webp");
+    }
+}
+
+html {
+    @apply scroll-smooth scroll-pt-[64px];
+}

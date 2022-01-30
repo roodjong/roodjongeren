@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "support_uses",
+  "info": {
+    "singularName": "support-us",
+    "pluralName": "support-uses",
+    "displayName": "Steun ons",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "richtext",
+      "required": true
+    },
+    "banner": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

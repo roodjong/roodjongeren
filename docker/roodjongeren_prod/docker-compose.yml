@@ -1,0 +1,81 @@
+version: '3.9'
+services:
+  postgres:
+    container_name: rood_postgres
+    image: postgres:14.1
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=$DATABASE_USER
+      - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+      - POSTGRES_DB=$DATABASE_NAME
+    networks:
+      - roodjongeren_network
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    logging:
+      driver: "local"
+  nginx:
+    container_name: rood_nginx
+    image: nginx:1.21.6-alpine
+    restart: unless-stopped
+    environment:
+      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+    networks:
+      - roodjongeren_network
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+    logging:
+      driver: "local"
+  strapi:
+    container_name: rood_strapi
+    build: ../../backend
+    image: jordimartijnvanos/roodjongeren_strapi
+    restart: unless-stopped
+    environment:
+      - URL=$STRAPI_URL
+      - HOST=$STRAPI_HOST
+      - PORT=$STRAPI_PORT
+      - ADMIN_JWT_SECRET=$STRAPI_ADMIN_JWT_SECRET
+      - JWT_SECTRET=$STRAPI_JWT_SECRET
+      - API_TOKEN_SALT=$STRAPI_API_TOKEN_SALT
+      - APP_KEYS=$STRAPI_APP_KEYS
+      - DATABASE_HOST=$DATABASE_HOST
+      - DATABASE_PORT=$DATABASE_PORT
+      - DATABASE_NAME=$DATABASE_NAME
+      - DATABASE_USER=$DATABASE_USER
+      - DATABASE_PASSWORD=$DATABASE_PASSWORD
+    depends_on:
+      - postgres
+    networks:
+      - roodjongeren_network
+    volumes:
+      - strapi_uploads_volume:/usr/src/app/public/uploads
+    logging:
+      driver: "local"
+  nextjs:
+    container_name: rood_nextjs
+    build: ../../frontend
+    image: jordimartijnvanos/roodjongeren_nextjs
+    restart: unless-stopped
+    environment:
+      - BACKEND_URL=http://strapi:1337
+      - NEXT_PUBLIC_BACKEND_URL=/backend
+    depends_on:
+      - strapi
+      - nginx
+    networks:
+      - roodjongeren_network
+    logging:
+      driver: "local"
+networks:
+  roodjongeren_network:
+    driver: bridge
+volumes:
+  postgres_volume:
+    name: rood_postgres_volume
+    driver: local
+  strapi_uploads_volume:
+    name: rood_postgres_volume
+    driver: local

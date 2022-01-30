@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# Whitelist
+!config/
+!database/
+!src/
+!favicon.ico
+!package.json
+!yarn.lock

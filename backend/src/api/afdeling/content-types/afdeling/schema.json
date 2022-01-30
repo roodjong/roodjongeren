@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "afdelingen",
+  "info": {
+    "singularName": "afdeling",
+    "pluralName": "afdelingen",
+    "displayName": "Afdeling",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "longitude": {
+      "type": "float",
+      "required": true
+    },
+    "latitude": {
+      "type": "float",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "twitterLink": {
+      "type": "string"
+    },
+    "facebookLink": {
+      "type": "string"
+    },
+    "instagramLink": {
+      "type": "string"
+    },
+    "contactpersoon": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::post.post",
+      "mappedBy": "afdeling"
+    },
+    "about": {
+      "type": "richtext",
+      "required": true
+    },
+    "banner": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
