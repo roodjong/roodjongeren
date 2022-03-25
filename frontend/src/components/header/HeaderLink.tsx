@@ -13,8 +13,8 @@ interface Props {
 export default function Header(props: Props) {
     const router = useRouter();
     const active = props.exact
-        ? router.pathname === props.href
-        : router.pathname.startsWith(props.href);
+        ? router.asPath === props.href
+        : router.asPath.startsWith(props.href);
     
     return <ConditionalWrapper wrap={!props.externalLink}
                                wrapper={children => <Link href={props.href}>{children}</Link>}>

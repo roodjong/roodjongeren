@@ -93,7 +93,6 @@ sudo cat dump_rood.sql | sudo docker exec -i rood_postgres psql -U postgres -d r
 
 ## Planned improvements
 
-- Fix HeaderLink active resetting when clicking on HeaderDropdown
 - Fix black flashing pages on refresh
 - Add HTTPS support
 - Add aria labels for improved search engine support
@@ -105,3 +104,4 @@ sudo cat dump_rood.sql | sudo docker exec -i rood_postgres psql -U postgres -d r
 - Add short links to afdeling
 - Fix slug generation adds -1
 - Fix adding afdeling results in error
+- Use public license fonts only
