@@ -95,8 +95,13 @@ sudo cat dump_rood.sql | sudo docker exec -i rood_postgres psql -U postgres -d r
 
 - Fix HeaderLink active resetting when clicking on HeaderDropdown
 - Fix black flashing pages on refresh
-- Fix bug where you cannot access Strapi on the deployed environment
 - Add HTTPS support
 - Add aria labels for improved search engine support
 - Add a WYSIWYG editor
 - Add analytics
+- Less noisy Leaflet map
+- Add Opiniestukken
+- Add Afdelingsnieuwsberichten
+- Add short links to afdeling
+- Fix slug generation adds -1
+- Fix adding afdeling results in error
