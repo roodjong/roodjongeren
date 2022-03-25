@@ -98,7 +98,6 @@ sudo cat dump_rood.sql | sudo docker exec -i rood_postgres psql -U postgres -d r
 - Add aria labels for improved search engine support
 - Add a WYSIWYG editor
 - Add analytics
-- Less noisy Leaflet map
 - Add Opiniestukken
 - Add Afdelingsnieuwsberichten
 - Add short links to afdeling
