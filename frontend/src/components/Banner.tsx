@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import imageLoader from '../utils/image-loader';
 import {ReactNode} from 'react';
-import {FaChevronDown} from 'react-icons/fa';
 
 interface Props {
     title: string;
@@ -20,27 +19,22 @@ export default function Banner(props: Props) {
         <div className="absolute top-0 left-0 w-full h-full bg-primary"
              style={{clipPath: 'polygon(0% 85%, 0% 101%, 60% 101%)'}}/>
         <div className="w-full px-4 pt-[128px] pb-16 text-white font-bold text-center relative font-extralight uppercase font-title">
-            <div className="flex w-full">
-                <TitleDecoration/>
-                <h1 className="text-[4rem] sm:text-[6rem] md:text-[7rem] font-bold leading-none text-outline" style={{wordBreak: 'break-word'}}>
-                    {props.title}
-                </h1>
-                <TitleDecoration/>
-            </div>
+            <h1 className="text-[4rem] sm:text-[6rem] md:text-[7rem] font-bold leading-none text-outline" style={{wordBreak: 'break-word'}}>
+                {props.title}
+            </h1>
             <h2 className="text-5xl text-outline">{props.subtitle}</h2>
             <ContentLink/>
         </div>
     </div>;
 }
 
-function TitleDecoration() {
-    return <div className="mt-[1.5rem] sm:mt-[2.5rem] md:mt-[3rem] border-t-2 border-b-2 border-white h-4 grow"/>;
-}
-
 function ContentLink() {
-    return <div className="w-full">
-        <a href="#main-content" className="inline-block" tabIndex={-1}>
-            <FaChevronDown className="text-8xl text-faded hover:text-white transition-colors scale-y-[30%]"/>
+    return <div className="mt-12">
+        <a href="#main-content" className="inline-block group" tabIndex={-1}>
+            <div className="flex mt-12 opacity-75 group-hover:opacity-100 transition-opacity">
+                <div className="h-[2px] w-14 bg-white transition-colors origin-right rotate-45"/>
+                <div className="h-[2px] w-14 bg-white transition-colors origin-left -rotate-45"/>
+            </div>
         </a>
     </div>;
 }
