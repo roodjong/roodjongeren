@@ -28,7 +28,7 @@ export default function Header() {
             <div className="flex gap-4 justify-between items-center">
                 <Link href="/" passHref>
                     <div
-                        className={`hover:skew-x-3 transition-transform flex py-1 mr-4 cursor-pointer transition-all min-w-[64px] ${hasScrolled ? 'w-[64px]' : 'w-[64px] md:w-[128px]'}`}>
+                        className={`hover:skew-x-3 transition-transform flex py-2 mr-4 cursor-pointer transition-all min-w-[64px] ${hasScrolled ? 'w-[64px]' : 'w-[64px] md:w-[128px]'}`}>
                         <Image src="/images/rood-logo.svg" width="128px" height="128px" alt="Logo ROOD"/>
                     </div>
                 </Link>
