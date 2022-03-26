@@ -55,7 +55,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     const page = parseInt(params.page);
     
     const [{posts, pagination}, banner] = await Promise.all([
-        fetchPosts(null, page),
+        fetchPosts(null, null, page),
         fetchFallbackBanner()
     ]);
     

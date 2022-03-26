@@ -175,7 +175,7 @@ export async function fetchPostSlugs(): Promise<{ slugs: string[], pagination: S
     };
 }
 
-export async function fetchPosts(author: string | null = null, page: number = 1, pageSize: number = 8): Promise<{ posts: Post[], pagination: StrapiPagination }> {
+export async function fetchPosts(author: string | null = null, afdeling: string | null = null, page: number = 1, pageSize: number = 8): Promise<{ posts: Post[], pagination: StrapiPagination }> {
     const response = await backend.get<StrapiListResponse<Post>>('/posts', {
         params: {
             sort: 'publishedAt:desc',
@@ -198,13 +198,14 @@ export async function fetchPosts(author: string | null = null, page: number = 1,
                     fields: ['formats']
                 }
             },
-            filters: author ? {
-                author: {$eq: author}
-            } : undefined
+            filters: {
+                author: author ? {$eq: author} : undefined,
+                afdeling: afdeling ? {
+                    slug: {$eq: afdeling}
+                } : undefined
+            }
         }
     });
-    
-    console.log(response.request);
     
     function sanitise(post: any): Post {
         post.afdeling = post.afdeling.data?.attributes ?? null;
