@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {fetchAfdeling, fetchAfdelingen, fetchFallbackBanner} from '../../utils/backend';
+import {fetchAfdeling, fetchAfdelingen, fetchFallbackBanner, fetchPosts} from '../../utils/backend';
 import Afdeling from '../../models/Afdeling';
 import {ParsedUrlQuery} from 'querystring';
 import {GetStaticPropsContext, GetStaticPropsResult} from 'next';
@@ -10,6 +10,9 @@ import {FaFacebook, FaInstagram, FaTwitter} from 'react-icons/fa';
 import Banner from '../../components/Banner';
 import Main from '../../components/Main';
 import {revalidate} from '../../utils/revalidate';
+import {Post} from '../../models/Post';
+import EndlessNewsLoader from '../../components/EndlessNewsLoader';
+import Subheader from '../../components/Subheader';
 
 interface Params extends ParsedUrlQuery {
     slug: string;
@@ -18,6 +21,7 @@ interface Params extends ParsedUrlQuery {
 interface Props {
     fallbackBanner: string;
     afdeling: Afdeling;
+    posts: Post[];
 }
 
 export default function AfdelingPage(props: Props) {
@@ -29,7 +33,7 @@ export default function AfdelingPage(props: Props) {
         </Head>
         <Banner title={afdeling.name} background={afdeling.banner ?? props.fallbackBanner} compact/>
         <Main className="content flex flex-col-reverse md:flex-row gap-4 justify-between">
-            <div className="">
+            <div>
                 <div className="flex text-base mt-2 mb-6 gap-4 text-primary">
                     <IconContext.Provider value={{className: '!text-primary origin-center group-hover:scale-125 transition-transform inline mr-2'}}>
                         {afdeling.twitterLink && <a className="group hover:underline" href={afdeling.twitterLink}><FaTwitter/> Twitter</a>}
@@ -46,6 +50,10 @@ export default function AfdelingPage(props: Props) {
                                 phone={afdeling.contactpersoon?.phone ?? undefined}/>
             </div>
         </Main>
+        <div className="content">
+            <Subheader>Laatste nieuws</Subheader>
+            <EndlessNewsLoader posts={props.posts} afdeling={props.afdeling.slug}/>
+        </div>
     </div>;
 }
 
@@ -63,13 +71,14 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<Props>> {
     const params = context.params as Params;
     
-    const [fallbackBanner, afdeling] = await Promise.all([
+    const [fallbackBanner, afdeling, {posts}] = await Promise.all([
         fetchFallbackBanner(),
-        fetchAfdeling(params.slug)
+        fetchAfdeling(params.slug),
+        fetchPosts(null, params.slug, 1, 4)
     ]);
     
     return {
-        props: {fallbackBanner, afdeling},
+        props: {fallbackBanner, afdeling, posts},
         revalidate
     };
 }

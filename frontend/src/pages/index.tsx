@@ -7,10 +7,11 @@ import {fetchAfdelingen, fetchHome, fetchPosts} from '../utils/backend';
 import Afdeling from '../models/Afdeling';
 import HomeContent from '../models/HomeContent';
 import {Post} from '../models/Post';
-import LatestNews from '../components/LatestNews';
+import EndlessNewsLoader from '../components/EndlessNewsLoader';
 import Main from '../components/Main';
 import {revalidate} from '../utils/revalidate';
 import {GetStaticPropsResult} from 'next';
+import Subheader from '../components/Subheader';
 
 interface Props {
     homeContent: HomeContent;
@@ -30,7 +31,10 @@ export default function HomePage(props: Props) {
         <Main>
             <AboutUsShort content={content.shortAboutUs}/>
             <AfdelingenMap afdelingen={props.afdelingen} compact/>
-            <LatestNews posts={props.posts}/>
+            <div className="content">
+                <Subheader>Laatste nieuws</Subheader>
+                <EndlessNewsLoader posts={props.posts}/>
+            </div>
         </Main>
     </div>;
 }
@@ -39,7 +43,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
     const [homeContent, afdelingen, {posts}] = await Promise.all([
         fetchHome(),
         fetchAfdelingen(),
-        fetchPosts(null, 1, 4)
+        fetchPosts(null, null, 1, 4)
     ]);
     
     return {

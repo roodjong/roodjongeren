@@ -98,6 +98,5 @@ cat dump_rood.sql | docker exec -i rood_postgres psql -U rood -d rood
 - Add aria labels for improved search engine support
 - Add a WYSIWYG editor
 - Add analytics
-- Add Afdelingsnieuwsberichten
 - Add short links to afdeling
 - Use public license fonts only
