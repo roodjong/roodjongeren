@@ -91,10 +91,17 @@ To restore the backup of the database into a running Postgres container, use the
 cat dump_rood.sql | docker exec -i rood_postgres psql -U rood -d rood
 ```
 
+### Configuring SSL
+
+The Nginx rules as specified in `nginx_ssl.conf` expect a certbot setup created using a webroot. You should volume mount
+this file on a deployed environment, rather than `nginx.conf`.
+
+See https://ssl-config.mozilla.org/#server=nginx&version=1.21.6&config=intermediate&openssl=1.1.1k&guideline=5.6 for
+details.
+
 ## Planned improvements
 
 - Fix black flashing pages on refresh
-- Add HTTPS support
 - Add aria labels for improved search engine support
 - Add a WYSIWYG editor
 - Add analytics
