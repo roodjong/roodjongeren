@@ -107,3 +107,5 @@ details.
 - Add analytics
 - Add short links to afdeling
 - Use public license fonts only
+- Fix author not clickable in PostItem
+- Fix author not clickable on article page
