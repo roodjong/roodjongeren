@@ -46,6 +46,14 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "nieuws",
+        "opiniestuk"
+      ],
+      "required": true
     }
   }
 }

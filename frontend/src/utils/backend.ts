@@ -123,7 +123,6 @@ export async function fetchPrivacybeleid(): Promise<PrivacybeleidContent> {
 export async function fetchAfdelingen(): Promise<Afdeling[]> {
     const response = await backend.get<StrapiListResponse<Afdeling>>('/afdelingen', {
         params: {
-            _limit: -1,
             sort: 'name',
             fields: [
                 'name',
@@ -165,7 +164,6 @@ export async function fetchAfdeling(slug: string): Promise<AfdelingDetail> {
 export async function fetchPostSlugs(): Promise<{ slugs: string[], pagination: StrapiPagination }> {
     const response = await backend.get<StrapiListResponse<Post>>('/posts', {
         params: {
-            _limited: -1,
             sort: 'publishedAt:desc',
             fields: 'slug'
         }
@@ -177,7 +175,7 @@ export async function fetchPostSlugs(): Promise<{ slugs: string[], pagination: S
     };
 }
 
-export async function fetchPosts(page: number = 1, pageSize: number = 4): Promise<{ posts: Post[], pagination: StrapiPagination }> {
+export async function fetchPosts(author: string | null = null, page: number = 1, pageSize: number = 8): Promise<{ posts: Post[], pagination: StrapiPagination }> {
     const response = await backend.get<StrapiListResponse<Post>>('/posts', {
         params: {
             sort: 'publishedAt:desc',
@@ -189,7 +187,8 @@ export async function fetchPosts(page: number = 1, pageSize: number = 4): Promis
                 'title',
                 'slug',
                 'publishedAt',
-                'author'
+                'author',
+                'type'
             ],
             populate: {
                 afdeling: {
@@ -198,9 +197,14 @@ export async function fetchPosts(page: number = 1, pageSize: number = 4): Promis
                 banner: {
                     fields: ['formats']
                 }
-            }
+            },
+            filters: author ? {
+                author: {$eq: author}
+            } : undefined
         }
     });
+    
+    console.log(response.request);
     
     function sanitise(post: any): Post {
         post.afdeling = post.afdeling.data?.attributes ?? null;
@@ -214,6 +218,19 @@ export async function fetchPosts(page: number = 1, pageSize: number = 4): Promis
         posts: response.data.data.map(it => sanitise(it.attributes)),
         pagination: response.data.meta.pagination
     };
+}
+
+export async function fetchAuthors(): Promise<string[]> {
+    const response = await backend.get<StrapiListResponse<Post>>('/posts', {
+        params: {
+            sort: 'author:asc',
+            fields: ['author']
+        }
+    });
+    
+    const uniqueAuthors = new Set(response.data.data.map(it => it.attributes.author));
+    
+    return [...uniqueAuthors];
 }
 
 export async function fetchPost(slug: string): Promise<PostDetail> {
@@ -254,7 +271,6 @@ export async function fetchConfidantsPage(): Promise<ConfidantsPageContent> {
     });
     
     function sanitise(content: any) {
-        console.log(content);
         content.banner = content.banner.data.attributes.url;
         return content;
     }
@@ -265,7 +281,6 @@ export async function fetchConfidantsPage(): Promise<ConfidantsPageContent> {
 export async function fetchConfidants(): Promise<Confidant[]> {
     const response = await backend.get<StrapiListResponse<Confidant>>('/confidants', {
         params: {
-            _limit: -1,
             sort: 'name',
             populate: {
                 photo: {
@@ -286,7 +301,6 @@ export async function fetchConfidants(): Promise<Confidant[]> {
 export async function fetchWorkgroups(): Promise<Workgroup[]> {
     const response = await backend.get<StrapiListResponse<Workgroup>>('/workgroups', {
         params: {
-            _limit: -1,
             sort: 'name'
         }
     });

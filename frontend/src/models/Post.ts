@@ -8,6 +8,7 @@ export interface Post {
         slug: string;
     };
     banner: null | string;
+    type: PostType;
 }
 
 export interface PostDetail {
@@ -23,4 +24,19 @@ export interface PostDetail {
         slug: string;
     };
     banner: null | string;
+    type: PostType;
+}
+
+export enum PostType {
+    NEWS = 'nieuws',
+    SUBMISSION = 'opiniestuk'
+}
+
+export function postTypeToText(postType: PostType) {
+    switch (postType) {
+        case PostType.NEWS:
+            return 'Nieuwsbericht';
+        case PostType.SUBMISSION:
+            return 'Opiniestuk';
+    }
 }

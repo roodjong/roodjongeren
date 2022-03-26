@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {Post} from '../models/Post';
+import {Post, postTypeToText} from '../models/Post';
 import {dateToText} from '../utils/date';
 import imageLoader from '../utils/image-loader';
 
@@ -18,7 +18,16 @@ export default function PostItem(props: Props) {
                 <div>
                     <h1 className="font-title text-3xl font-bold">{post.title}</h1>
                     <p className="text-faded">
-                        <span>{post.author}</span>
+                        <span>{postTypeToText(post.type)}</span>
+                    </p>
+                    <p className="text-faded">
+                        <span>
+                            <Link href={`/nieuws/auteur/${post.author}/1`}>
+                                <a className="hover:underline hover:text-primary transition-colors">
+                                    {post.author}
+                                </a>
+                            </Link>
+                        </span>
                         <span className="mx-2">&#xB7;</span>
                         <span>{dateToText(new Date(post.publishedAt))}</span>
                     </p>

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import {ParsedUrlQuery} from 'querystring';
 import {GetStaticPathsResult, GetStaticPropsContext} from 'next';
-import {PostDetail} from '../../../models/Post';
+import {PostDetail, PostType} from '../../../models/Post';
 import {fetchFallbackBanner, fetchPost, fetchPostSlugs} from '../../../utils/backend';
 import Markdown from '../../../components/Markdown';
 import {dateToText} from '../../../utils/date';
@@ -37,6 +37,13 @@ export default function PostPage(props: Props) {
                 <span>{post.author}</span>
                 <span className="mx-2">&#xB7;</span>
                 <span>{dateToText(new Date(post.publishedAt))}</span>
+                {post.type === PostType.SUBMISSION &&
+                    <p className="mt-4">
+                        <i>
+                            Dit artikel is een ingezonden opiniestuk. De opvattingen zijn daarmee geen officiële standpunten van ROOD en sluiten niet
+                            noodzakelijkerwijs aan op de meningen van al onze leden.
+                        </i>
+                    </p>}
             </p>
             <Markdown content={post.content}/>
         </Main>

@@ -27,7 +27,7 @@ export default function NieuwsPage(props: Props) {
         </Head>
         <Banner title="Nieuws" background={props.banner} compact/>
         <Main className="content">
-            <CollectionViewer pagination={props.pagination} pageItems={props.posts.length}>
+            <CollectionViewer pagination={props.pagination} pageItems={props.posts.length} urlPrefix="/nieuws/page/">
                 <div className="flex flex-col gap-6 pb-4">
                     {props.posts.map(post => <PostItem key={post.slug} post={post}/>)}
                 </div>
@@ -55,7 +55,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     const page = parseInt(params.page);
     
     const [{posts, pagination}, banner] = await Promise.all([
-        fetchPosts(page),
+        fetchPosts(null, page),
         fetchFallbackBanner()
     ]);
     
