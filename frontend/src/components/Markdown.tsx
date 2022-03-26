@@ -49,11 +49,11 @@ function MarkdownBlockquote(props: PropsWithChildren<any>) {
 }
 
 function MarkdownUnorderedList(props: PropsWithChildren<UnorderedListProps>) {
-    return <ul className="list-inside list-star my-4">{props.children}</ul>;
+    return <ul className="list-inside list-star my-4 space-y-4">{props.children}</ul>;
 }
 
 function MarkdownOrderedList(props: PropsWithChildren<OrderedListProps>) {
-    return <ol className="list-inside list-decimal my-4">
+    return <ol className="list-inside list-decimal my-4 space-y-4">
         {props.children}
     </ol>;
 }
@@ -71,7 +71,7 @@ function MarkdownImage(props: PropsWithChildren<any>) {
         setNaturalHeight(it.naturalHeight);
     }, []);
     
-    return <span className="flex md:float-right md:ml-4 md:w-[50%] clear-both mb-4 rounded shadow overflow-hidden">
+    return <span className="flex md:float-right md:ml-4 md:w-[50%] clear-both mb-4 shadow shadow-[#0004]">
         <Image src={props.src}
                alt={props.alt}
                width={naturalWidth ?? 256}

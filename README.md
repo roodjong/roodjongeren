@@ -88,7 +88,7 @@ docker exec -t rood_postgres pg_dump -c -U rood rood > dump_rood.sql
 To restore the backup of the database into a running Postgres container, use the following:
 
 ```bash
-sudo cat dump_rood.sql | sudo docker exec -i rood_postgres psql -U postgres -d rood
+cat dump_rood.sql | docker exec -i rood_postgres psql -U rood -d rood
 ```
 
 ## Planned improvements
@@ -98,9 +98,6 @@ sudo cat dump_rood.sql | sudo docker exec -i rood_postgres psql -U postgres -d r
 - Add aria labels for improved search engine support
 - Add a WYSIWYG editor
 - Add analytics
-- Add Opiniestukken
 - Add Afdelingsnieuwsberichten
 - Add short links to afdeling
-- Fix slug generation adds -1
-- Fix adding afdeling results in error
 - Use public license fonts only
