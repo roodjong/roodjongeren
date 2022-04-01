@@ -7,6 +7,7 @@ import Markdown from '../../../components/Markdown';
 import {dateToText} from '../../../utils/date';
 import Banner from '../../../components/Banner';
 import Main from '../../../components/Main';
+import Link from 'next/link';
 
 interface Params extends ParsedUrlQuery {
     slug: string;
@@ -34,7 +35,13 @@ export default function PostPage(props: Props) {
                 compact/>
         <Main className="content">
             <p className="text-faded mb-4">
-                <span>{post.author}</span>
+                <span>
+                    <Link href={`/nieuws/auteur/${post.author}`}>
+                        <a className="hover:underline hover:text-primary transition-colors">
+                            {post.author}
+                        </a>
+                    </Link>
+                </span>
                 <span className="mx-2">&#xB7;</span>
                 <span>{dateToText(new Date(post.publishedAt))}</span>
                 {post.type === PostType.SUBMISSION &&
