@@ -107,6 +107,4 @@ details.
 - Add analytics
 - Add short links to afdeling (e.g. /utrecht redirects to /afdeling/utrecht)
 - Use public license fonts only
-- Fix author not clickable in PostItem
-- Fix author not clickable on article page
 - Adopt NextJS' "standalone" feature once it's no longer experimental

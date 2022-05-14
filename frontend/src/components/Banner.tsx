@@ -12,7 +12,8 @@ interface Props {
 export default function Banner(props: Props) {
     return <div
         className={`w-full bg-center bg-cover relative bg-secondary flex items-center min-h-screen ${props.compact ? 'md:!min-h-[32rem] md:mt-[64px]' : ''}`}>
-        <Image src={props.background} layout="fill" objectFit="cover" objectPosition="center" loader={imageLoader} alt="Banner" className="blur"/>
+        <Image src={props.background} layout="fill" objectFit="cover" objectPosition="center" loader={imageLoader} alt="Banner"
+               className={props.compact ? 'blur' : undefined}/>
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary via-transparent to-transparent mix-blend-darken"/>
         <div className="absolute top-0 left-0 w-full h-full bg-primary mix-blend-darken"
              style={{clipPath: 'polygon(101% 85%, 40% 101%, 101% 101%)'}}/>

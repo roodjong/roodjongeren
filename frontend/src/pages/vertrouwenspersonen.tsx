@@ -20,7 +20,7 @@ export default function VertrouwenspersonenPage(props: Props) {
             <title>Vertrouwenspersonen</title>
         </Head>
         <Banner title="Vertrouwens&shy;personen" background={props.content.banner} compact/>
-        <Main className="content">
+        <Main className="container">
             <div className="mb-8">
                 <Markdown content={props.content.content}/>
             </div>

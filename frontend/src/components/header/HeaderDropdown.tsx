@@ -1,4 +1,4 @@
-import {MouseEventHandler, ReactNode, useCallback, useEffect, useState} from 'react';
+import React, {ReactNode, useCallback, useEffect, useRef, useState} from 'react';
 import {FaCaretDown} from 'react-icons/fa';
 import {useRouter} from 'next/router';
 
@@ -11,8 +11,8 @@ export default function HeaderDropdown(props: Props) {
     const router = useRouter();
     const [isOpen, setOpen] = useState<boolean>(false);
     
-    const handleClick = useCallback<MouseEventHandler>(e => e.stopPropagation(), []);
-    const handleToggleMenu = useCallback(() => setOpen(prevState => !prevState), [setOpen]);
+    const dropdownRef = useRef<any>(null);
+    const handleToggleMenu = useCallback((e: React.MouseEvent) => setOpen(prevState => !prevState), [setOpen]);
     
     const handleFocus = useCallback(() => setOpen(true), [setOpen]);
     const handleBlur = useCallback(() => setOpen(false), [setOpen]);
@@ -22,14 +22,19 @@ export default function HeaderDropdown(props: Props) {
     }, [router.pathname]);
     
     useEffect(() => {
-        const handleClickOutside = () => setOpen(false);
-        window.onclick = handleClickOutside;
+        const handleClickOutside = (e: MouseEvent) => {
+            const wasClickedOutsideOfDropdown = !dropdownRef.current?.contains(e.target);
+            if (wasClickedOutsideOfDropdown) {
+                setOpen(false);
+            }
+        };
+        window.addEventListener('click', handleClickOutside);
         return () => window.removeEventListener('click', handleClickOutside);
-    }, [setOpen]);
+    }, [setOpen, dropdownRef]);
     
-    return <div className="flex flex-col grow" onClick={handleClick}>
+    return <div className="flex flex-col grow">
         <div className="flex relative grow items-center justify-center relative p-4 cursor-pointer whitespace-nowrap relative group text-4xl font-title"
-             onClick={handleToggleMenu}>
+             onClick={handleToggleMenu} ref={dropdownRef}>
             <span>
                 {props.title}
                 <FaCaretDown className={`inline ml-2 transition-transform ${isOpen ? 'rotate-180' : 'rotate-0'}`}/>

@@ -18,7 +18,7 @@ export default function WerkgroepenPage(props: Props) {
             <title>Werkgroepen</title>
         </Head>
         <Banner title="Werkgroepen" background={props.banner} compact/>
-        <Main className="content">
+        <Main className="container">
             {props.workgroups.map(workgroup => <WorkgroupCard key={workgroup.name} workgroup={workgroup}/>)}
         </Main>
     </div>;
