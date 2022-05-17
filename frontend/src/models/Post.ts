@@ -29,7 +29,7 @@ export interface PostDetail {
 
 export enum PostType {
     NEWS = 'nieuws',
-    SUBMISSION = 'opiniestuk'
+    SUBMISSION = 'inzending'
 }
 
 export function postTypeToText(postType: PostType) {
@@ -37,6 +37,6 @@ export function postTypeToText(postType: PostType) {
         case PostType.NEWS:
             return 'Nieuwsbericht';
         case PostType.SUBMISSION:
-            return 'Opiniestuk';
+            return 'Inzending';
     }
 }

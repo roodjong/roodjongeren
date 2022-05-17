@@ -10,7 +10,7 @@ interface Props {
 export default function AboutUsShort(props: Props) {
     return <div className="w-full">
         <div className="p-4">
-            <div className="content pt-8 pb-12">
+            <div className="container pt-8 pb-12">
                 <div className="justify-between gap-8 sm:gap-16 flex flex-col sm:flex-row">
                     <div>
                         <Markdown content={props.content}/>

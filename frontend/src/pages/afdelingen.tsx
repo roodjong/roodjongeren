@@ -24,7 +24,7 @@ export default function AfdelingenPage(props: Props) {
         </Head>
         <Banner title="Afdelingen" background={props.banner} compact/>
         <Main>
-            <div className="content">
+            <div className="container">
                 <Subheader>Overzicht</Subheader>
                 <p className="my-4">
                     Wij hebben {props.afdelingen.length} afdelingen verspreid over Nederland.
@@ -32,7 +32,7 @@ export default function AfdelingenPage(props: Props) {
                 </p>
                 <AfdelingenTable afdelingen={props.afdelingen}/>
             </div>
-            <div className="content">
+            <div className="container">
                 <Subheader>Kaart</Subheader>
             </div>
             <AfdelingenMap afdelingen={props.afdelingen}/>

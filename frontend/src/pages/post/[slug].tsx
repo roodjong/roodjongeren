@@ -1,13 +1,14 @@
 import Head from 'next/head';
 import {ParsedUrlQuery} from 'querystring';
 import {GetStaticPathsResult, GetStaticPropsContext} from 'next';
-import {PostDetail, PostType} from '../../../models/Post';
-import {fetchFallbackBanner, fetchPost, fetchPostSlugs} from '../../../utils/backend';
-import Markdown from '../../../components/Markdown';
-import {dateToText} from '../../../utils/date';
-import Banner from '../../../components/Banner';
-import Main from '../../../components/Main';
+import {PostDetail, PostType} from '../../models/Post';
+import {fetchFallbackBanner, fetchPost, fetchPostSlugs} from '../../utils/backend';
+import Markdown from '../../components/Markdown';
+import {dateToText} from '../../utils/date';
+import Banner from '../../components/Banner';
+import Main from '../../components/Main';
 import Link from 'next/link';
+import PostTypeDisplay from '../../components/PostTypeDisplay';
 
 interface Params extends ParsedUrlQuery {
     slug: string;
@@ -33,10 +34,12 @@ export default function PostPage(props: Props) {
                 </>}
                 background={post.banner ?? props.fallbackBanner}
                 compact/>
-        <Main className="content">
+        <Main className="container">
             <p className="text-faded mb-4">
+                <PostTypeDisplay type={props.post.type}/>
+                <span className="mx-2">&#xB7;</span>
                 <span>
-                    <Link href={`/nieuws/auteur/${post.author}`}>
+                    <Link href={`/auteur/${post.author}`}>
                         <a className="hover:underline hover:text-primary transition-colors">
                             {post.author}
                         </a>

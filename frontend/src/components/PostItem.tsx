@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {Post, postTypeToText} from '../models/Post';
+import {Post} from '../models/Post';
 import {dateToText} from '../utils/date';
 import imageLoader from '../utils/image-loader';
 import {useRouter} from 'next/router';
 import {useCallback} from 'react';
+import PostTypeDisplay from './PostTypeDisplay';
 
 interface Props {
     post: Post;
@@ -12,7 +13,7 @@ interface Props {
 
 export default function PostItem(props: Props) {
     const post = props.post;
-    const link = `/nieuws/post/${post.slug}`;
+    const link = `/post/${post.slug}`;
     
     const router = useRouter();
     
@@ -28,11 +29,10 @@ export default function PostItem(props: Props) {
             <div>
                 <h1 className="font-title text-3xl font-bold">{post.title}</h1>
                 <p className="text-faded">
-                    <span>{postTypeToText(post.type)}</span>
-                </p>
-                <p className="text-faded">
-                        <span>
-                            <Link href={`/nieuws/auteur/${post.author}`}>
+                    <PostTypeDisplay type={props.post.type}/>
+                    <span className="mx-2">&#xB7;</span>
+                    <span>
+                            <Link href={`/auteur/${post.author}`}>
                                 <a className="hover:underline hover:text-primary transition-colors" onClick={stopPropagation}>
                                     {post.author}
                                 </a>
@@ -43,7 +43,7 @@ export default function PostItem(props: Props) {
                 </p>
             </div>
             <Link href={link}>
-                <a className="button-primary text-xl inline-block"
+                <a className="button-primary text-xl inline-block px-4 py-2"
                    tabIndex={-1}>
                     Lees meer
                 </a>

@@ -1,22 +1,22 @@
 import Head from 'next/head';
-import {fetchAboutUs} from '../utils/backend';
-import AboutUsContent from '../models/AboutUsContent';
 import Markdown from '../components/Markdown';
 import Banner from '../components/Banner';
 import Main from '../components/Main';
 import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
+import {fetchProgram} from '../utils/backend';
+import ProgramContent from '../models/ProgramContent';
 
 interface Props {
-    content: AboutUsContent;
+    content: ProgramContent;
 }
 
-export default function OverOnsPage(props: Props) {
+export default function ProgrammaPage(props: Props) {
     return <div>
         <Head>
-            <title>Over Ons</title>
+            <title>Programma</title>
         </Head>
-        <Banner title="Over ons" background={props.content.banner} compact/>
+        <Banner title="Programma" background={props.content.banner} compact/>
         <Main className="container">
             <Markdown content={props.content.content}/>
         </Main>
@@ -26,7 +26,7 @@ export default function OverOnsPage(props: Props) {
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
     return {
         props: {
-            content: await fetchAboutUs()
+            content: await fetchProgram()
         },
         revalidate
     };

@@ -11,7 +11,7 @@ import Banner from '../../components/Banner';
 import Main from '../../components/Main';
 import {revalidate} from '../../utils/revalidate';
 import {Post} from '../../models/Post';
-import EndlessNewsLoader from '../../components/EndlessNewsLoader';
+import EndlessPostsLoader from '../../components/EndlessNewsLoader';
 import Subheader from '../../components/Subheader';
 
 interface Params extends ParsedUrlQuery {
@@ -32,7 +32,7 @@ export default function AfdelingPage(props: Props) {
             <title>{afdeling.name}</title>
         </Head>
         <Banner title={afdeling.name} background={afdeling.banner ?? props.fallbackBanner} compact/>
-        <Main className="content flex flex-col-reverse md:flex-row gap-4 justify-between">
+        <Main className="container flex flex-col-reverse md:flex-row gap-4 justify-between">
             <div>
                 <div className="flex text-base mt-2 mb-6 gap-4 text-primary">
                     <IconContext.Provider value={{className: '!text-primary origin-center group-hover:scale-125 transition-transform inline mr-2'}}>
@@ -50,9 +50,9 @@ export default function AfdelingPage(props: Props) {
                                 phone={afdeling.contactpersoon?.phone ?? undefined}/>
             </div>
         </Main>
-        <div className="content">
+        <div className="container">
             <Subheader>Laatste nieuws</Subheader>
-            <EndlessNewsLoader posts={props.posts} afdeling={props.afdeling.slug}/>
+            <EndlessPostsLoader posts={props.posts} afdeling={props.afdeling.slug}/>
         </div>
     </div>;
 }
