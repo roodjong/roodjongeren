@@ -19,7 +19,7 @@ export default function SupportUsPage(props: Props) {
             <title>Steun ons</title>
         </Head>
         <Banner title="Steun ons" background={props.content.banner} compact/>
-        <Main className="content">
+        <Main className="container">
             <Markdown content={props.content.content}/>
             <a className="button-primary inline-block text-3xl"
                href="https://mijnrood.nl/steunlid-worden">

@@ -51,7 +51,7 @@
       "type": "enumeration",
       "enum": [
         "nieuws",
-        "opiniestuk"
+        "inzending"
       ],
       "required": true
     }

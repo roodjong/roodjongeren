@@ -1,14 +1,14 @@
 import Head from 'next/head';
-import {fetchFallbackBanner, fetchPosts} from '../../../utils/backend';
-import {Post} from '../../../models/Post';
-import {StrapiPagination} from '../../../models/strapi';
-import CollectionViewer from '../../../components/CollectionViewer';
-import PostItem from '../../../components/PostItem';
+import {fetchFallbackBanner, fetchPosts} from '../../utils/backend';
+import {Post, PostType} from '../../models/Post';
+import {StrapiPagination} from '../../models/strapi';
+import CollectionViewer from '../../components/CollectionViewer';
+import PostItem from '../../components/PostItem';
 import {GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult} from 'next';
 import {ParsedUrlQuery} from 'querystring';
-import Banner from '../../../components/Banner';
-import Main from '../../../components/Main';
-import {revalidate} from '../../../utils/revalidate';
+import Banner from '../../components/Banner';
+import Main from '../../components/Main';
+import {revalidate} from '../../utils/revalidate';
 
 interface Params extends ParsedUrlQuery {
     page: string;
@@ -16,20 +16,20 @@ interface Params extends ParsedUrlQuery {
 
 interface Props {
     banner: string;
-    posts: Post[];
+    submissions: Post[];
     pagination: StrapiPagination;
 }
 
-export default function NieuwsPage(props: Props) {
+export default function InzendingenPage(props: Props) {
     return <div>
         <Head>
-            <title>Nieuws</title>
+            <title>Inzendingen</title>
         </Head>
-        <Banner title="Nieuws" background={props.banner} compact/>
-        <Main className="content">
-            <CollectionViewer pagination={props.pagination} pageItems={props.posts.length} urlPrefix="/nieuws/page/">
+        <Banner title="Inzendingen" background={props.banner} compact/>
+        <Main className="container">
+            <CollectionViewer pagination={props.pagination} pageItems={props.submissions.length} urlPrefix="/inzendingen/">
                 <div className="flex flex-col gap-6 pb-4">
-                    {props.posts.map(post => <PostItem key={post.slug} post={post}/>)}
+                    {props.submissions.map(post => <PostItem key={post.slug} post={post}/>)}
                 </div>
             </CollectionViewer>
         </Main>
@@ -37,7 +37,7 @@ export default function NieuwsPage(props: Props) {
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-    const {pagination} = await fetchPosts();
+    const {pagination} = await fetchPosts(PostType.SUBMISSION);
     const paths = [...Array(pagination.pageCount).keys()].map((pageIndex: number) => ({
         params: {
             page: (pageIndex + 1).toString()
@@ -55,12 +55,12 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     const page = parseInt(params.page);
     
     const [{posts, pagination}, banner] = await Promise.all([
-        fetchPosts(null, null, page),
+        fetchPosts(PostType.SUBMISSION, null, null, page, 8),
         fetchFallbackBanner()
     ]);
     
     return {
-        props: {banner, posts, pagination},
+        props: {banner, submissions: posts, pagination},
         revalidate
     };
 }

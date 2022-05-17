@@ -18,7 +18,7 @@ export default function PrivacybeleidPage(props: Props) {
             <title>Privacybeleid</title>
         </Head>
         <Banner title="Privacybeleid" background={props.banner} compact/>
-        <Main className="content">
+        <Main className="container">
             <Markdown content={props.privacybeleid.content}/>
         </Main>
     </div>;

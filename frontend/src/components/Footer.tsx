@@ -5,7 +5,7 @@ import {IconContext} from 'react-icons';
 
 export default function Footer() {
     return <footer className="bg-primary text-white">
-        <div className="content flex flex-col py-12 sm:flex-row gap-8 sm:gap-4 items-center text-center sm:text-left justify-between">
+        <div className="container flex flex-col py-12 sm:flex-row gap-8 sm:gap-4 items-center text-center sm:text-left justify-between">
             <div>
                 <Image src="/images/rood-logo-white.svg" width="128px" height="128px" alt="Logo ROOD"/>
             </div>

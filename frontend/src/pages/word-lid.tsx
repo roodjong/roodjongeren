@@ -19,7 +19,7 @@ export default function JoinUsPage(props: Props) {
             <title>Word lid</title>
         </Head>
         <Banner title="Word lid" background={props.content.banner} compact/>
-        <Main className="content">
+        <Main className="container">
             <Markdown content={props.content.content}/>
             <a className="button-primary inline-block text-3xl"
                href="https://mijnrood.nl/aanmelden">

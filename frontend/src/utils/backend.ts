@@ -5,7 +5,7 @@ import AfdelingDetail from '../models/Afdeling';
 import AboutUsContent from '../models/AboutUsContent';
 import PrivacybeleidContent from '../models/PrivacybeleidContent';
 import qs from 'qs';
-import {Post, PostDetail} from '../models/Post';
+import {Post, PostDetail, PostType} from '../models/Post';
 import HomeContent from '../models/HomeContent';
 import JoinUsContent from '../models/JoinUsContent';
 import SupportUsContent from '../models/SupportUsContent';
@@ -13,6 +13,7 @@ import {Confidant} from '../models/Confidant';
 import ConfidantsPageContent from '../models/ConfidantsPageContent';
 import {Workgroup} from '../models/Workgroup';
 import joinPaths from './paths';
+import ProgramContent from '../models/ProgramContent';
 
 export const backendBaseUrl = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? '';
 
@@ -60,6 +61,25 @@ export async function fetchHome(): Promise<HomeContent> {
 
 export async function fetchAboutUs(): Promise<AboutUsContent> {
     const response = await backend.get<StrapiResponse<AboutUsContent>>('/about-us', {
+        params: {
+            populate: {
+                banner: {
+                    fields: ['url']
+                }
+            }
+        }
+    });
+    
+    function sanitise(content: any) {
+        content.banner = content.banner.data.attributes.url;
+        return content;
+    }
+    
+    return sanitise(response.data.data.attributes);
+}
+
+export async function fetchProgram(): Promise<ProgramContent> {
+    const response = await backend.get<StrapiResponse<ProgramContent>>('/program', {
         params: {
             populate: {
                 banner: {
@@ -175,7 +195,7 @@ export async function fetchPostSlugs(): Promise<{ slugs: string[], pagination: S
     };
 }
 
-export async function fetchPosts(author: string | null = null, afdeling: string | null = null, page: number = 1, pageSize: number = 8): Promise<{ posts: Post[], pagination: StrapiPagination }> {
+export async function fetchPosts(type: PostType | undefined = undefined, author: string | null = null, afdeling: string | null = null, page: number = 1, pageSize: number = 8): Promise<{ posts: Post[], pagination: StrapiPagination }> {
     const response = await backend.get<StrapiListResponse<Post>>('/posts', {
         params: {
             sort: 'publishedAt:desc',
@@ -202,7 +222,8 @@ export async function fetchPosts(author: string | null = null, afdeling: string 
                 author: author ? {$eq: author} : undefined,
                 afdeling: afdeling ? {
                     slug: {$eq: afdeling}
-                } : undefined
+                } : undefined,
+                type
             }
         }
     });
