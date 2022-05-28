@@ -40,7 +40,7 @@ services:
       - HOST=$STRAPI_HOST
       - PORT=$STRAPI_PORT
       - ADMIN_JWT_SECRET=$STRAPI_ADMIN_JWT_SECRET
-      - JWT_SECTRET=$STRAPI_JWT_SECRET
+      - JWT_SECRET=$STRAPI_JWT_SECRET
       - API_TOKEN_SALT=$STRAPI_API_TOKEN_SALT
       - APP_KEYS=$STRAPI_APP_KEYS
       - DATABASE_HOST=$DATABASE_HOST
@@ -66,7 +66,6 @@ services:
       - NEXT_PUBLIC_BACKEND_URL=/backend
     depends_on:
       - strapi
-      - nginx
     networks:
       - roodjongeren_network
     logging:

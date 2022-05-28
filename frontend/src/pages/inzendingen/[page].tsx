@@ -10,6 +10,8 @@ import Banner from '../../components/Banner';
 import Main from '../../components/Main';
 import {revalidate} from '../../utils/revalidate';
 
+const PAGE_SIZE = 8;
+
 interface Params extends ParsedUrlQuery {
     page: string;
 }
@@ -37,7 +39,7 @@ export default function InzendingenPage(props: Props) {
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-    const {pagination} = await fetchPosts(PostType.SUBMISSION);
+    const {pagination} = await fetchPosts(PostType.SUBMISSION, null, null, 0, PAGE_SIZE);
     const paths = [...Array(pagination.pageCount).keys()].map((pageIndex: number) => ({
         params: {
             page: (pageIndex + 1).toString()
