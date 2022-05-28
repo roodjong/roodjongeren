@@ -1,26 +1,26 @@
-import {FaAt, FaPhone} from 'react-icons/fa';
+import {FaPhone} from 'react-icons/fa';
 import {IconContext} from 'react-icons';
+import {Afdeling} from '../models/Afdeling';
 
 interface Props {
-    header: string;
-    name?: string;
-    email: string;
-    phone?: string;
+    afdeling: Afdeling;
 }
 
 export default function ContactDisplay(props: Props) {
     return <div className="p-4 flex flex-col gap-2 shadow-inner bg-gray-50">
         <IconContext.Provider value={{className: 'inline mr-2 origin-center group-hover:scale-125 transition-transform'}}>
-            <h2 className="font-title font-bold text-2xl">{props.header}</h2>
-            {props.name && <p>{props.name}</p>}
-            <a className="group text-primary hover:underline" href={`mailto:${props.email}`}>
-                <FaAt/>{props.email}
-            </a>
-            {props.phone &&
-                <a className="group text-primary hover:underline"
-                   href={`tel:${props.phone}`}>
-                    <FaPhone/>{props.phone
-                }</a>}
+            <h2 className="font-title font-bold text-2xl">Contactpersoon(nen)</h2>
+            <div className="divide-y divide-solid">
+                {props.afdeling.contactpersonen.map(contactpersoon => <div className="py-2 last:pb-0 first:pt-0">
+                    <p>{contactpersoon.firstname} {contactpersoon.lastname}</p>
+                    {contactpersoon.phone &&
+                        <a className="group text-primary hover:underline"
+                           href={`tel:${contactpersoon.phone}`}>
+                            <FaPhone/>{contactpersoon.phone
+                        }</a>}
+                </div>)}
+                {props.afdeling.contactpersonen.length === 0 && <i className="text-faded">Geen</i>}
+            </div>
         </IconContext.Provider>
     </div>;
 }
