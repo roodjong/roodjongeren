@@ -10,6 +10,8 @@ import Banner from '../../components/Banner';
 import Main from '../../components/Main';
 import {revalidate} from '../../utils/revalidate';
 
+const PAGE_SIZE = 8;
+
 interface Params extends ParsedUrlQuery {
     page: string;
 }
@@ -37,13 +39,12 @@ export default function NieuwsPage(props: Props) {
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-    const {pagination} = await fetchPosts();
+    const {pagination} = await fetchPosts(PostType.NEWS, null, null, 0, PAGE_SIZE);
     const paths = [...Array(pagination.pageCount).keys()].map((pageIndex: number) => ({
         params: {
             page: (pageIndex + 1).toString()
         }
     }));
-    
     return {
         paths,
         fallback: 'blocking'
@@ -55,7 +56,7 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     const page = parseInt(params.page);
     
     const [{posts, pagination}, banner] = await Promise.all([
-        fetchPosts(PostType.NEWS, null, null, page, 8),
+        fetchPosts(PostType.NEWS, null, null, page, PAGE_SIZE),
         fetchFallbackBanner()
     ]);
     

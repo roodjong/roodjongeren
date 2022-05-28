@@ -68,7 +68,7 @@ Push the docker images to a <ins>**private**</ins> repository. This is essential
 from being exposed. You can push the images using:
 
 ```bash
-docker-compose -f docker/roodjongeren_prod/docker-compose.yml push5+
+docker-compose -f docker/roodjongeren_prod/docker-compose.yml push
 ```
 
 Besides the database, users can also upload media. These are stored in a volume bound
@@ -101,10 +101,8 @@ details.
 
 ## Planned improvements
 
-- Fix black flashing pages on refresh
 - Add aria labels for improved search engine support
 - Add a WYSIWYG editor
 - Add analytics
-- Add short links to afdeling (e.g. /utrecht redirects to /afdeling/utrecht)
 - Use public license fonts only
 - Adopt NextJS' "standalone" feature once it's no longer experimental

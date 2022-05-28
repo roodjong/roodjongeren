@@ -35,7 +35,8 @@ function AfdelingRow({afdeling}: { afdeling: Afdeling }) {
         <TableCell>
             {afdeling.contactpersonen.length === 0
                 ? '-'
-                : afdeling.contactpersonen.map(contactpersoon => <p>{`${contactpersoon.firstname} ${contactpersoon.lastname}`}</p>)
+                : afdeling.contactpersonen.map((contactpersoon, i) =>
+                    <p key={i}>{`${contactpersoon.firstname} ${contactpersoon.lastname}`}</p>)
             }
         </TableCell>
         <TableCell className="sm:table-cell hidden">
