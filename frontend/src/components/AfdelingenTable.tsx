@@ -16,7 +16,7 @@ export default function AfdelingenTable(props: Props) {
     return <Table>
         <TableHead>
             <TableHeadCell>Naam</TableHeadCell>
-            <TableHeadCell>Contactpersoon</TableHeadCell>
+            <TableHeadCell>Contactpersoon(en)</TableHeadCell>
             <TableHeadCell className="sm:table-cell hidden">E-mail</TableHeadCell>
             <TableHeadCell className="sm:table-cell hidden"/>
         </TableHead>
@@ -33,7 +33,10 @@ function AfdelingRow({afdeling}: { afdeling: Afdeling }) {
     return <TableRow onClick={() => router.push(link)}>
         <TableCell>{afdeling.name}</TableCell>
         <TableCell>
-            {afdeling.contactpersoon !== null ? `${afdeling.contactpersoon.firstname} ${afdeling.contactpersoon.lastname}` : '-'}
+            {afdeling.contactpersonen.length === 0
+                ? '-'
+                : afdeling.contactpersonen.map(contactpersoon => <p>{`${contactpersoon.firstname} ${contactpersoon.lastname}`}</p>)
+            }
         </TableCell>
         <TableCell className="sm:table-cell hidden">
             <a href={`mailto:afdeling.email`}
