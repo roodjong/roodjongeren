@@ -5,7 +5,6 @@
  */
 
 const {createCoreController} = require('@strapi/strapi').factories;
-const {sanitize} = require('@strapi/utils');
 
 module.exports = createCoreController('api::afdeling.afdeling', ({strapi}) => ({
 
@@ -14,13 +13,13 @@ module.exports = createCoreController('api::afdeling.afdeling', ({strapi}) => ({
       ...ctx.query,
       populate: {
         ...ctx.query.populate,
-        contactpersoon: {
-          fields: ['firstname', 'lastname', 'phone'],
+        contactpersonen: {
+          fields: ['firstname', 'lastname', 'phone']
         }
       }
     });
     const response = this.transformResponse(results, {pagination})
-    response.data.forEach(sanitiseContactpersoon);
+    response.data.forEach(sanitiseContactpersonen);
     return response;
   },
 
@@ -29,25 +28,23 @@ module.exports = createCoreController('api::afdeling.afdeling', ({strapi}) => ({
       ...ctx.query,
       populate: {
         ...ctx.query.populate,
-        contactpersoon: {
+        contactpersonen: {
           fields: ['firstname', 'lastname', 'phone']
         }
       }
     });
     const response = this.transformResponse(result);
-    sanitiseContactpersoon(response.data);
+    sanitiseContactpersonen(response.data);
     return response;
   }
 }));
 
-function sanitiseContactpersoon(afdeling) {
-  let contactpersoon = afdeling.attributes.contactpersoon.data;
-  if (contactpersoon) {
-    contactpersoon = {
-      firstname: contactpersoon.attributes.firstname,
-      lastname: contactpersoon.attributes.lastname,
-      phone: contactpersoon.attributes.phone
-    }
-  }
-  afdeling.attributes.contactpersoon = contactpersoon;
+function sanitiseContactpersonen(afdeling) {
+  afdeling.attributes.contactpersonen = afdeling.attributes.contactpersonen.data.map(it => {
+    return {
+      firstname: it.attributes.firstname,
+      lastname: it.attributes.lastname,
+      phone: it.attributes.phone
+    };
+  });
 }

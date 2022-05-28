@@ -38,9 +38,9 @@
     "instagramLink": {
       "type": "string"
     },
-    "contactpersoon": {
+    "contactpersonen": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "plugin::users-permissions.user"
     },
     "slug": {
