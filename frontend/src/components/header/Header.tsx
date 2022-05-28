@@ -50,8 +50,8 @@ export default function Header() {
                     <HeaderLink href="/vertrouwenspersonen">Vertrouwenspersonen</HeaderLink>
                 </HeaderDropdown>
                 <HeaderDropdown title="Berichten">
-                    <HeaderLink href="/nieuws/1">Nieuws</HeaderLink>
-                    <HeaderLink href="/inzendingen/1">Inzendingen</HeaderLink>
+                    <HeaderLink href="/nieuws">Nieuws</HeaderLink>
+                    <HeaderLink href="/inzendingen">Inzendingen</HeaderLink>
                 </HeaderDropdown>
                 <HeaderLink href="/word-lid">Word lid</HeaderLink>
                 <HeaderLink href="/steun-ons">Steun ons</HeaderLink>
