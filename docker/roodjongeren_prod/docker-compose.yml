@@ -78,5 +78,5 @@ volumes:
     name: rood_postgres_volume
     driver: local
   strapi_uploads_volume:
-    name: rood_postgres_volume
+    name: rood_strapi_volume
     driver: local
