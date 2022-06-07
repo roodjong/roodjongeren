@@ -9,6 +9,7 @@ import Banner from '../../components/Banner';
 import Main from '../../components/Main';
 import Link from 'next/link';
 import PostTypeDisplay from '../../components/PostTypeDisplay';
+import {revalidate} from '../../utils/revalidate';
 
 interface Params extends ParsedUrlQuery {
     slug: string;
@@ -82,6 +83,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     ]);
     
     return {
-        props: {post, fallbackBanner}
+        props: {post, fallbackBanner},
+        revalidate
     };
 }

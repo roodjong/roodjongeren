@@ -51,7 +51,7 @@ export default function AfdelingPage(props: Props) {
             </div>
         </Main>
         <div className="container">
-            <Subheader>Laatste nieuws</Subheader>
+            <Subheader>Laatste nieuws & inzendingen</Subheader>
             <EndlessPostsLoader posts={props.posts} afdeling={props.afdeling.slug}/>
         </div>
     </div>;

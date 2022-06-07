@@ -208,7 +208,6 @@ const postsToRedirect = [
     'huisjesmelker',
     'feitenrelaas-politiegeweld-op-het-woonopstand-in-rotterdam',
     'rood-groningen-de-straat-op-tegen-geweld-tegen-vrouwen',
-    'programma',
     'verslag-ledenvergadering-21-november',
     'hoe-nu-verder-2',
     'de-bode-november-2021-21-november-woonprotest-utrecht',
@@ -294,8 +293,7 @@ module.exports = withTM({
                     destination: `/post/${it}`,
                     permanent: true
                 }
-            }),
-            {source: '/:slug', destination: '/afdelingen/:slug', permanent: true}
+            })
         ]
     }
 });
