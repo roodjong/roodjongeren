@@ -1,10 +1,11 @@
 import ReactMarkdown from 'react-markdown';
 import Subheader from '../components/Subheader';
-import {PropsWithChildren, useCallback, useState} from 'react';
+import {PropsWithChildren} from 'react';
 import {HeadingProps, OrderedListProps, UnorderedListProps} from 'react-markdown/lib/ast-to-react';
 import {FaQuoteLeft} from 'react-icons/fa';
-import Image from 'next/image';
-import imageLoader from '../utils/image-loader';
+import joinPaths from '../utils/paths';
+import {backendBaseUrl} from '../utils/backend';
+import remarkGfm from 'remark-gfm';
 
 interface Props {
     content: string;
@@ -12,7 +13,9 @@ interface Props {
 
 export default function Markdown(props: Props) {
     return <div className="overflow-hidden">
-        <ReactMarkdown includeElementIndex components={{
+        <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            includeElementIndex components={{
             h1: MarkdownHeader1,
             h2: MarkdownHeader2,
             h3: MarkdownHeader3,
@@ -21,7 +24,9 @@ export default function Markdown(props: Props) {
             ol: MarkdownOrderedList,
             a: MarkdownAnchor,
             img: MarkdownImage,
-            p: MarkdownParagraph
+            p: MarkdownParagraph,
+            th: MarkdownTableHead,
+            td: MarkdownTableData
         }}>
             {props.content}
         </ReactMarkdown>
@@ -63,24 +68,20 @@ function MarkdownAnchor(props: PropsWithChildren<any>) {
 }
 
 function MarkdownImage(props: PropsWithChildren<any>) {
-    const [naturalWidth, setNaturalWidth] = useState<number | null>(null);
-    const [naturalHeight, setNaturalHeight] = useState<number | null>(null);
-    
-    const handleLoadingComplete = useCallback(it => {
-        setNaturalWidth(it.naturalWidth);
-        setNaturalHeight(it.naturalHeight);
-    }, []);
-    
-    return <span className="flex md:float-right md:ml-4 md:w-[50%] clear-both mb-4 shadow shadow-[#0004]">
-        <Image src={props.src}
-               alt={props.alt}
-               width={naturalWidth ?? 256}
-               height={naturalHeight ?? 256}
-               loader={imageLoader}
-               onLoadingComplete={handleLoadingComplete}/>
+    return <span>
+        <img src={joinPaths(backendBaseUrl, props.src)} alt={props.alt}
+             className="md:float-right md:ml-4 md:max-w-[50%] clear-both mb-4 shadow shadow-[#0004]"/>
     </span>;
 }
 
 function MarkdownParagraph(props: PropsWithChildren<any>) {
     return <p className="my-4">{props.children}</p>;
+}
+
+function MarkdownTableHead(props: PropsWithChildren<any>) {
+    return <th className="pr-4 last:pr-0 text-left">{props.children}</th>;
+}
+
+function MarkdownTableData(props: PropsWithChildren<any>) {
+    return <td className="pr-4 last:pr-0">{props.children}</td>;
 }
