@@ -285,6 +285,7 @@ module.exports = withTM({
     },
     async redirects() {
         return [
+            {source: '/roundcube', destination: 'https://web0134.zxcs.nl/roundcube', permanent: true},
             {source: '/groepen', destination: '/afdelingen', permanent: true},
             {source: '/groepen/:slug', destination: '/afdelingen/:slug', permanent: true},
             ...postsToRedirect.map(it => {
