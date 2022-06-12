@@ -19,6 +19,12 @@ export default function Footer() {
                    className="hover:underline">
                     mijnrood.nl
                 </a>
+                <p>KVK: 24349986</p>
+                <a href="https://www.google.nl/maps/place/Gaffelstraat+61B,+3014+RC+Rotterdam"
+                   className="hover:underline">
+                    <p>Gaffelstraat 61B</p>
+                    <p>3014 RC Rotterdam</p>
+                </a>
             </div>
             <div className="flex flex-col gap-2">
                 <IconContext.Provider value={{className: 'inline mr-2 origin-center group-hover:scale-125 transition-transform'}}>
