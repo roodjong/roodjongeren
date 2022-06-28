@@ -17,7 +17,7 @@ import ProgramContent from '../models/ProgramContent';
 
 export const backendBaseUrl = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? '';
 
-const backend = axios.create({
+export const backend = axios.create({
     baseURL: joinPaths(backendBaseUrl, '/api'),
     paramsSerializer: params => qs.stringify(params)
 });

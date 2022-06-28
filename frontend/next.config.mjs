@@ -5,6 +5,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 const withTM = transpile(['react-icons/fa', 'react-icons/lib']);
+
 const backendBaseUrl = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? '';
 const backend = axios.create({
     baseURL: `${backendBaseUrl}/api`,
@@ -293,7 +294,7 @@ export default withTM({
         ]
     },
     async redirects() {
-        const response = await backend.get('/afdelingen', {
+        const afdelingenResponse = await backend.get('/afdelingen', {
             params: {
                 sort: 'name',
                 fields: [
@@ -301,6 +302,8 @@ export default withTM({
                 ]
             }
         });
+        const afdelingen = afdelingenResponse.data.data;
+
         return [
             {source: '/roundcube', destination: 'https://web0134.zxcs.nl/roundcube', permanent: true},
             {source: '/groepen', destination: '/afdelingen', permanent: true},
@@ -312,7 +315,7 @@ export default withTM({
                     permanent: true
                 }
             }),
-            ...response.data.data.map(it => {
+            ...afdelingen.map(it => {
                 return {
                     source: `/${it.attributes.slug}`,
                     destination: `/afdelingen/${it.attributes.slug}`,
