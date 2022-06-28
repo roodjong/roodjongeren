@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 
-const withTM = require('next-transpile-modules')(['react-icons/fa', 'react-icons/lib']);
+import transpile from 'next-transpile-modules';
+import axios from 'axios';
+import qs from 'qs';
+
+const withTM = transpile(['react-icons/fa', 'react-icons/lib']);
+
+const backendBaseUrl = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? '';
+const backend = axios.create({
+    baseURL: `${backendBaseUrl}/api`,
+    paramsSerializer: params => qs.stringify(params)
+});
 
 const postsToRedirect = [
     'samen-tegen-racisme',
@@ -275,7 +285,7 @@ const postsToRedirect = [
     'voorwaarts-naar-een-vrije-dag-van-de-arbeid'
 ]
 
-module.exports = withTM({
+export default withTM({
     reactStrictMode: true,
     async rewrites() {
         return [
@@ -284,6 +294,16 @@ module.exports = withTM({
         ]
     },
     async redirects() {
+        const afdelingenResponse = await backend.get('/afdelingen', {
+            params: {
+                sort: 'name',
+                fields: [
+                    'slug',
+                ]
+            }
+        });
+        const afdelingen = afdelingenResponse.data.data;
+
         return [
             {source: '/roundcube', destination: 'https://web0134.zxcs.nl/roundcube', permanent: true},
             {source: '/groepen', destination: '/afdelingen', permanent: true},
@@ -292,6 +312,13 @@ module.exports = withTM({
                 return {
                     source: `/${it}`,
                     destination: `/post/${it}`,
+                    permanent: true
+                }
+            }),
+            ...afdelingen.map(it => {
+                return {
+                    source: `/${it.attributes.slug}`,
+                    destination: `/afdelingen/${it.attributes.slug}`,
                     permanent: true
                 }
             })
