@@ -20,7 +20,8 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "react-leaflet": "^4.0.0",
-    "react-markdown": "^8.0.3"
+    "react-markdown": "^8.0.3",
+    "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
     "@types/leaflet": "^1.7.10",
