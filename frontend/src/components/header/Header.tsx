@@ -49,7 +49,7 @@ export default function Header() {
                     <HeaderLink href="/programma">Programma</HeaderLink>
                     <HeaderLink href="/vertrouwenspersonen">Vertrouwenspersonen</HeaderLink>
                 </HeaderDropdown>
-                <HeaderDropdown title="Berichten">
+                <HeaderDropdown title="Actueel">
                     <HeaderLink href="/nieuws">Nieuws</HeaderLink>
                     <HeaderLink href="/inzendingen">Inzendingen</HeaderLink>
                 </HeaderDropdown>
