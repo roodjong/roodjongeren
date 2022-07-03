@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {FaFacebook, FaInstagram, FaTiktok, FaTwitter} from 'react-icons/fa';
+import {FaFacebook, FaInstagram, FaTiktok, FaTwitter, FaGithub} from 'react-icons/fa';
 import {IconContext} from 'react-icons';
 
 export default function Footer() {
@@ -43,6 +43,10 @@ export default function Footer() {
                     <a href="https://www.tiktok.com/@roodjong"
                        className="hover:underline group">
                         <FaTiktok/>Tiktok
+                    </a>
+                    <a href="https://github.com/roodjong"
+                       className="hover:underline group">
+                        <FaGithub/>GitHub
                     </a>
                 </IconContext.Provider>
             </div>
