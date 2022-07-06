@@ -22,6 +22,10 @@ export default function PostItem(props: Props) {
     }, [router, link]);
     
     const stopPropagation = useCallback(e => e.stopPropagation(), []);
+
+    if (!post.banner) {
+        post.banner="../../images/banner.webp"
+    }
     
     return <div onClick={handleClick}
                 className="shadow shadow-[#0004] bg-gray-50 hover:shadow-lg hover:shadow-[#0004] transition-shadow rounded flex flex-col md:flex-row items-stretch cursor-pointer">
@@ -49,14 +53,13 @@ export default function PostItem(props: Props) {
                 </a>
             </Link>
         </div>
-        {post.banner &&
-            <div className="relative basis-1/2 min-h-[12rem] md:min-h-0">
-                <Image loader={imageLoader}
-                       src={post.banner}
-                       alt="Artikel-banner"
-                       objectFit="cover"
-                       objectPosition="center"
-                       layout="fill"/>
-            </div>}
+        <div className="relative basis-1/2 min-h-[12rem] md:min-h-0">
+            <Image loader={imageLoader}
+                   src={post.banner}
+                   alt="Artikel-banner"
+                   objectFit="cover"
+                   objectPosition="center"
+                   layout="fill"/>
+        </div>
     </div>;
 }
