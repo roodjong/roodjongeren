@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "default_post_banners",
+  "info": {
+    "singularName": "default-post-banner",
+    "pluralName": "default-post-banners",
+    "displayName": "Default Post Banner",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "banner": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

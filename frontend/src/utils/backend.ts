@@ -195,6 +195,25 @@ export async function fetchPostSlugs(): Promise<{ slugs: string[], pagination: S
     };
 }
 
+export async function fetchDefaultPostBanner(): Promise<DefaultBanner> {
+    const response = await backend.get<StrapiResponse<DefaultBanner>>('/default-post-banner', {
+        params: {
+            populate: {
+                banner: {
+                    fields: ['url']
+                }
+            }
+        }
+    });
+
+    function sanitise(content: any) {
+        content.banner = content.banner.data.attributes.url;
+        return content;
+    }
+
+    return sanitise(response.data.data.attributes);
+}
+
 export async function fetchPosts(type: PostType | undefined = undefined, author: string | null = null, afdeling: string | null = null, page: number = 1, pageSize: number = 8): Promise<{ posts: Post[], pagination: StrapiPagination }> {
     const response = await backend.get<StrapiListResponse<Post>>('/posts', {
         params: {

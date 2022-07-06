@@ -1,14 +1,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {Post} from '../models/Post';
+import DefaultBanner from '../models/DefaultBanner';
 import {dateToText} from '../utils/date';
 import imageLoader from '../utils/image-loader';
+import {fetchDefaultPostBanner} from '../utils/backend'
 import {useRouter} from 'next/router';
 import {useCallback} from 'react';
 import PostTypeDisplay from './PostTypeDisplay';
 
 interface Props {
     post: Post;
+    defaultbanner: DefaultBanner;
 }
 
 export default function PostItem(props: Props) {
@@ -24,7 +27,7 @@ export default function PostItem(props: Props) {
     const stopPropagation = useCallback(e => e.stopPropagation(), []);
 
     if (!post.banner) {
-        post.banner="../../images/banner.webp"
+        post.banner=props.defaultbanner.banner
     }
     
     return <div onClick={handleClick}
@@ -62,4 +65,13 @@ export default function PostItem(props: Props) {
                    layout="fill"/>
         </div>
     </div>;
+}
+
+export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
+    return {
+        props: {
+            content: await fetchDefaultPostBanner()
+        },
+        revalidate
+    };
 }
