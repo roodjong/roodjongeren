@@ -91,6 +91,12 @@ To restore the backup of the database into a running Postgres container, use the
 cat dump_rood.sql | docker exec -i rood_postgres psql -U rood -d rood
 ```
 
+To back up images and files uploaded to Strapi, you can run `docker cp` in the instance:
+
+```bash
+sudo docker cp rood_strapi:/usr/src/app/public/uploads/ uploads_backup/
+```
+
 ### Configuring SSL
 
 The Nginx rules as specified in `nginx_ssl.conf` expect a certbot setup created using a webroot. You should volume mount

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import {useMemo} from 'react';
-import {fetchAfdelingen, fetchFallbackBanner} from '../utils/backend';
+import {fetchAfdelingen, fetchFallback} from '../utils/backend';
 import Afdeling from '../models/Afdeling';
 import Subheader from '../components/Subheader';
 import AfdelingenTable from '../components/AfdelingenTable';
@@ -11,7 +11,7 @@ import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
 
 interface Props {
-    banner: string;
+    pageBanner: string;
     afdelingen: Afdeling[];
 }
 
@@ -22,7 +22,7 @@ export default function AfdelingenPage(props: Props) {
         <Head>
             <title>Afdelingen</title>
         </Head>
-        <Banner title="Afdelingen" background={props.banner} compact/>
+        <Banner title="Afdelingen" background={props.pageBanner} compact/>
         <Main>
             <div className="container">
                 <Subheader>Overzicht</Subheader>
@@ -41,13 +41,13 @@ export default function AfdelingenPage(props: Props) {
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-    const [banner, afdelingen] = await Promise.all([
-        fetchFallbackBanner(),
+    const [{pageBanner}, afdelingen] = await Promise.all([
+        fetchFallback(),
         fetchAfdelingen()
     ]);
     
     return {
-        props: {banner, afdelingen},
+        props: {pageBanner, afdelingen},
         revalidate
     };
 }

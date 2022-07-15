@@ -1,12 +1,12 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import {fetchFallbackBanner} from '../utils/backend';
+import {fetchFallback} from '../utils/backend';
 import Banner from '../components/Banner';
 import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
 
 interface Props {
-    banner: string;
+    pageBanner: string;
 }
 
 
@@ -19,14 +19,16 @@ export default function Custom404Page(props: Props) {
                 subtitle={<div className="rounded shadow overflow-hidden mt-4">
                     <Image src="/images/sad-meme.webp" width="128" height="128" alt=""/>
                 </div>}
-                background={props.banner}/>
+                background={props.pageBanner}/>
     </div>;
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
+    const {pageBanner} = await fetchFallback();
+    
     return {
         props: {
-            banner: await fetchFallbackBanner()
+            pageBanner
         },
         revalidate
     };

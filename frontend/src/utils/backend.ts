@@ -14,6 +14,7 @@ import ConfidantsPageContent from '../models/ConfidantsPageContent';
 import {Workgroup} from '../models/Workgroup';
 import joinPaths from './paths';
 import ProgramContent from '../models/ProgramContent';
+import Fallback from '../models/Fallback';
 
 export const backendBaseUrl = process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? '';
 
@@ -22,22 +23,26 @@ export const backend = axios.create({
     paramsSerializer: params => qs.stringify(params)
 });
 
-export async function fetchFallbackBanner(): Promise<string> {
-    const response = await backend.get<StrapiResponse<HomeContent>>('/home', {
+export async function fetchFallback(): Promise<Fallback> {
+    const response = await backend.get<StrapiResponse<any>>('/fallback', {
         params: {
             populate: {
-                banner: {
+                pageBanner: {
+                    fields: ['url']
+                },
+                postBanner: {
                     fields: ['url']
                 }
             }
         }
     });
     
-    function sanitise(content: any) {
-        return content.banner.data.attributes?.url ?? null;
-    }
+    const content = response.data.data.attributes;
     
-    return sanitise(response.data.data.attributes);
+    return {
+        pageBanner: content.pageBanner.data.attributes?.url ?? null,
+        postBanner: content.postBanner.data.attributes?.url ?? null
+    };
 }
 
 export async function fetchHome(): Promise<HomeContent> {

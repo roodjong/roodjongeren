@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {fetchAfdeling, fetchAfdelingen, fetchFallbackBanner, fetchPosts} from '../../utils/backend';
+import {fetchAfdeling, fetchAfdelingen, fetchFallback, fetchPosts} from '../../utils/backend';
 import Afdeling from '../../models/Afdeling';
 import {ParsedUrlQuery} from 'querystring';
 import {GetStaticPropsContext, GetStaticPropsResult} from 'next';
@@ -19,7 +19,8 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
-    fallbackBanner: string;
+    fallbackPageBanner: string;
+    fallbackPostBanner: string;
     afdeling: Afdeling;
     posts: Post[];
 }
@@ -31,7 +32,7 @@ export default function AfdelingPage(props: Props) {
         <Head>
             <title>{afdeling.name}</title>
         </Head>
-        <Banner title={afdeling.name} background={afdeling.banner ?? props.fallbackBanner} compact/>
+        <Banner title={afdeling.name} background={afdeling.banner ?? props.fallbackPageBanner} compact/>
         <Main className="container flex flex-col-reverse md:flex-row gap-4 justify-between">
             <div>
                 <div className="flex text-base mt-2 mb-6 gap-2 lg:gap-4 text-primary lg:flex-row flex-col">
@@ -52,7 +53,7 @@ export default function AfdelingPage(props: Props) {
         </Main>
         <div className="container">
             <Subheader>Laatste nieuws & inzendingen</Subheader>
-            <EndlessPostsLoader posts={props.posts} afdeling={props.afdeling.slug}/>
+            <EndlessPostsLoader posts={props.posts} afdeling={props.afdeling.slug} fallbackPostBanner={props.fallbackPostBanner}/>
         </div>
     </div>;
 }
@@ -71,14 +72,14 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<Props>> {
     const params = context.params as Params;
     
-    const [fallbackBanner, afdeling, {posts}] = await Promise.all([
-        fetchFallbackBanner(),
+    const [{pageBanner, postBanner}, afdeling, {posts}] = await Promise.all([
+        fetchFallback(),
         fetchAfdeling(params.slug),
         fetchPosts(undefined, undefined, params.slug, 1, 4)
     ]);
     
     return {
-        props: {fallbackBanner, afdeling, posts},
+        props: {fallbackPageBanner: pageBanner, fallbackPostBanner: postBanner, afdeling, posts},
         revalidate
     };
 }

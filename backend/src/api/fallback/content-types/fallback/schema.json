@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "fallbacks",
+  "info": {
+    "singularName": "fallback",
+    "pluralName": "fallbacks",
+    "displayName": "Fallback"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "pageBanner": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "postBanner": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}
