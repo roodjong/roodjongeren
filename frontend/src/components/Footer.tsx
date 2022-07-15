@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {FaFacebook, FaInstagram, FaTiktok, FaTwitter, FaGithub} from 'react-icons/fa';
+import {FaFacebook, FaGithub, FaInstagram, FaReddit, FaTiktok, FaTwitter} from 'react-icons/fa';
 import {IconContext} from 'react-icons';
 
 export default function Footer() {
@@ -47,6 +47,10 @@ export default function Footer() {
                     <a href="https://github.com/roodjong"
                        className="hover:underline group">
                         <FaGithub/>GitHub
+                    </a>
+                    <a href="https://reddit.com/r/Poldersocialisme/"
+                       className="hover:underline group">
+                        <FaReddit/>Reddit
                     </a>
                 </IconContext.Provider>
             </div>
