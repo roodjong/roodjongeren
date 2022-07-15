@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {fetchAuthors, fetchFallbackBanner, fetchPosts} from '../../utils/backend';
+import {fetchAuthors, fetchFallback, fetchPosts} from '../../utils/backend';
 import {Post} from '../../models/Post';
 import {GetStaticPathsResult, GetStaticPropsContext, GetStaticPropsResult} from 'next';
 import {ParsedUrlQuery} from 'querystring';
@@ -13,7 +13,8 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
-    banner: string;
+    pageBanner: string;
+    fallbackPostBanner: string;
     posts: Post[];
     author: string;
 }
@@ -23,9 +24,9 @@ export default function NieuwsAuthorPage(props: Props) {
         <Head>
             <title>{props.author} - Nieuws & Opiniestukken</title>
         </Head>
-        <Banner title={props.author} subtitle="Nieuws & Inzendingen" background={props.banner} compact/>
+        <Banner title={props.author} subtitle="Nieuws & Inzendingen" background={props.pageBanner} compact/>
         <Main className="container">
-            <EndlessPostsLoader posts={props.posts} author={props.author}/>
+            <EndlessPostsLoader posts={props.posts} author={props.author} fallbackPostBanner={props.fallbackPostBanner}/>
         </Main>
     </div>;
 }
@@ -44,13 +45,13 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     const params = context.params as Params;
     const author = params.author;
     
-    const [{posts}, banner] = await Promise.all([
+    const [{posts}, {pageBanner, postBanner}] = await Promise.all([
         fetchPosts(undefined, author, null, 1, 4),
-        fetchFallbackBanner()
+        fetchFallback()
     ]);
     
     return {
-        props: {banner, posts, author},
+        props: {pageBanner, posts, author, fallbackPostBanner: postBanner},
         revalidate
     };
 }

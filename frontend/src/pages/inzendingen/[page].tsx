@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {fetchFallbackBanner, fetchPosts} from '../../utils/backend';
+import {fetchFallback, fetchPosts} from '../../utils/backend';
 import {Post, PostType} from '../../models/Post';
 import {StrapiPagination} from '../../models/strapi';
 import CollectionViewer from '../../components/CollectionViewer';
@@ -17,7 +17,8 @@ interface Params extends ParsedUrlQuery {
 }
 
 interface Props {
-    banner: string;
+    pageBanner: string;
+    fallbackPostBanner: string;
     submissions: Post[];
     pagination: StrapiPagination;
 }
@@ -27,11 +28,11 @@ export default function InzendingenPage(props: Props) {
         <Head>
             <title>Inzendingen</title>
         </Head>
-        <Banner title="Inzendingen" background={props.banner} compact/>
+        <Banner title="Inzendingen" background={props.pageBanner} compact/>
         <Main className="container">
             <CollectionViewer pagination={props.pagination} pageItems={props.submissions.length} urlPrefix="/inzendingen/">
                 <div className="flex flex-col gap-6 pb-4">
-                    {props.submissions.map(post => <PostItem key={post.slug} post={post}/>)}
+                    {props.submissions.map(post => <PostItem key={post.slug} post={post} fallbackBanner={props.fallbackPostBanner}/>)}
                 </div>
             </CollectionViewer>
         </Main>
@@ -56,13 +57,13 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     const params = context.params as Params;
     const page = parseInt(params.page);
     
-    const [{posts, pagination}, banner] = await Promise.all([
+    const [{posts, pagination}, {pageBanner, postBanner}] = await Promise.all([
         fetchPosts(PostType.SUBMISSION, null, null, page, 8),
-        fetchFallbackBanner()
+        fetchFallback()
     ]);
     
     return {
-        props: {banner, submissions: posts, pagination},
+        props: {pageBanner, fallbackPostBanner: postBanner, submissions: posts, pagination},
         revalidate
     };
 }

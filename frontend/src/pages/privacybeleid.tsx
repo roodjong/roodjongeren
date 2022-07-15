@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {fetchFallbackBanner, fetchPrivacybeleid} from '../utils/backend';
+import {fetchFallback, fetchPrivacybeleid} from '../utils/backend';
 import PrivacybeleidContent from '../models/PrivacybeleidContent';
 import Markdown from '../components/Markdown';
 import Banner from '../components/Banner';
@@ -8,7 +8,7 @@ import {revalidate} from '../utils/revalidate';
 import {GetStaticPropsResult} from 'next';
 
 interface Props {
-    banner: string;
+    pageBanner: string;
     privacybeleid: PrivacybeleidContent;
 }
 
@@ -17,7 +17,7 @@ export default function PrivacybeleidPage(props: Props) {
         <Head>
             <title>Privacybeleid</title>
         </Head>
-        <Banner title="Privacybeleid" background={props.banner} compact/>
+        <Banner title="Privacybeleid" background={props.pageBanner} compact/>
         <Main className="container">
             <Markdown content={props.privacybeleid.content}/>
         </Main>
@@ -26,13 +26,13 @@ export default function PrivacybeleidPage(props: Props) {
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
     
-    const [banner, privacybeleid] = await Promise.all([
-        fetchFallbackBanner(),
+    const [{pageBanner}, privacybeleid] = await Promise.all([
+        fetchFallback(),
         fetchPrivacybeleid()
     ]);
     
     return {
-        props: {banner, privacybeleid},
+        props: {pageBanner, privacybeleid},
         revalidate
     };
 }

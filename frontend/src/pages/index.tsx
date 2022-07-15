@@ -3,7 +3,7 @@ import Banner from '../components/Banner';
 import AboutUsShort from '../components/AboutUsShort';
 import dynamic from 'next/dynamic';
 import {useMemo} from 'react';
-import {fetchAfdelingen, fetchHome, fetchPosts} from '../utils/backend';
+import {fetchAfdelingen, fetchFallback, fetchHome, fetchPosts} from '../utils/backend';
 import Afdeling from '../models/Afdeling';
 import HomeContent from '../models/HomeContent';
 import {Post} from '../models/Post';
@@ -17,6 +17,7 @@ interface Props {
     homeContent: HomeContent;
     afdelingen: Afdeling[];
     posts: Post[];
+    fallbackPostBanner: string;
 }
 
 export default function HomePage(props: Props) {
@@ -33,21 +34,22 @@ export default function HomePage(props: Props) {
             <AfdelingenMap afdelingen={props.afdelingen} compact/>
             <div className="container">
                 <Subheader>Laatste nieuws & inzendingen</Subheader>
-                <EndlessPostsLoader posts={props.posts}/>
+                <EndlessPostsLoader posts={props.posts} fallbackPostBanner={props.fallbackPostBanner}/>
             </div>
         </Main>
     </div>;
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-    const [homeContent, afdelingen, {posts}] = await Promise.all([
+    const [homeContent, afdelingen, {posts}, {postBanner}] = await Promise.all([
         fetchHome(),
         fetchAfdelingen(),
-        fetchPosts(undefined, null, null, 1, 4)
+        fetchPosts(undefined, null, null, 1, 4),
+        fetchFallback()
     ]);
     
     return {
-        props: {homeContent, afdelingen, posts},
+        props: {homeContent, afdelingen, posts, fallbackPostBanner: postBanner},
         revalidate
     };
 }

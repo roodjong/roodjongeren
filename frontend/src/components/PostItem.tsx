@@ -9,6 +9,7 @@ import PostTypeDisplay from './PostTypeDisplay';
 
 interface Props {
     post: Post;
+    fallbackBanner: string;
 }
 
 export default function PostItem(props: Props) {
@@ -49,14 +50,13 @@ export default function PostItem(props: Props) {
                 </a>
             </Link>
         </div>
-        {post.banner &&
-            <div className="relative basis-1/2 min-h-[12rem] md:min-h-0">
-                <Image loader={imageLoader}
-                       src={post.banner}
-                       alt="Artikel-banner"
-                       objectFit="cover"
-                       objectPosition="center"
-                       layout="fill"/>
-            </div>}
+        <div className="relative basis-1/2 min-h-[12rem] md:min-h-0">
+            <Image loader={imageLoader}
+                   src={post.banner ?? props.fallbackBanner}
+                   alt="Artikel-banner"
+                   objectFit={post.banner ? 'cover' : 'scale-down'}
+                   objectPosition="center"
+                   layout="fill"/>
+        </div>
     </div>;
 }

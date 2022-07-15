@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import {fetchFallbackBanner, fetchWorkgroups} from '../utils/backend';
+import {fetchFallback, fetchWorkgroups} from '../utils/backend';
 import {Workgroup} from '../models/Workgroup';
 import WorkgroupCard from '../components/WorkgroupCard';
 import Banner from '../components/Banner';
@@ -8,7 +8,7 @@ import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
 
 interface Props {
-    banner: string;
+    pageBanner: string;
     workgroups: Workgroup[];
 }
 
@@ -17,7 +17,7 @@ export default function WerkgroepenPage(props: Props) {
         <Head>
             <title>Werkgroepen</title>
         </Head>
-        <Banner title="Werkgroepen" background={props.banner} compact/>
+        <Banner title="Werkgroepen" background={props.pageBanner} compact/>
         <Main className="container">
             {props.workgroups.map(workgroup => <WorkgroupCard key={workgroup.name} workgroup={workgroup}/>)}
         </Main>
@@ -25,13 +25,13 @@ export default function WerkgroepenPage(props: Props) {
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-    const [banner, workgroups] = await Promise.all([
-        fetchFallbackBanner(),
+    const [{pageBanner}, workgroups] = await Promise.all([
+        fetchFallback(),
         fetchWorkgroups()
     ]);
     
     return {
-        props: {banner, workgroups},
+        props: {pageBanner, workgroups},
         revalidate
     };
 }

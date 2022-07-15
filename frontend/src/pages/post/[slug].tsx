@@ -2,7 +2,7 @@ import Head from 'next/head';
 import {ParsedUrlQuery} from 'querystring';
 import {GetStaticPathsResult, GetStaticPropsContext} from 'next';
 import {PostDetail, PostType} from '../../models/Post';
-import {fetchFallbackBanner, fetchPost, fetchPostSlugs} from '../../utils/backend';
+import {fetchFallback, fetchPost, fetchPostSlugs} from '../../utils/backend';
 import Markdown from '../../components/Markdown';
 import {dateToText} from '../../utils/date';
 import Banner from '../../components/Banner';
@@ -77,13 +77,13 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 export async function getStaticProps(context: GetStaticPropsContext) {
     const params = context.params as Params;
     
-    const [post, fallbackBanner] = await Promise.all([
+    const [post, {pageBanner}] = await Promise.all([
         fetchPost(params.slug),
-        fetchFallbackBanner()
+        fetchFallback()
     ]);
     
     return {
-        props: {post, fallbackBanner},
+        props: {post, fallbackBanner: pageBanner},
         revalidate
     };
 }

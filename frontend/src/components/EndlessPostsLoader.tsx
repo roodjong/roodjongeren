@@ -8,6 +8,7 @@ interface Props {
     author: string | null;
     afdeling: string | null;
     pageSize: number;
+    fallbackPostBanner: string;
 }
 
 EndlessPostsLoader.defaultProps = {
@@ -35,7 +36,7 @@ export default function EndlessPostsLoader(props: Props) {
     }
     
     return <div className="flex flex-col gap-6 pb-4 mt-8">
-        {posts.map(post => <PostItem key={post.slug} post={post}/>)}
+        {posts.map(post => <PostItem key={post.slug} post={post} fallbackBanner={props.fallbackPostBanner}/>)}
         <div className="text-center">
             {posts.length === 0
                 ? <p className="text-faded"><i>Nog geen nieuwsberichten</i></p>
