@@ -3,8 +3,6 @@ import Subheader from '../components/Subheader';
 import {PropsWithChildren} from 'react';
 import {HeadingProps, OrderedListProps, UnorderedListProps} from 'react-markdown/lib/ast-to-react';
 import {FaQuoteLeft} from 'react-icons/fa';
-import joinPaths from '../utils/paths';
-import {backendBaseUrl} from '../utils/backend';
 import remarkGfm from 'remark-gfm';
 
 interface Props {
@@ -69,7 +67,7 @@ function MarkdownAnchor(props: PropsWithChildren<any>) {
 
 function MarkdownImage(props: PropsWithChildren<any>) {
     return <span>
-        <img src={joinPaths(backendBaseUrl, props.src)} alt={props.alt}
+        <img src={props.src} alt={props.alt}
              className="md:float-right md:ml-4 md:max-w-[50%] clear-both mb-4 shadow shadow-[#0004]"/>
     </span>;
 }
