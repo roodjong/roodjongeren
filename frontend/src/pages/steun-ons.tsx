@@ -22,7 +22,7 @@ export default function SupportUsPage(props: Props) {
         <Main className="container">
             <Markdown content={props.content.content}/>
             <a className="button-primary inline-block text-3xl"
-               href="https://mijnrood.nl/steunlid-worden">
+               href="https://mijn.roodjongeren.nl/steunlid-worden">
                 Steunlid worden <FaHandHoldingHeart className="inline align-baseline ml-2"/>
             </a>
             <p className="mt-4">
