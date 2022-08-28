@@ -15,7 +15,7 @@ export default function Footer() {
                 <Link href="/privacybeleid">
                     <a className="hover:underline">Privacybeleid</a>
                 </Link>
-                <a href="https://mijn.roodjongeren.nl/login"
+                <a href="https://mijn.roodjongeren.nl"
                    className="hover:underline">
                     mijnROOD
                 </a>
