@@ -15,9 +15,9 @@ export default function Footer() {
                 <Link href="/privacybeleid">
                     <a className="hover:underline">Privacybeleid</a>
                 </Link>
-                <a href="https://mijnrood.nl/"
+                <a href="https://mijn.roodjongeren.nl/login"
                    className="hover:underline">
-                    mijnrood.nl
+                    mijnROOD
                 </a>
                 <p>KVK: 24349986</p>
                 <a href="https://www.google.nl/maps/place/Gaffelstraat+61B,+3014+RC+Rotterdam"
