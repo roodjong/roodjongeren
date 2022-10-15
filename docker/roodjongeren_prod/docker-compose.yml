@@ -52,6 +52,7 @@ services:
       - DATABASE_NAME=$DATABASE_NAME
       - DATABASE_USER=$DATABASE_USER
       - DATABASE_PASSWORD=$DATABASE_PASSWORD
+      - STRAPI_LICENSE=$STRAPI_LICENSE
     depends_on:
       - postgres
     networks:
