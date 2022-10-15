@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import {useMemo} from 'react';
 import {fetchAfdelingen, fetchFallback} from '../utils/backend';
@@ -9,6 +8,7 @@ import Banner from '../components/Banner';
 import Main from '../components/Main';
 import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
+import HeadPage from '../components/HeadPage';
 
 interface Props {
     pageBanner: string;
@@ -19,9 +19,8 @@ export default function AfdelingenPage(props: Props) {
     const AfdelingenMap = useMemo(() => dynamic(() => import('../components/AfdelingenMap'), {ssr: false}), []);
     
     return <div>
-        <Head>
-            <title>Afdelingen</title>
-        </Head>
+        <HeadPage title="Afdelingen" description="Overzicht van alle afdelingen van ROOD" url="https://roodjongeren.nl/afdelingen"/>
+        
         <Banner title="Afdelingen" background={props.pageBanner} compact/>
         <Main>
             <div className="container">

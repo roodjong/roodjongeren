@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {fetchFallback, fetchPosts} from '../utils/backend';
 import {Post} from '../models/Post';
 import {StrapiPagination} from '../models/strapi';
@@ -10,6 +9,7 @@ import Main from '../components/Main';
 import {revalidate} from '../utils/revalidate';
 import Search from '../components/Search';
 import {useCallback, useEffect, useState} from 'react';
+import HeadPage from '../components/HeadPage';
 
 const PAGE_SIZE = 8;
 
@@ -53,9 +53,9 @@ export default function ActueelPage(props: Props) {
     }, [searchString, page, props]);
     
     return <div>
-        <Head>
-            <title>Actueel</title>
-        </Head>
+        <HeadPage title="Actueel"
+                  description="Overzicht van alle nieuwsberichten en inzendingen van ROOD"
+                  url="https://roodjongeren.nl/actueel"/>
         <Banner title="Actueel" background={props.pageBanner} compact/>
         <Main className="container">
             <Search onChange={handleSearch} placeholder="Zoek op titel, auteur of inhoud" isLoading={isLoading}/>

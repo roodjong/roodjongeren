@@ -35,7 +35,7 @@ export default function PostItem(props: Props) {
                         <span className="mx-2">&#xB7;</span>
                     </>}
                     <span>
-                            <Link href={`/auteur/${post.author}`}>
+                            <Link href={`/auteur/${encodeURIComponent(post.author)}`}>
                                 <a className="hover:underline hover:text-primary transition-colors" onClick={stopPropagation}>
                                     {post.author}
                                 </a>
