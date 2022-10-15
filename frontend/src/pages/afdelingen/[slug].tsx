@@ -20,7 +20,6 @@ interface Params extends ParsedUrlQuery {
 
 interface Props {
     fallbackPageBanner: string;
-    fallbackPostBanner: string;
     afdeling: Afdeling;
     posts: Post[];
 }
@@ -53,7 +52,7 @@ export default function AfdelingPage(props: Props) {
         </Main>
         <div className="container">
             <Subheader>Laatste nieuws & inzendingen</Subheader>
-            <EndlessPostsLoader posts={props.posts} afdeling={props.afdeling.slug} fallbackPostBanner={props.fallbackPostBanner}/>
+            <EndlessPostsLoader posts={props.posts} afdeling={props.afdeling.slug} showPostType/>
         </div>
     </div>;
 }
@@ -72,14 +71,14 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: GetStaticPropsContext): Promise<GetStaticPropsResult<Props>> {
     const params = context.params as Params;
     
-    const [{pageBanner, postBanner}, afdeling, {posts}] = await Promise.all([
+    const [{pageBanner}, afdeling, {posts}] = await Promise.all([
         fetchFallback(),
         fetchAfdeling(params.slug),
         fetchPosts(undefined, undefined, params.slug, 1, 4)
     ]);
     
     return {
-        props: {fallbackPageBanner: pageBanner, fallbackPostBanner: postBanner, afdeling, posts},
+        props: {fallbackPageBanner: pageBanner, afdeling, posts},
         revalidate
     };
 }

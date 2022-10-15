@@ -54,6 +54,10 @@
         "inzending"
       ],
       "required": true
+    },
+    "frontpage": {
+      "type": "boolean",
+      "required": true
     }
   }
 }
