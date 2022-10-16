@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {fetchSupportUs} from '../utils/backend';
 import Markdown from '../components/Markdown';
 import {FaHandHoldingHeart} from 'react-icons/fa';
@@ -8,6 +7,7 @@ import Banner from '../components/Banner';
 import Main from '../components/Main';
 import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
+import HeadPage from '../components/HeadPage';
 
 interface Props {
     content: SupportUsContent;
@@ -15,9 +15,9 @@ interface Props {
 
 export default function SupportUsPage(props: Props) {
     return <div>
-        <Head>
-            <title>Steun ons</title>
-        </Head>
+        <HeadPage title="Steun ons"
+                  description="ROOD steunen zonder (volledig) lid te worden"
+                  url="https://roodjongeren.nl/steun-ons"/>
         <Banner title="Steun ons" background={props.content.banner} compact/>
         <Main className="container">
             <Markdown content={props.content.content}/>

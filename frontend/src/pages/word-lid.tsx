@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {fetchJoinUs} from '../utils/backend';
 import Markdown from '../components/Markdown';
 import JoinUsContent from '../models/JoinUsContent';
@@ -8,6 +7,7 @@ import Banner from '../components/Banner';
 import Main from '../components/Main';
 import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
+import HeadPage from '../components/HeadPage';
 
 interface Props {
     content: JoinUsContent;
@@ -15,9 +15,9 @@ interface Props {
 
 export default function JoinUsPage(props: Props) {
     return <div>
-        <Head>
-            <title>Word lid</title>
-        </Head>
+        <HeadPage title="Word lid"
+                  description="Actief worden in de grootste socialistische jongerenorganisatie van Nederland"
+                  url="https://roodjongeren.nl/word-lid"/>
         <Banner title="Word lid" background={props.content.banner} compact/>
         <Main className="container">
             <Markdown content={props.content.content}/>
