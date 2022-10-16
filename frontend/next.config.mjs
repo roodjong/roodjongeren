@@ -289,8 +289,8 @@ export default withTM({
     reactStrictMode: true,
     async rewrites() {
         return [
-            {source: '/nieuws', destination: '/nieuws/1'},
-            {source: '/inzendingen', destination: '/inzendingen/1'},
+            {source: '/nieuws', destination: '/actueel'},
+            {source: '/inzendingen', destination: '/actueel'},
         ]
     },
     async redirects() {

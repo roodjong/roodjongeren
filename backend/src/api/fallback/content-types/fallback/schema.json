@@ -4,7 +4,8 @@
   "info": {
     "singularName": "fallback",
     "pluralName": "fallbacks",
-    "displayName": "Fallback"
+    "displayName": "Fallback",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -12,20 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "pageBanner": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
-    },
-    "postBanner": {
+      "required": true,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     }
   }
 }

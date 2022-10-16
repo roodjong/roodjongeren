@@ -3,10 +3,10 @@ import Banner from '../components/Banner';
 import AboutUsShort from '../components/AboutUsShort';
 import dynamic from 'next/dynamic';
 import {useMemo} from 'react';
-import {fetchAfdelingen, fetchFallback, fetchHome, fetchPosts} from '../utils/backend';
+import {fetchAfdelingen, fetchHome, fetchPosts} from '../utils/backend';
 import Afdeling from '../models/Afdeling';
 import HomeContent from '../models/HomeContent';
-import {Post} from '../models/Post';
+import {Post, PostType} from '../models/Post';
 import Main from '../components/Main';
 import {revalidate} from '../utils/revalidate';
 import {GetStaticPropsResult} from 'next';
@@ -16,8 +16,8 @@ import EndlessPostsLoader from '../components/EndlessPostsLoader';
 interface Props {
     homeContent: HomeContent;
     afdelingen: Afdeling[];
-    posts: Post[];
-    fallbackPostBanner: string;
+    latestNews: Post[];
+    latestSubmissions: Post[];
 }
 
 export default function HomePage(props: Props) {
@@ -32,24 +32,35 @@ export default function HomePage(props: Props) {
         <Main>
             <AboutUsShort content={content.shortAboutUs}/>
             <AfdelingenMap afdelingen={props.afdelingen} compact/>
-            <div className="container">
-                <Subheader>Laatste nieuws & inzendingen</Subheader>
-                <EndlessPostsLoader posts={props.posts} fallbackPostBanner={props.fallbackPostBanner}/>
+            <div className="container flex sm:flex-row flex-col gap-8 mt-4">
+                <div className="basis-2/3">
+                    <Subheader>Laatste nieuws</Subheader>
+                    <EndlessPostsLoader postType={PostType.NEWS} posts={props.latestNews}/>
+                </div>
+                <div className="basis-1/3">
+                    <Subheader>Laatste inzendingen</Subheader>
+                    <EndlessPostsLoader postType={PostType.SUBMISSION} posts={props.latestSubmissions}/>
+                </div>
             </div>
         </Main>
     </div>;
 }
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
-    const [homeContent, afdelingen, {posts}, {postBanner}] = await Promise.all([
+    const [homeContent, afdelingen, news, submissions] = await Promise.all([
         fetchHome(),
         fetchAfdelingen(),
-        fetchPosts(undefined, null, null, 1, 4),
-        fetchFallback()
+        fetchPosts(PostType.NEWS, null, null, 1, 6, true),
+        fetchPosts(PostType.SUBMISSION, null, null, 1, 6, true)
     ]);
     
     return {
-        props: {homeContent, afdelingen, posts, fallbackPostBanner: postBanner},
+        props: {
+            homeContent,
+            afdelingen,
+            latestNews: news.posts,
+            latestSubmissions: submissions.posts
+        },
         revalidate
     };
 }

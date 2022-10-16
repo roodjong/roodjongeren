@@ -1,20 +1,22 @@
-import {Post} from '../models/Post';
+import {Post, PostType} from '../models/Post';
 import PostItem from './PostItem';
 import {useState} from 'react';
 import {fetchPosts} from '../utils/backend';
 
 interface Props {
     posts: Post[];
+    postType: PostType | null;
     author: string | null;
     afdeling: string | null;
-    pageSize: number;
-    fallbackPostBanner: string;
+    showPostType?: boolean;
+    frontpageOnly: boolean | null;
 }
 
 EndlessPostsLoader.defaultProps = {
+    postType: null,
     author: null,
     afdeling: null,
-    pageSize: 4
+    frontpageOnly: null
 };
 
 export default function EndlessPostsLoader(props: Props) {
@@ -25,7 +27,7 @@ export default function EndlessPostsLoader(props: Props) {
     
     function loadMore() {
         setLoading(true);
-        fetchPosts(undefined, props.author, props.afdeling, page + 1, props.pageSize).then(({posts, pagination}) => {
+        fetchPosts(props.postType, props.author, props.afdeling, page + 1, props.posts.length, null).then(({posts, pagination}) => {
             if (posts.length === 0) {
                 setReachedEnd(true);
             } else {
@@ -35,8 +37,8 @@ export default function EndlessPostsLoader(props: Props) {
         }).finally(() => setLoading(false));
     }
     
-    return <div className="flex flex-col gap-6 pb-4 mt-8">
-        {posts.map(post => <PostItem key={post.slug} post={post} fallbackBanner={props.fallbackPostBanner}/>)}
+    return <div className="flex flex-col gap-6 pb-4 mt-4">
+        {posts.map(post => <PostItem key={post.slug} post={post} showPostType={props.showPostType}/>)}
         <div className="text-center">
             {posts.length === 0
                 ? <p className="text-faded"><i>Nog geen nieuwsberichten</i></p>
