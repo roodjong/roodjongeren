@@ -21,7 +21,7 @@ export default function SupportUsPage(props: Props) {
         <Banner title="Steun ons" background={props.content.banner} compact/>
         <Main className="container">
             <Markdown content={props.content.content}/>
-            <a className="button-primary inline-block text-3xl"
+            <a className="button-primary inline-block text-3xl umami--click--steunlid-worden"
                href="https://mijn.roodjongeren.nl/steunlid-worden">
                 Steunlid worden <FaHandHoldingHeart className="inline align-baseline ml-2"/>
             </a>

@@ -111,10 +111,20 @@ For local development, add a `license.txt` file to `backend/`. Place the Strapi 
 
 For production instances, assign the license to the `STRAPI_LICENSE` key in your deployed .env file.
 
+### Setting up Umami analytics
+
+The docker compose stack automatically builds and deploys [Umami](https://umami.is/), together with its own Postgres
+instance.
+
+Umami can be accessed from `/umami`. For first time setups please change the default password for the admin account.
+By default, the login credentials are "admin" and "umami".
+
+After logging in, add the website you want to track. The script it gives you should be placed in the head element of the
+frontend.
+
+Add appropriate non-admin user accounts for everyone you want to give access to view the analytics.
+
 ## Planned improvements
 
-- Add aria labels for improved search engine support
 - Add a WYSIWYG editor
-- Add analytics
-- Use public license fonts only
 - Adopt NextJS' "standalone" feature once it's no longer experimental
