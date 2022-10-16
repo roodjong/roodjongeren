@@ -14,7 +14,6 @@ interface Params extends ParsedUrlQuery {
 
 interface Props {
     pageBanner: string;
-    fallbackPostBanner: string;
     posts: Post[];
     author: string;
 }
@@ -26,7 +25,7 @@ export default function NieuwsAuthorPage(props: Props) {
         </Head>
         <Banner title={props.author} subtitle="Nieuws & Inzendingen" background={props.pageBanner} compact/>
         <Main className="container">
-            <EndlessPostsLoader posts={props.posts} author={props.author} fallbackPostBanner={props.fallbackPostBanner}/>
+            <EndlessPostsLoader posts={props.posts} author={props.author}/>
         </Main>
     </div>;
 }
@@ -45,13 +44,13 @@ export async function getStaticProps(context: GetStaticPropsContext): Promise<Ge
     const params = context.params as Params;
     const author = params.author;
     
-    const [{posts}, {pageBanner, postBanner}] = await Promise.all([
+    const [{posts}, {pageBanner}] = await Promise.all([
         fetchPosts(undefined, author, null, 1, 4),
         fetchFallback()
     ]);
     
     return {
-        props: {pageBanner, posts, author, fallbackPostBanner: postBanner},
+        props: {pageBanner, posts, author},
         revalidate
     };
 }

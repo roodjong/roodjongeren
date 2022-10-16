@@ -29,9 +29,6 @@ export async function fetchFallback(): Promise<Fallback> {
             populate: {
                 pageBanner: {
                     fields: ['url']
-                },
-                postBanner: {
-                    fields: ['url']
                 }
             }
         }
@@ -40,8 +37,7 @@ export async function fetchFallback(): Promise<Fallback> {
     const content = response.data.data.attributes;
     
     return {
-        pageBanner: content.pageBanner.data.attributes?.url ?? null,
-        postBanner: content.postBanner.data.attributes?.url ?? null
+        pageBanner: content.pageBanner.data.attributes?.url ?? null
     };
 }
 
@@ -200,7 +196,7 @@ export async function fetchPostSlugs(): Promise<{ slugs: string[], pagination: S
     };
 }
 
-export async function fetchPosts(type: PostType | undefined = undefined, author: string | null = null, afdeling: string | null = null, page: number = 1, pageSize: number = 8): Promise<{ posts: Post[], pagination: StrapiPagination }> {
+export async function fetchPosts(type: PostType | null = null, author: string | null = null, afdeling: string | null = null, page: number = 1, pageSize: number = 8, frontpage: boolean | null = null, searchString: string | null = null): Promise<{ posts: Post[], pagination: StrapiPagination }> {
     const response = await backend.get<StrapiListResponse<Post>>('/posts', {
         params: {
             sort: 'publishedAt:desc',
@@ -228,7 +224,25 @@ export async function fetchPosts(type: PostType | undefined = undefined, author:
                 afdeling: afdeling ? {
                     slug: {$eq: afdeling}
                 } : undefined,
-                type
+                type: type ?? undefined,
+                frontpage: frontpage === null ? undefined : frontpage,
+                $or: [
+                    {
+                        title: {
+                            $containsi: searchString
+                        }
+                    },
+                    {
+                        author: {
+                            $containsi: searchString
+                        }
+                    },
+                    {
+                        content: {
+                            $containsi: searchString
+                        }
+                    }
+                ]
             }
         }
     });
