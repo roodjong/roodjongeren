@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {fetchAfdeling, fetchAfdelingen, fetchFallback, fetchPosts} from '../../utils/backend';
 import Afdeling from '../../models/Afdeling';
 import {ParsedUrlQuery} from 'querystring';
@@ -13,6 +12,7 @@ import {revalidate} from '../../utils/revalidate';
 import {Post} from '../../models/Post';
 import Subheader from '../../components/Subheader';
 import EndlessPostsLoader from '../../components/EndlessPostsLoader';
+import HeadAfdeling from '../../components/HeadAfdeling';
 
 interface Params extends ParsedUrlQuery {
     slug: string;
@@ -28,9 +28,7 @@ export default function AfdelingPage(props: Props) {
     const afdeling = props.afdeling;
     
     return <div>
-        <Head>
-            <title>{afdeling.name}</title>
-        </Head>
+        <HeadAfdeling afdeling={afdeling}/>
         <Banner title={afdeling.name} background={afdeling.banner ?? props.fallbackPageBanner} compact/>
         <Main className="container flex flex-col-reverse md:flex-row gap-4 justify-between">
             <div>

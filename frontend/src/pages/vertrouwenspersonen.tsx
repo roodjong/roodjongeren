@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {fetchConfidants, fetchConfidantsPage} from '../utils/backend';
 import {Confidant} from '../models/Confidant';
 import Markdown from '../components/Markdown';
@@ -8,6 +7,7 @@ import Banner from '../components/Banner';
 import Main from '../components/Main';
 import {GetStaticPropsResult} from 'next';
 import {revalidate} from '../utils/revalidate';
+import HeadPage from '../components/HeadPage';
 
 interface Props {
     content: ConfidantsPageContent;
@@ -16,9 +16,9 @@ interface Props {
 
 export default function VertrouwenspersonenPage(props: Props) {
     return <div>
-        <Head>
-            <title>Vertrouwenspersonen</title>
-        </Head>
+        <HeadPage title="Vertrouwenspersonen"
+                  description="Bij wie je terecht kan als je tegen problemen aanloopt in ROOD"
+                  url="https://roodjongeren.nl/vertrouwenspersonen"/>
         <Banner title="Vertrouwens&shy;personen" background={props.content.banner} compact/>
         <Main className="container">
             <div className="mb-8">

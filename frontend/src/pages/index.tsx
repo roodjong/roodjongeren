@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Banner from '../components/Banner';
 import AboutUsShort from '../components/AboutUsShort';
 import dynamic from 'next/dynamic';
@@ -12,6 +11,7 @@ import {revalidate} from '../utils/revalidate';
 import {GetStaticPropsResult} from 'next';
 import Subheader from '../components/Subheader';
 import EndlessPostsLoader from '../components/EndlessPostsLoader';
+import HeadPage from '../components/HeadPage';
 
 interface Props {
     homeContent: HomeContent;
@@ -25,9 +25,9 @@ export default function HomePage(props: Props) {
     const AfdelingenMap = useMemo(() => dynamic(() => import('../components/AfdelingenMap'), {ssr: false}), []);
     
     return <div>
-        <Head>
-            <title>ROOD, Socialistische Jongeren</title>
-        </Head>
+        <HeadPage title="ROOD, Socialistische Jongeren"
+                  description="Politieke organisatie voor socialistische of anderzijds linkse jongeren"
+                  url="https://roodjongeren.nl/"/>
         <Banner title={content.bannerTitle} subtitle={content.bannerSubtitle} background={content.banner}/>
         <Main>
             <AboutUsShort content={content.shortAboutUs}/>

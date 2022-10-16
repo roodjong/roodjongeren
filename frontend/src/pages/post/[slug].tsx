@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import {ParsedUrlQuery} from 'querystring';
 import {GetStaticPathsResult, GetStaticPropsContext} from 'next';
 import {PostDetail, PostType} from '../../models/Post';
@@ -10,6 +9,7 @@ import Main from '../../components/Main';
 import Link from 'next/link';
 import PostTypeDisplay from '../../components/PostTypeDisplay';
 import {revalidate} from '../../utils/revalidate';
+import HeadArticle from '../../components/HeadArticle';
 
 interface Params extends ParsedUrlQuery {
     slug: string;
@@ -24,9 +24,7 @@ export default function PostPage(props: Props) {
     const post = props.post;
     
     return <div>
-        <Head>
-            <title>{post.title}</title>
-        </Head>
+        <HeadArticle post={post}/>
         <Banner title={post.title}
                 subtitle={<>
                     {post.author}
@@ -40,7 +38,7 @@ export default function PostPage(props: Props) {
                 <PostTypeDisplay type={props.post.type}/>
                 <span className="mx-2">&#xB7;</span>
                 <span>
-                    <Link href={`/auteur/${post.author}`}>
+                    <Link href={`/auteur/${encodeURIComponent(post.author)}`}>
                         <a className="hover:underline hover:text-primary transition-colors">
                             {post.author}
                         </a>
