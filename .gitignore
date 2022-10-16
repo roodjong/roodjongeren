@@ -1,3 +1,3 @@
 .idea/
 docker/roodjongeren_prod/.env.prod
-dump_rood.sql
+dump_rood*.sql
