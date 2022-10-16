@@ -105,6 +105,12 @@ this file on a deployed environment, rather than `nginx.conf`.
 See https://ssl-config.mozilla.org/#server=nginx&version=1.21.6&config=intermediate&openssl=1.1.1k&guideline=5.6 for
 details.
 
+### Adding Strapi Enterprise license
+
+For local development, add a `license.txt` file to `backend/`. Place the Strapi license key in this file.
+
+For production instances, assign the license to the `STRAPI_LICENSE` key in your deployed .env file.
+
 ## Planned improvements
 
 - Add aria labels for improved search engine support
