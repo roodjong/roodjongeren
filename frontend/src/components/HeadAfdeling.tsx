@@ -1,5 +1,4 @@
 import joinPaths from '../utils/paths';
-import {backendBaseUrl} from '../utils/backend';
 import Head from 'next/head';
 import AfdelingDetail from '../models/Afdeling';
 
@@ -15,6 +14,7 @@ export default function HeadAfdeling({afdeling}: Props) {
         description = description + '...';
     }
     const url = joinPaths('https://roodjongeren.nl/afdeling/', afdeling.slug);
+    const image = joinPaths('https://roodjongeren.nl/backend/', afdeling.banner ?? '');
     
     return <Head>
         <title>{afdeling.name}</title>
@@ -31,7 +31,8 @@ export default function HeadAfdeling({afdeling}: Props) {
         <meta name="twitter:description" content={description}/>
         <meta name="twitter:card" content="summary_large_image"/>
         {afdeling.banner && <>
-            <meta property="twitter:image" content={joinPaths(backendBaseUrl, afdeling.banner)}/>
+            <meta property="og:image" content={image}/>
+            <meta name="twitter:image" content={image}/>
         </>}
     </Head>;
 }

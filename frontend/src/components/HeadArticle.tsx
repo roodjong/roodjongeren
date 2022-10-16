@@ -1,5 +1,4 @@
 import joinPaths from '../utils/paths';
-import {backendBaseUrl} from '../utils/backend';
 import Head from 'next/head';
 import {PostDetail} from '../models/Post';
 
@@ -15,6 +14,7 @@ export default function HeadArticle({post}: Props) {
         description = description + '...';
     }
     const url = joinPaths('https://roodjongeren.nl/posts/', post.slug);
+    const image = joinPaths('https://roodjongeren.nl/backend/', post.banner ?? '');
     
     return <Head>
         <title>{post.title}</title>
@@ -34,7 +34,8 @@ export default function HeadArticle({post}: Props) {
         <meta name="twitter:description" content={description}/>
         <meta name="twitter:card" content="summary_large_image"/>
         {post.banner && <>
-            <meta property="twitter:image" content={joinPaths(backendBaseUrl, post.banner)}/>
+            <meta property="og:image" content={image}/>
+            <meta name="twitter:image" content={image}/>
         </>}
     </Head>;
 }

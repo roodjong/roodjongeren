@@ -52,7 +52,7 @@ export default function Header() {
                 <HeaderLink href="/actueel">Actueel</HeaderLink>
                 <HeaderLink href="/word-lid">Word lid</HeaderLink>
                 <HeaderLink href="/steun-ons">Steun ons</HeaderLink>
-                <HeaderLink href="https://derodelap.nl/" externalLink>Shop</HeaderLink>
+                <HeaderLink href="https://derodelap.nl/" externalLink className="umami--click--header-shop">Shop</HeaderLink>
             </div>
         </nav>
     </header>;

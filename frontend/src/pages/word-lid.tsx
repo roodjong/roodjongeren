@@ -21,7 +21,7 @@ export default function JoinUsPage(props: Props) {
         <Banner title="Word lid" background={props.content.banner} compact/>
         <Main className="container">
             <Markdown content={props.content.content}/>
-            <a className="button-primary inline-block text-3xl umami--click--inschrijven"
+            <a className="button-primary inline-block text-3xl umami--click--word-lid"
                href="https://mijn.roodjongeren.nl/aanmelden">
                 Inschrijven <FaFistRaised className="inline align-baseline ml-2"/>
             </a>

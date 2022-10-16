@@ -71,20 +71,15 @@ passes to the frontend and backend docker services. The docker compose file that
 The nginx configuration is located at `/etc/nginx/sites-enabled/roodjongeren.nl.conf`. Whenever the nginx config is changed,
 reload it using `sudo systemctl reload nginx`.
 
-### Pushing docker images
+### Deploying on production
 
-Push the docker images to a <ins>**private**</ins> repository. This is essential, to prevent secret in your .env-files
-from being exposed. You can push the images using:
+Make sure your latest changes have been pushed. `ssh` into the production instance. `cd` to `~/roodjongeren`.
+This is where the docker compose file is, as well as the .env file. `cd roodjongeren` to open the cloned repository.
+Pull the latest changes from GitHub via `sudo git pull`.
 
-```bash
-docker-compose -f docker/roodjongeren_prod/docker-compose.yml push
-```
-
-Besides the database, users can also upload media. These are stored in a volume bound
-to `rood_strapi:/usr/src/app/public/uploads`, and should be backed up and restored together with the database.
-
-To use these images pull them into your host instance and restart the Docker Compose stack using the `--no-build`
-and `-d` flags.
+Afterwards `cd ..` back into the folder with your docker compose file and
+run `sudo docker compose build [service] [--no-cache]` to create new docker images.
+Deploy them with `sudo docker compose up`.
 
 ### Backing Up & Restoring Database
 

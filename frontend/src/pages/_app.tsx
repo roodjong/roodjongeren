@@ -7,7 +7,7 @@ export default function RoodJongerenApp({Component, pageProps}: AppProps) {
     return <Layout>
         <Head>
             <title>ROOD, Socialistische Jongeren</title>
-            <script async defer data-website-id="2b3534fb-1af5-4fa4-93f6-0fa62a239ae1" src="/umami/stasi.js"></script>
+            <script async defer data-website-id="96e32064-8d01-434b-98ab-7a14c468669c" src="/umami/stasi.js"></script>
         </Head>
         <Component {...pageProps} />
     </Layout>;

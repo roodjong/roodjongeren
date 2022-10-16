@@ -1,0 +1,13 @@
+# Ignore everything
+*
+
+# Whitelist
+!src/
+!public/
+!next.config.mjs
+!next-env.d.ts
+!postcss.config.js
+!tailwind.config.js
+!tsconfig.json
+!package.json
+!yarn.lock
