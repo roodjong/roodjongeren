@@ -68,7 +68,8 @@ On the production server, the nginx docker is instead run as a regular nginx ubu
 passes to the frontend and backend docker services. The docker compose file that's used on the server is located at
 `/home/ubuntu/roodjongeren/docker-compose.yml`. Restart the docker containers with `docker compose restart`. 
 
-The nginx configuration is located at `/etc/nginx/sites-enabled/roodjongeren.nl.conf`. 
+The nginx configuration is located at `/etc/nginx/sites-enabled/roodjongeren.nl.conf`. Whenever the nginx config is changed,
+reload it using `sudo systemctl reload nginx`.
 
 ### Pushing docker images
 
