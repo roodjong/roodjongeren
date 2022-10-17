@@ -12,23 +12,9 @@ services:
       - postgres_volume:/var/lib/postgresql/data
     logging:
       driver: "local"
-  nginx:
-    container_name: rood_nginx
-    image: nginx:1.21.6-alpine
-    restart: unless-stopped
-    environment:
-      - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./certbot/www/:/var/www/certbot/:ro
-    ports:
-      - "80:80"
-      - "443:443"
-    logging:
-      driver: "local"
   strapi:
     container_name: rood_strapi
-    build: ../../backend
+    build: ./roodjongeren/backend
     restart: unless-stopped
     environment:
       - URL=$STRAPI_URL
@@ -54,9 +40,11 @@ services:
       - strapi_uploads_volume:/usr/src/app/public/uploads
     logging:
       driver: "local"
+    ports:
+      - "1337:1337"
   nextjs:
     container_name: rood_nextjs
-    build: ../../frontend
+    build: ./roodjongeren/frontend
     restart: unless-stopped
     environment:
       - BACKEND_URL=http://strapi:1337
@@ -65,6 +53,8 @@ services:
       - strapi
     logging:
       driver: "local"
+    ports:
+      - "3000:3000"
   umami_postgres:
     container_name: umami_postgres
     image: postgres:14.1
@@ -80,15 +70,13 @@ services:
   umami:
     container_name: umami
     build:
-      context: ../umami
+      context: ./roodjongeren/docker/umami
       args:
         - BASE_PATH=/umami
         - DATABASE_TYPE=postgresql
     restart: unless-stopped
     depends_on:
       - umami_postgres
-    networks:
-      - roodjongeren_network
     environment:
       - DATABASE_URL=postgresql://${UMAMI_DATABASE_USER}:${UMAMI_DATABASE_PASSWORD}@umami_postgres:5432/${UMAMI_DATABASE_NAME}
       - BASE_PATH=/umami
@@ -96,6 +84,8 @@ services:
       # A custom name reduces the chance of ad blockers preventing our analytics from working
       - TRACKER_SCRIPT_NAME=stasi
       - COLLECT_API_ENDPOINT=/stasi/knock
+    ports:
+      - '3100:3000'
     logging:
       driver: "local"
 volumes:
