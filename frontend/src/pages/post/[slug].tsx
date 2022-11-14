@@ -50,7 +50,7 @@ export default function PostPage(props: Props) {
                     <p className="mt-4">
                         <i>
                             Dit artikel is een ingezonden opiniestuk. De opvattingen zijn daarmee geen officiële standpunten van ROOD en sluiten niet
-                            noodzakelijkerwijs aan op de meningen van al onze leden.
+                            noodzakelijkerwijs aan op de meningen van al onze leden. Leden kunnen opiniestukken indienen door een conceptversie te sturen naar de redactie via redactie@roodjongeren.nl
                         </i>
                     </p>}
             </p>
