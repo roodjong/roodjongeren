@@ -86,7 +86,10 @@ module.exports = createCoreController(
         signature.id,
         { data: { confirmed: true } }
       );
-      ctx.redirect(`/petities/${signature.petition.slug}#thanks`);
+      const post = await strapi.db.query("api::post.post").findOne({
+        where: { petition: signature.petition.id },
+      });
+      ctx.redirect(`/petitie/${post.slug}#thanks`);
     },
   })
 );

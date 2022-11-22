@@ -51,13 +51,20 @@
       "type": "enumeration",
       "enum": [
         "nieuws",
-        "inzending"
+        "inzending",
+        "petitie"
       ],
       "required": true
     },
     "frontpage": {
       "type": "boolean",
       "required": true
+    },
+    "petition": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::petition.petition",
+      "mappedBy": "post"
     }
   }
 }

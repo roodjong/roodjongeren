@@ -1,18 +1,11 @@
 export interface PetitionDetail {
   id: number;
-  title: string;
-  content: string;
-  slug: string;
+  hook: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
   signatureCount: number;
-  author: string;
   extraQuestions: Array<Question> | null;
-  afdeling: null | {
-      name: string;
-      slug: string;
-  };
 }
 
 export type Question = MultipleChoiceQuestion | FieldQuestion;

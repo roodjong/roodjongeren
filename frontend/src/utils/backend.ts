@@ -309,7 +309,8 @@ export async function fetchAuthors(): Promise<string[]> {
     return [...uniqueAuthors];
 }
 
-export async function fetchPost(slug: string): Promise<PostDetail> {
+export async function fetchPost(slug: string, isPetition: boolean = false): Promise<PostDetail> {
+  const petitionFilter = isPetition ? {petition: {$notNull: true}} : {}
   const response = await backend.get<StrapiListResponse<PostDetail>>("/posts", {
     params: {
       filters: {
@@ -322,15 +323,11 @@ export async function fetchPost(slug: string): Promise<PostDetail> {
         banner: {
           fields: ["url"],
         },
-      },
-    },
-  });
-
-  function sanitise(post: any) {
-    post.afdeling = post.afdeling.data?.attributes ?? null;
-    post.banner = post.banner.data?.attributes?.url ?? null;
-    return post;
-  }
+        petition: {
+          fields: ["id"]
+        }
+        return post;
+    }
 
     return sanitise(response.data.data[0].attributes);
 }
@@ -402,32 +399,27 @@ export async function fetchPetitionSlugs(): Promise<{
     slugs: string[];
     pagination: StrapiPagination;
 }> {
-  const response = await backend.get<StrapiListResponse<Post>>("/petitions", {
-    params: {
-      sort: "publishedAt:desc",
-      fields: "slug",
-    },
-  });
+    const response = await backend.get<StrapiListResponse<Post>>("/posts", {
+        params: {
+            filters: {
+                type: "petitie",
+            },
+            sort: "publishedAt:desc",
+            fields: "slug",
+        },
+    });
 
-  return {
-    slugs: response.data.data.map((it) => it.attributes.slug),
-    pagination: response.data.meta.pagination,
-  };
+    return {
+        slugs: response.data.data.map((it) => it.attributes.slug),
+        pagination: response.data.meta.pagination,
+    };
 }
 
-export async function fetchPetition(slug: string): Promise<PetitionDetail> {
-  const response = await backend.get<StrapiListResponse<PostDetail>>(
-    joinPaths("/petitions", slug),
-    {
-      params: {
-        populate: {
-          afdeling: {
-            select: ["name", "slug"],
-          },
-        },
-      },
-    }
-  );
+export async function fetchPetition(id: number): Promise<PetitionDetail> {
+    const response = await backend.get<StrapiListResponse<PostDetail>>(
+        joinPaths("/petitions", id.toString()),
+        {}
+    );
 
     return response.data;
 }

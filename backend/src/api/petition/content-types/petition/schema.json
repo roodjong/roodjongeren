@@ -12,22 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "content": {
-      "type": "richtext"
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
-    "afdeling": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::afdeling.afdeling"
-    },
-    "author": {
+    "hook": {
       "type": "string"
     },
     "signatures": {
@@ -38,6 +23,12 @@
     },
     "extraQuestions": {
       "type": "json"
+    },
+    "post": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::post.post",
+      "inversedBy": "petition"
     }
   }
 }

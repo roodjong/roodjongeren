@@ -1,3 +1,5 @@
+import { PetitionDetail } from "./Petition";
+
 export interface Post {
     title: string;
     slug: string;
@@ -25,11 +27,13 @@ export interface PostDetail {
     };
     banner: null | string;
     type: PostType;
+    petition: PetitionDetail;
 }
 
 export enum PostType {
     NEWS = 'nieuws',
-    SUBMISSION = 'inzending'
+    SUBMISSION = 'inzending',
+    PETITION = 'petitie',
 }
 
 export function postTypeToText(postType: PostType) {
@@ -38,5 +42,7 @@ export function postTypeToText(postType: PostType) {
             return 'Nieuwsbericht';
         case PostType.SUBMISSION:
             return 'Inzending';
+        case PostType.PETITION:
+            return 'Petitie';
     }
 }
