@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "petitions",
+  "info": {
+    "singularName": "petition",
+    "pluralName": "petitions",
+    "displayName": "Petitie",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "afdeling": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::afdeling.afdeling"
+    },
+    "author": {
+      "type": "string"
+    },
+    "signatures": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::petition-signature.petition-signature",
+      "mappedBy": "petition"
+    },
+    "extraQuestions": {
+      "type": "json"
+    }
+  }
+}

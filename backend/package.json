@@ -12,10 +12,11 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-i18n": "4.2.3",
-    "@strapi/plugin-users-permissions": "4.2.3",
+    "@strapi/plugin-i18n": "4.5.2",
+    "@strapi/plugin-users-permissions": "4.5.2",
     "@strapi/provider-email-nodemailer": "^4.4.3",
-    "@strapi/strapi": "4.2.3",
+    "@strapi/strapi": "4.5.2",
+    "crypto-random-string": "^5.0.0",
     "pg": "^8.7.3"
   },
   "author": {
