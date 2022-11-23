@@ -309,22 +309,34 @@ export async function fetchAuthors(): Promise<string[]> {
     return [...uniqueAuthors];
 }
 
-export async function fetchPost(slug: string, isPetition: boolean = false): Promise<PostDetail> {
-  const petitionFilter = isPetition ? {petition: {$notNull: true}} : {}
-  const response = await backend.get<StrapiListResponse<PostDetail>>("/posts", {
-    params: {
-      filters: {
-        slug: { $eq: slug },
-      },
-      populate: {
-        afdeling: {
-          fields: ["name", "slug"],
-        },
-        banner: {
-          fields: ["url"],
-        },
-        petition: {
-          fields: ["id"]
+export async function fetchPost(slug: string): Promise<PostDetail> {
+    const response = await backend.get<StrapiListResponse<PostDetail>>(
+        "/posts",
+        {
+            params: {
+                filters: {
+                    slug: { $eq: slug },
+                },
+                populate: {
+                    afdeling: {
+                        fields: ["name", "slug"],
+                    },
+                    banner: {
+                        fields: ["url"],
+                    },
+                    petition: {
+                        fields: ["id"],
+                    },
+                },
+            },
+        }
+    );
+
+    async function sanitise(post: any) {
+        post.afdeling = post.afdeling.data?.attributes ?? null;
+        post.banner = post.banner.data?.attributes?.url ?? null;
+        if (post.petition.data) {
+            post.petition = await fetchPetition(post.petition.data.id);
         }
         return post;
     }

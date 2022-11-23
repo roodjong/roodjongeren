@@ -53,12 +53,9 @@ module.exports = createCoreController(
         return;
       }
 
-      await strapi.plugins["email"].services.email.send({
-        to: email,
-        subject: "Verifieer je email om deze petitie te ondertekenen",
-        text: `Klik op deze link om je mail te verifieren: ${petitionSignature.confirmationCode}`,
-        html: `Klik hier om je mail te verifieren: <a href="http://roodjongeren.nl/backend/api/petition-signatures/confirm/${petitionSignature.confirmationCode}">Verifieer email</a>`,
-      });
+      await strapi
+        .service("api::petition-signature.petition-signature")
+        .sendConfirmationEmail(email, petitionSignature);
 
       ctx.send({ existed: false });
     },
