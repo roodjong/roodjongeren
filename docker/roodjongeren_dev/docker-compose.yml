@@ -47,6 +47,12 @@ services:
       # A custom name reduces the chance of ad blockers preventing our analytics from working
       - TRACKER_SCRIPT_NAME=stasi
       - COLLECT_API_ENDPOINT=/stasi/knock
+  mailcatcher:
+    container_name: rood_mailcatcher
+    image: sj26/mailcatcher:v0.8.1
+    ports:
+      - "1025:1025"
+      - "1080:1080"
 volumes:
   postgres_volume:
     name: rood_postgres_volume
