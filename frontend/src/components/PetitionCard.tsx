@@ -1,6 +1,6 @@
 import {
     Dispatch,
-    FormEventHandler,
+    FormEvent,
     ReactNode,
     SetStateAction,
     useCallback,
@@ -10,7 +10,7 @@ import {
 import { FaSpinner } from "react-icons/fa";
 import { PetitionDetail, Question } from "../models/Petition";
 import { submitPetitionSignature } from "../utils/backend";
-import RoundedBox from "./RoundedBox";
+import PetitionFormBox from "./PetitionFormBox";
 
 interface Props {
     className?: string;
@@ -74,14 +74,27 @@ async function handleSubmit(
 }
 
 function renderInputForQuestion(
-    q: Question & { state: [string, Dispatch<SetStateAction<string>>] }
+    questions: Array<Question & { value: string }>,
+    setQuestions: Dispatch<SetStateAction<Array<Question & { value: string }>>>,
+    index: number
 ) {
+    const q = questions[index];
     if ("choices" in q) {
         const emptyOption = <option key="empty" value=""></option>;
         return (
             <select
                 className="w-full h-8 rounded-md text-black p-2"
-                onChange={(e) => q.state[1](e.target.value)}
+                onChange={(e) => {
+                    setQuestions(
+                        questions.map((q, i) => {
+                            if (i === index) {
+                                return { ...q, value: e.target.value };
+                            } else {
+                                return { ...q };
+                            }
+                        })
+                    );
+                }}
                 required={q.required ? true : undefined}
             >
                 {emptyOption}
@@ -116,16 +129,17 @@ function renderInputForQuestion(
 }
 
 function renderExtraQuestions(
-    questions: Array<
-        Question & { state: [string, Dispatch<SetStateAction<string>>] }
-    >
+    questions: Array<Question & { value: string }>,
+    setQuestions: Dispatch<SetStateAction<Array<Question & { value: string }>>>
 ) {
     return questions.map((q, i) => (
         <>
             <div key={`label-${i.toString()}`}>
                 <label>{q.question}</label>
             </div>
-            <div key={`input-${i.toString()}`}>{renderInputForQuestion(q)}</div>
+            <div key={`input-${i.toString()}`}>
+                {renderInputForQuestion(questions, setQuestions, i)}
+            </div>
         </>
     ));
 }
@@ -139,10 +153,13 @@ export default function PetitionCard(props: Props) {
         }
     });
 
-    const extraQuestions = (petition.extraQuestions ?? []).map((q) => ({
-        state: useState(""),
-        ...q,
-    }));
+    //   const extraQuestions = (petition.extraQuestions ?? []).map((q) => ({
+    //     state: useState(""),
+    //     ...q,
+    //   }));
+    const [extraQuestions, setExtraQuestions] = useState(
+        (petition.extraQuestions ?? []).map((q) => ({ value: "", ...q }))
+    );
 
     const nameId = "name-field"; // CHANGEME: update to useId in react 18
     const emailId = "email-field"; // CHANGEME: update to useId in react 18
@@ -150,46 +167,8 @@ export default function PetitionCard(props: Props) {
     const [nameInput, setNameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
 
-    if (state == State.Submitting) {
-        return (
-            <RoundedBox className={props.className}>
-                <div className="self-center py-20">
-                    <FaSpinner className="animate-spin" />
-                </div>
-            </RoundedBox>
-        );
-    }
-    if (state == State.Error) {
-        return (
-            <RoundedBox className={props.className}>
-                <div className="py-20">
-                    Er is iets mis gegaan bij het opsturen.
-                </div>
-            </RoundedBox>
-        );
-    }
-    if (state == State.Existed) {
-        return (
-            <RoundedBox className={props.className}>
-                <div className="py-20">
-                    Je hebt deze petitie al een keer ingevuld.
-                </div>
-            </RoundedBox>
-        );
-    }
-    if (state == State.Success) {
-        return (
-            <RoundedBox className={props.className}>
-                <div className="py-20">
-                    Succes! Check je email om je handtekening definitief te
-                    maken.
-                </div>
-            </RoundedBox>
-        );
-    }
-
     const onSubmitCallback = useCallback(
-        (e: SubmitEvent) => {
+        (e: FormEvent) => {
             e.preventDefault();
             handleSubmit(
                 petition,
@@ -197,7 +176,7 @@ export default function PetitionCard(props: Props) {
                 emailInput,
                 extraQuestions.map((q) => ({
                     question: q.question,
-                    answer: q.state[0],
+                    answer: q.value,
                 })),
                 setState
             );
@@ -205,8 +184,49 @@ export default function PetitionCard(props: Props) {
         [petition, nameInput, emailInput, extraQuestions, handleSubmit]
     );
 
+    if (state == State.Submitting) {
+        return (
+            <PetitionFormBox className={props.className}>
+                <div className="self-center py-20">
+                    <FaSpinner className="animate-spin" />
+                </div>
+            </PetitionFormBox>
+        );
+    }
+    if (state == State.Error) {
+        return (
+            <PetitionFormBox className={props.className}>
+                <div className="py-20">
+                    Er is iets mis gegaan bij het opsturen.
+                </div>
+            </PetitionFormBox>
+        );
+    }
+    if (state == State.Existed) {
+        return (
+            <PetitionFormBox className={props.className}>
+                <div className="py-20">
+                    Je hebt deze petitie al een keer ingevuld.
+                </div>
+            </PetitionFormBox>
+        );
+    }
+    if (state == State.Success) {
+        return (
+            <PetitionFormBox className={props.className}>
+                <div className="py-20">
+                    Succes! Check je email om je handtekening definitief te
+                    maken.
+                </div>
+            </PetitionFormBox>
+        );
+    }
+
     return (
-        <RoundedBox className={props.className} onSubmit={onSubmitCallback}>
+        <PetitionFormBox
+            className={props.className}
+            onSubmit={onSubmitCallback}
+        >
             <>
                 <h2 className="font-title text-3xl font-bold mb-4">
                     Teken nu voor {petition.hook}!
@@ -244,7 +264,7 @@ export default function PetitionCard(props: Props) {
                         onInput={(e) => setEmailInput(e.target.value)}
                     />
                 </div>
-                {renderExtraQuestions(extraQuestions)}
+                {renderExtraQuestions(extraQuestions, setExtraQuestions)}
                 <button
                     type="submit"
                     className="mt-4 font-title text-2xl font-bold border-white border-4 rounded-lg p-1 px-4 w-min"
@@ -252,6 +272,6 @@ export default function PetitionCard(props: Props) {
                     Teken!
                 </button>
             </>
-        </RoundedBox>
+        </PetitionFormBox>
     );
 }
