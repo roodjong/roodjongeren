@@ -116,7 +116,10 @@ function renderInputForQuestion(
                 setQuestions(
                     questions.map((q, i) => {
                         if (i === index) {
-                            return { ...q, value: (e.target as HTMLInputElement).value };
+                            return {
+                                ...q,
+                                value: (e.target as HTMLInputElement).value,
+                            };
                         } else {
                             return { ...q };
                         }
@@ -248,7 +251,9 @@ export default function PetitionCard(props: Props) {
                         required
                         className="w-full h-8 rounded-md text-black p-2"
                         value={nameInput}
-                        onInput={(e) => setNameInput((e.target as HTMLInputElement).value)}
+                        onInput={(e) =>
+                            setNameInput((e.target as HTMLInputElement).value)
+                        }
                     />
                 </div>
                 <div>
@@ -261,7 +266,9 @@ export default function PetitionCard(props: Props) {
                         required
                         className="w-full h-8 rounded-md text-black p-2"
                         value={emailInput}
-                        onInput={(e) => setEmailInput((e.target as HTMLInputElement).value)}
+                        onInput={(e) =>
+                            setEmailInput((e.target as HTMLInputElement).value)
+                        }
                     />
                 </div>
                 {renderExtraQuestions(extraQuestions, setExtraQuestions)}
