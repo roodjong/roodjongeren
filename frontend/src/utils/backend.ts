@@ -335,7 +335,7 @@ export async function fetchPost(slug: string): Promise<PostDetail> {
     async function sanitise(post: any) {
         post.afdeling = post.afdeling.data?.attributes ?? null;
         post.banner = post.banner.data?.attributes?.url ?? null;
-        if (post.petition.data) {
+        if (post.petition && post.petition.data) {
             post.petition = await fetchPetition(post.petition.data.id);
         }
         return post;
