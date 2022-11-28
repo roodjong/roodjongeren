@@ -19,7 +19,7 @@ import { Workgroup } from "../models/Workgroup";
 import joinPaths from "./paths";
 import ProgramContent from "../models/ProgramContent";
 import Fallback from "../models/Fallback";
-import { PetitionDetail, Signature } from "../models/Petition";
+import { PetitionDetail } from "../models/Petition";
 
 export const backendBaseUrl =
     process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "";
@@ -335,7 +335,7 @@ export async function fetchPost(slug: string): Promise<PostDetail> {
     async function sanitise(post: any) {
         post.afdeling = post.afdeling.data?.attributes ?? null;
         post.banner = post.banner.data?.attributes?.url ?? null;
-        if (post.petition.data) {
+        if (post.petition && post.petition.data) {
             post.petition = await fetchPetition(post.petition.data.id);
         }
         return post;
@@ -428,11 +428,10 @@ export async function fetchPetitionSlugs(): Promise<{
 }
 
 export async function fetchPetition(id: number): Promise<PetitionDetail> {
-    const response = await backend.get<StrapiListResponse<PostDetail>>(
+    const response = await backend.get<PetitionDetail>(
         joinPaths("/petitions", id.toString()),
         {}
     );
-
     return response.data;
 }
 
@@ -442,8 +441,9 @@ export async function submitPetitionSignature(
     email: string,
     questionAnswers: Array<{ question: string; answer: string }>
 ): Promise<{ existed: boolean }> {
-    return backend.post<StrapiResponse<{ existed: boolean }>>(
+    const response = await backend.post<{ existed: boolean }>(
         "/petition-signatures",
         { petitionId: petition.id, name, email, questionAnswers }
     );
+    return response.data;
 }

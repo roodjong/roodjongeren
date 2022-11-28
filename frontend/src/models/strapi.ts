@@ -26,5 +26,5 @@ export interface StrapiImage {
     url: string;
     width: number;
     height: number;
-    
+
 }
