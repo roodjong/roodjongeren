@@ -62,11 +62,14 @@ and `localhost/backend/admin` and ensure everything is working as expected.
 When building images for production, it's recommended to add an additional .env-file called `.env.prod`. Do not add this
 file to version control. Reference the .env-file with the `--env-file` flag when building the images for production.
 
+You can use mailcatcher to see the emails the strapi application sends. Mailcatcher will be available on http://localhost:1080
+after starting the docker-compose.yml.
+
 ### Production server notes
 
 On the production server, the nginx docker is instead run as a regular nginx ubuntu service. The nginx on the host proxy
 passes to the frontend and backend docker services. The docker compose file that's used on the server is located at
-`/home/ubuntu/roodjongeren/docker-compose.yml`. Restart the docker containers with `docker compose restart`. 
+`/home/ubuntu/roodjongeren/docker-compose.yml`. Restart the docker containers with `docker compose restart`.
 
 The nginx configuration is located at `/etc/nginx/sites-enabled/roodjongeren.nl.conf`. Whenever the nginx config is changed,
 reload it using `sudo systemctl reload nginx`.

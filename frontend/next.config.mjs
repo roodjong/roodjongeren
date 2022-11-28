@@ -291,6 +291,7 @@ export default withTM({
         return [
             {source: '/nieuws', destination: '/actueel'},
             {source: '/inzendingen', destination: '/actueel'},
+            {source: '/petitie/:slug', destination: '/post/:slug'},
         ]
     },
     async redirects() {

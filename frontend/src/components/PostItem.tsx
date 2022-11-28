@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import {Post} from '../models/Post';
+import {Post, PostType} from '../models/Post';
 import {dateToText} from '../utils/date';
 import imageLoader from '../utils/image-loader';
 import {useRouter} from 'next/router';
@@ -14,16 +14,16 @@ interface Props {
 
 export default function PostItem(props: Props) {
     const post = props.post;
-    const link = `/post/${post.slug}`;
-    
+    const link = post.type == PostType.PETITION ? `/petitie/${post.slug}` : `/post/${post.slug}`;
+
     const router = useRouter();
-    
+
     const handleClick = useCallback(() => {
         router.push(link).then();
     }, [router, link]);
-    
+
     const stopPropagation = useCallback(e => e.stopPropagation(), []);
-    
+
     return <div onClick={handleClick}
                 className="shadow shadow-[#0004] bg-gray-50 hover:shadow-lg hover:shadow-[#0004] transition-shadow rounded flex flex-col md:flex-row items-stretch cursor-pointer">
         <div className={`p-4 flex flex-col basis-2/3 gap-4 justify-between items-start ${post.banner ? 'basis-2/3' : 'basis-full'}`}>
