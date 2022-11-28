@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * join-us service.
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+const { createCoreService } = require("@strapi/strapi").factories;
 
-module.exports = createCoreService('api::join-us.join-us');
+module.exports = createCoreService("api::join-us.join-us");

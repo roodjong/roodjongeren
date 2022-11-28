@@ -1,4 +1,4 @@
-import {ReactNode} from 'react';
+import { ReactNode } from "react";
 
 interface Props {
     children: ReactNode;
@@ -6,7 +6,5 @@ interface Props {
 }
 
 export default function TableCell(props: Props) {
-    return <td className={`p-2 ${props.className ?? ''}`}>
-        {props.children}
-    </td>;
+    return <td className={`p-2 ${props.className ?? ""}`}>{props.children}</td>;
 }

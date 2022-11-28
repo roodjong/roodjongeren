@@ -12,7 +12,6 @@ function joinPaths(...args) {
   return path.posix.join(...args).replace(":/", "://");
 }
 
-
 module.exports = createCoreService(
   "api::petition-signature.petition-signature",
   ({ strapi }) => ({

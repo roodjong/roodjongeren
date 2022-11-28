@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 interface Props {
     children: ReactNode;
@@ -7,8 +7,14 @@ interface Props {
 }
 
 export default function TableRow(props: Props) {
-    return <tr className={`border-b border-b-gray-300 hover:cursor-pointer hover:bg-gray-100 transition-colors ${props.className ?? ""}`}
-               onClick={props.onClick}>
-        {props.children}
-    </tr>;
+    return (
+        <tr
+            className={`border-b border-b-gray-300 hover:cursor-pointer hover:bg-gray-100 transition-colors ${
+                props.className ?? ""
+            }`}
+            onClick={props.onClick}
+        >
+            {props.children}
+        </tr>
+    );
 }

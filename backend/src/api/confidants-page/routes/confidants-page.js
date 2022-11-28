@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * confidants-page router.
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+const { createCoreRouter } = require("@strapi/strapi").factories;
 
-module.exports = createCoreRouter('api::confidants-page.confidants-page');
+module.exports = createCoreRouter("api::confidants-page.confidants-page");
