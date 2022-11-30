@@ -1,9 +1,5 @@
 import axios from "axios";
-import {
-    StrapiListResponse,
-    StrapiPagination,
-    StrapiResponse,
-} from "../models/strapi";
+import { StrapiListResponse, StrapiPagination, StrapiResponse } from "../models/strapi";
 import Afdeling from "../models/Afdeling";
 import AfdelingDetail from "../models/Afdeling";
 import AboutUsContent from "../models/AboutUsContent";
@@ -67,18 +63,15 @@ export async function fetchHome(): Promise<HomeContent> {
 }
 
 export async function fetchAboutUs(): Promise<AboutUsContent> {
-    const response = await backend.get<StrapiResponse<AboutUsContent>>(
-        "/about-us",
-        {
-            params: {
-                populate: {
-                    banner: {
-                        fields: ["url"],
-                    },
+    const response = await backend.get<StrapiResponse<AboutUsContent>>("/about-us", {
+        params: {
+            populate: {
+                banner: {
+                    fields: ["url"],
                 },
             },
-        }
-    );
+        },
+    });
 
     function sanitise(content: any) {
         content.banner = content.banner.data.attributes.url;
@@ -89,18 +82,15 @@ export async function fetchAboutUs(): Promise<AboutUsContent> {
 }
 
 export async function fetchProgram(): Promise<ProgramContent> {
-    const response = await backend.get<StrapiResponse<ProgramContent>>(
-        "/program",
-        {
-            params: {
-                populate: {
-                    banner: {
-                        fields: ["url"],
-                    },
+    const response = await backend.get<StrapiResponse<ProgramContent>>("/program", {
+        params: {
+            populate: {
+                banner: {
+                    fields: ["url"],
                 },
             },
-        }
-    );
+        },
+    });
 
     function sanitise(content: any) {
         content.banner = content.banner.data.attributes.url;
@@ -111,18 +101,15 @@ export async function fetchProgram(): Promise<ProgramContent> {
 }
 
 export async function fetchJoinUs(): Promise<JoinUsContent> {
-    const response = await backend.get<StrapiResponse<JoinUsContent>>(
-        "/join-us",
-        {
-            params: {
-                populate: {
-                    banner: {
-                        fields: ["url"],
-                    },
+    const response = await backend.get<StrapiResponse<JoinUsContent>>("/join-us", {
+        params: {
+            populate: {
+                banner: {
+                    fields: ["url"],
                 },
             },
-        }
-    );
+        },
+    });
 
     function sanitise(content: any) {
         content.banner = content.banner.data.attributes.url;
@@ -133,18 +120,15 @@ export async function fetchJoinUs(): Promise<JoinUsContent> {
 }
 
 export async function fetchSupportUs(): Promise<SupportUsContent> {
-    const response = await backend.get<StrapiResponse<SupportUsContent>>(
-        "/support-us",
-        {
-            params: {
-                populate: {
-                    banner: {
-                        fields: ["url"],
-                    },
+    const response = await backend.get<StrapiResponse<SupportUsContent>>("/support-us", {
+        params: {
+            populate: {
+                banner: {
+                    fields: ["url"],
                 },
             },
-        }
-    );
+        },
+    });
 
     function sanitise(content: any) {
         content.banner = content.banner.data.attributes.url;
@@ -162,43 +146,37 @@ export async function fetchPrivacybeleid(): Promise<PrivacybeleidContent> {
 }
 
 export async function fetchAfdelingen(): Promise<Afdeling[]> {
-    const response = await backend.get<StrapiListResponse<Afdeling>>(
-        "/afdelingen",
-        {
-            params: {
-                sort: "name",
-                fields: [
-                    "name",
-                    "slug",
-                    "longitude",
-                    "latitude",
-                    "email",
-                    "twitterLink",
-                    "facebookLink",
-                    "instagramLink",
-                ],
-            },
-        }
-    );
+    const response = await backend.get<StrapiListResponse<Afdeling>>("/afdelingen", {
+        params: {
+            sort: "name",
+            fields: [
+                "name",
+                "slug",
+                "longitude",
+                "latitude",
+                "email",
+                "twitterLink",
+                "facebookLink",
+                "instagramLink",
+            ],
+        },
+    });
     return response.data.data.map((it) => it.attributes);
 }
 
 export async function fetchAfdeling(slug: string): Promise<AfdelingDetail> {
-    const response = await backend.get<StrapiListResponse<Afdeling>>(
-        "/afdelingen",
-        {
-            params: {
-                filters: {
-                    slug: { $eq: slug },
-                },
-                populate: {
-                    banner: {
-                        fields: "*",
-                    },
+    const response = await backend.get<StrapiListResponse<Afdeling>>("/afdelingen", {
+        params: {
+            filters: {
+                slug: { $eq: slug },
+            },
+            populate: {
+                banner: {
+                    fields: "*",
                 },
             },
-        }
-    );
+        },
+    });
 
     function sanitise(afdeling: any): Afdeling {
         afdeling.banner = afdeling.banner.data?.attributes?.url ?? null;
@@ -302,35 +280,30 @@ export async function fetchAuthors(): Promise<string[]> {
         },
     });
 
-    const uniqueAuthors = new Set(
-        response.data.data.map((it) => it.attributes.author)
-    );
+    const uniqueAuthors = new Set(response.data.data.map((it) => it.attributes.author));
 
     return [...uniqueAuthors];
 }
 
 export async function fetchPost(slug: string): Promise<PostDetail> {
-    const response = await backend.get<StrapiListResponse<PostDetail>>(
-        "/posts",
-        {
-            params: {
-                filters: {
-                    slug: { $eq: slug },
+    const response = await backend.get<StrapiListResponse<PostDetail>>("/posts", {
+        params: {
+            filters: {
+                slug: { $eq: slug },
+            },
+            populate: {
+                afdeling: {
+                    fields: ["name", "slug"],
                 },
-                populate: {
-                    afdeling: {
-                        fields: ["name", "slug"],
-                    },
-                    banner: {
-                        fields: ["url"],
-                    },
-                    petition: {
-                        fields: ["id"],
-                    },
+                banner: {
+                    fields: ["url"],
+                },
+                petition: {
+                    fields: ["id"],
                 },
             },
-        }
-    );
+        },
+    });
 
     async function sanitise(post: any) {
         post.afdeling = post.afdeling.data?.attributes ?? null;
@@ -367,19 +340,16 @@ export async function fetchConfidantsPage(): Promise<ConfidantsPageContent> {
 }
 
 export async function fetchConfidants(): Promise<Confidant[]> {
-    const response = await backend.get<StrapiListResponse<Confidant>>(
-        "/confidants",
-        {
-            params: {
-                sort: "name",
-                populate: {
-                    photo: {
-                        fields: ["url"],
-                    },
+    const response = await backend.get<StrapiListResponse<Confidant>>("/confidants", {
+        params: {
+            sort: "name",
+            populate: {
+                photo: {
+                    fields: ["url"],
                 },
             },
-        }
-    );
+        },
+    });
 
     function sanitise(confidant: any): Confidant {
         confidant.photo = confidant.photo.data?.attributes?.url ?? null;
@@ -390,14 +360,11 @@ export async function fetchConfidants(): Promise<Confidant[]> {
 }
 
 export async function fetchWorkgroups(): Promise<Workgroup[]> {
-    const response = await backend.get<StrapiListResponse<Workgroup>>(
-        "/workgroups",
-        {
-            params: {
-                sort: "name",
-            },
-        }
-    );
+    const response = await backend.get<StrapiListResponse<Workgroup>>("/workgroups", {
+        params: {
+            sort: "name",
+        },
+    });
 
     function sanitise(confidant: any): Workgroup {
         // confidant.photo = confidant.photo.data?.attributes?.url ?? null;
@@ -441,9 +408,11 @@ export async function submitPetitionSignature(
     email: string,
     questionAnswers: Array<{ question: string; answer: string }>
 ): Promise<{ existed: boolean }> {
-    const response = await backend.post<{ existed: boolean }>(
-        "/petition-signatures",
-        { petitionId: petition.id, name, email, questionAnswers }
-    );
+    const response = await backend.post<{ existed: boolean }>("/petition-signatures", {
+        petitionId: petition.id,
+        name,
+        email,
+        questionAnswers,
+    });
     return response.data;
 }

@@ -199,18 +199,14 @@ export default function PetitionCard(props: Props) {
     if (state == State.Error) {
         return (
             <PetitionFormBox className={props.className}>
-                <div className="py-20">
-                    Er is iets mis gegaan bij het opsturen.
-                </div>
+                <div className="py-20">Er is iets mis gegaan bij het opsturen.</div>
             </PetitionFormBox>
         );
     }
     if (state == State.Existed) {
         return (
             <PetitionFormBox className={props.className}>
-                <div className="py-20">
-                    Je hebt deze petitie al een keer ingevuld.
-                </div>
+                <div className="py-20">Je hebt deze petitie al een keer ingevuld.</div>
             </PetitionFormBox>
         );
     }
@@ -218,18 +214,14 @@ export default function PetitionCard(props: Props) {
         return (
             <PetitionFormBox className={props.className}>
                 <div className="py-20">
-                    Succes! Check je email om je handtekening definitief te
-                    maken.
+                    Succes! Check je email om je handtekening definitief te maken.
                 </div>
             </PetitionFormBox>
         );
     }
 
     return (
-        <PetitionFormBox
-            className={props.className}
-            onSubmit={onSubmitCallback}
-        >
+        <PetitionFormBox className={props.className} onSubmit={onSubmitCallback}>
             <>
                 <h2 className="font-title text-3xl font-bold mb-4">
                     Teken nu voor {petition.hook}!
