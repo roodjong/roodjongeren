@@ -47,6 +47,7 @@ async function handleSubmit(
     petition: PetitionDetail,
     name: string,
     email: string,
+    canEmail: boolean,
     questionAnswers: Array<{ question: string; answer: string }>,
     setState: Dispatch<SetStateAction<State>>
 ) {
@@ -56,7 +57,7 @@ async function handleSubmit(
             petition,
             name,
             email,
-            questionAnswers
+            [...questionAnswers, {"question": "_canEmail", "answer": canEmail.toString()}]
         );
         if (!result) {
             setState(State.Error);
@@ -120,6 +121,10 @@ function renderInputForQuestion(
                                 ...q,
                                 value: (e.target as HTMLInputElement).value,
                             };
+                            return {
+                                ...q,
+                                value: (e.target as HTMLInputElement).value,
+                            };
                         } else {
                             return { ...q };
                         }
@@ -165,6 +170,7 @@ export default function PetitionCard(props: Props) {
 
     const [nameInput, setNameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
+    const [canEmailInput, setCanEmailInput] = useState(false);
 
     const onSubmitCallback = useCallback(
         (e: FormEvent) => {
@@ -173,6 +179,7 @@ export default function PetitionCard(props: Props) {
                 petition,
                 nameInput,
                 emailInput,
+                canEmailInput,
                 extraQuestions.map((q) => ({
                     question: q.question,
                     answer: q.value,
@@ -180,7 +187,7 @@ export default function PetitionCard(props: Props) {
                 setState
             );
         },
-        [petition, nameInput, emailInput, extraQuestions]
+        [petition, nameInput, emailInput, canEmailInput, extraQuestions]
     );
 
     if (state == State.Submitting) {
@@ -260,6 +267,19 @@ export default function PetitionCard(props: Props) {
                     />
                 </div>
                 {renderExtraQuestions(extraQuestions, setExtraQuestions)}
+                <label>
+                    <input type="checkbox" required /> Ik ga akkoord dat mijn
+                    naam gebruikt wordt om deze petitie uit te voeren
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        defaultChecked={canEmailInput}
+                        onChange={() => setCanEmailInput(!canEmailInput)}
+                    />{" "}
+                    Ik ga akkoord dat mijn email gebruikt wordt om updates te krijgen over
+                    deze petitie
+                </label>
                 <button
                     type="submit"
                     className="mt-4 font-title text-2xl font-bold border-white border-4 rounded-lg p-1 px-4 w-min"
