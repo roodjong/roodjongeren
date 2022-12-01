@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/leaflet": "^1.7.10",
+    "@types/leaflet": "^1.9.0",
     "@types/qs": "^6.9.7",
     "@types/node": "17.0.33",
     "@types/react": "17.0.43",
@@ -17,7 +17,7 @@
     "axios": "^0.27.2",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
-    "leaflet": "^1.8.0",
+    "leaflet": "^1.9.3",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "next": "12.1.6",
     "next-transpile-modules": "^9.0.0",
@@ -32,7 +32,7 @@
     "typescript": "4.5.5"
   },
   "devDependencies": {
-    "@types/leaflet": "^1.7.10",
+    "@types/leaflet": "^1.9.0",
     "@types/node": "17.0.33",
     "@types/react": "17.0.43",
     "autoprefixer": "^10.4.7",
