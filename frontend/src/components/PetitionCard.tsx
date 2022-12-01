@@ -53,12 +53,10 @@ async function handleSubmit(
 ) {
     setState(State.Submitting);
     try {
-        const result = await submitPetitionSignature(
-            petition,
-            name,
-            email,
-            [...questionAnswers, {"question": "_canEmail", "answer": canEmail.toString()}]
-        );
+        const result = await submitPetitionSignature(petition, name, email, [
+            ...questionAnswers,
+            { question: "_canEmail", answer: canEmail.toString() },
+        ]);
         if (!result) {
             setState(State.Error);
         }
@@ -268,8 +266,8 @@ export default function PetitionCard(props: Props) {
                 </div>
                 {renderExtraQuestions(extraQuestions, setExtraQuestions)}
                 <label>
-                    <input type="checkbox" required /> Ik ga akkoord dat mijn
-                    naam gebruikt wordt om deze petitie uit te voeren
+                    <input type="checkbox" required /> Ik ga akkoord dat mijn gegevens
+                    verwerkt worden voor deze petitie
                 </label>
                 <label>
                     <input
