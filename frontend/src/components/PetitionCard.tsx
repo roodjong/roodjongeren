@@ -154,12 +154,8 @@ export default function PetitionCard(props: Props) {
         if (state != State.Success && ensureSessionStorage()[petition.id]) {
             setState(State.Existed);
         }
-    });
+    }, [state, petition.id]);
 
-    //   const extraQuestions = (petition.extraQuestions ?? []).map((q) => ({
-    //     state: useState(""),
-    //     ...q,
-    //   }));
     const [extraQuestions, setExtraQuestions] = useState(
         (petition.extraQuestions ?? []).map((q) => ({ value: "", ...q }))
     );
@@ -184,7 +180,7 @@ export default function PetitionCard(props: Props) {
                 setState
             );
         },
-        [petition, nameInput, emailInput, extraQuestions, handleSubmit]
+        [petition, nameInput, emailInput, extraQuestions]
     );
 
     if (state == State.Submitting) {
