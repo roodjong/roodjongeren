@@ -1,8 +1,8 @@
-module.exports = ({env}) => ({
-  host: env('HOST'),
-  port: env.int('PORT'),
-  url: env('URL'),
+module.exports = ({ env }) => ({
+  host: env("HOST"),
+  port: env.int("PORT"),
+  url: env("URL"),
   app: {
-    keys: env.array('APP_KEYS'),
-  }
+    keys: env.array("APP_KEYS"),
+  },
 });

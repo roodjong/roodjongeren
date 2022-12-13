@@ -1,4 +1,4 @@
-import {ReactNode} from "react";
+import { ReactNode } from "react";
 
 interface Props {
     wrap: boolean;
@@ -7,7 +7,5 @@ interface Props {
 }
 
 export default function ConditionalWrapper(props: Props) {
-    return <>
-        {props.wrap ? props.wrapper(props.children) : props.children}
-    </>;
+    return <>{props.wrap ? props.wrapper(props.children) : props.children}</>;
 }

@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  *  fallback controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
+const { createCoreController } = require("@strapi/strapi").factories;
 
-module.exports = createCoreController('api::fallback.fallback');
+module.exports = createCoreController("api::fallback.fallback");

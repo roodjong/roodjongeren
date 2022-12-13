@@ -43,17 +43,11 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "type": {
       "type": "enumeration",
-      "enum": [
-        "nieuws",
-        "inzending",
-        "petitie"
-      ],
+      "enum": ["nieuws", "inzending", "petitie"],
       "required": true
     },
     "frontpage": {

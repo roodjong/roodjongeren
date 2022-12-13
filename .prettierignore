@@ -1,0 +1,6 @@
+backend/.cache
+frontend/.next
+docker
+backend/build
+backend/.strapi-updater.json
+*.md

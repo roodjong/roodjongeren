@@ -1,5 +1,5 @@
-import path from 'path';
+import path from "path";
 
 export default function joinPaths(...args: string[]) {
-    return path.posix.join(...args).replace(':/', '://');
+    return path.posix.join(...args).replace(":/", "://");
 }

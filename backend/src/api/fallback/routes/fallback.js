@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * fallback router.
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+const { createCoreRouter } = require("@strapi/strapi").factories;
 
-module.exports = createCoreRouter('api::fallback.fallback');
+module.exports = createCoreRouter("api::fallback.fallback");

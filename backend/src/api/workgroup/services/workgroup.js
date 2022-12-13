@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * workgroup service.
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+const { createCoreService } = require("@strapi/strapi").factories;
 
-module.exports = createCoreService('api::workgroup.workgroup');
+module.exports = createCoreService("api::workgroup.workgroup");

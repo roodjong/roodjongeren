@@ -116,7 +116,10 @@ function renderInputForQuestion(
                 setQuestions(
                     questions.map((q, i) => {
                         if (i === index) {
-                            return { ...q, value: (e.target as HTMLInputElement).value };
+                            return {
+                                ...q,
+                                value: (e.target as HTMLInputElement).value,
+                            };
                         } else {
                             return { ...q };
                         }
@@ -151,12 +154,8 @@ export default function PetitionCard(props: Props) {
         if (state != State.Success && ensureSessionStorage()[petition.id]) {
             setState(State.Existed);
         }
-    });
+    }, [state, petition.id]);
 
-    //   const extraQuestions = (petition.extraQuestions ?? []).map((q) => ({
-    //     state: useState(""),
-    //     ...q,
-    //   }));
     const [extraQuestions, setExtraQuestions] = useState(
         (petition.extraQuestions ?? []).map((q) => ({ value: "", ...q }))
     );
@@ -181,7 +180,7 @@ export default function PetitionCard(props: Props) {
                 setState
             );
         },
-        [petition, nameInput, emailInput, extraQuestions, handleSubmit]
+        [petition, nameInput, emailInput, extraQuestions]
     );
 
     if (state == State.Submitting) {
@@ -196,18 +195,14 @@ export default function PetitionCard(props: Props) {
     if (state == State.Error) {
         return (
             <PetitionFormBox className={props.className}>
-                <div className="py-20">
-                    Er is iets mis gegaan bij het opsturen.
-                </div>
+                <div className="py-20">Er is iets mis gegaan bij het opsturen.</div>
             </PetitionFormBox>
         );
     }
     if (state == State.Existed) {
         return (
             <PetitionFormBox className={props.className}>
-                <div className="py-20">
-                    Je hebt deze petitie al een keer ingevuld.
-                </div>
+                <div className="py-20">Je hebt deze petitie al een keer ingevuld.</div>
             </PetitionFormBox>
         );
     }
@@ -215,18 +210,14 @@ export default function PetitionCard(props: Props) {
         return (
             <PetitionFormBox className={props.className}>
                 <div className="py-20">
-                    Succes! Check je email om je handtekening definitief te
-                    maken.
+                    Succes! Check je email om je handtekening definitief te maken.
                 </div>
             </PetitionFormBox>
         );
     }
 
     return (
-        <PetitionFormBox
-            className={props.className}
-            onSubmit={onSubmitCallback}
-        >
+        <PetitionFormBox className={props.className} onSubmit={onSubmitCallback}>
             <>
                 <h2 className="font-title text-3xl font-bold mb-4">
                     Teken nu voor {petition.hook}!
@@ -248,7 +239,9 @@ export default function PetitionCard(props: Props) {
                         required
                         className="w-full h-8 rounded-md text-black p-2"
                         value={nameInput}
-                        onInput={(e) => setNameInput((e.target as HTMLInputElement).value)}
+                        onInput={(e) =>
+                            setNameInput((e.target as HTMLInputElement).value)
+                        }
                     />
                 </div>
                 <div>
@@ -261,7 +254,9 @@ export default function PetitionCard(props: Props) {
                         required
                         className="w-full h-8 rounded-md text-black p-2"
                         value={emailInput}
-                        onInput={(e) => setEmailInput((e.target as HTMLInputElement).value)}
+                        onInput={(e) =>
+                            setEmailInput((e.target as HTMLInputElement).value)
+                        }
                     />
                 </div>
                 {renderExtraQuestions(extraQuestions, setExtraQuestions)}

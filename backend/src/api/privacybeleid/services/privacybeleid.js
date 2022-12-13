@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * privacybeleid service.
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+const { createCoreService } = require("@strapi/strapi").factories;
 
-module.exports = createCoreService('api::privacybeleid.privacybeleid');
+module.exports = createCoreService("api::privacybeleid.privacybeleid");

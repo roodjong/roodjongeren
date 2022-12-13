@@ -31,18 +31,18 @@ export interface PostDetail {
 }
 
 export enum PostType {
-    NEWS = 'nieuws',
-    SUBMISSION = 'inzending',
-    PETITION = 'petitie',
+    NEWS = "nieuws",
+    SUBMISSION = "inzending",
+    PETITION = "petitie",
 }
 
 export function postTypeToText(postType: PostType) {
     switch (postType) {
         case PostType.NEWS:
-            return 'Nieuwsbericht';
+            return "Nieuwsbericht";
         case PostType.SUBMISSION:
-            return 'Inzending';
+            return "Inzending";
         case PostType.PETITION:
-            return 'Petitie';
+            return "Petitie";
     }
 }

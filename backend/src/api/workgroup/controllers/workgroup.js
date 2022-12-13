@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  *  workgroup controller
  */
 
-const { createCoreController } = require('@strapi/strapi').factories;
+const { createCoreController } = require("@strapi/strapi").factories;
 
-module.exports = createCoreController('api::workgroup.workgroup');
+module.exports = createCoreController("api::workgroup.workgroup");

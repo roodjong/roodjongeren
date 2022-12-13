@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * petition service.
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+const { createCoreService } = require("@strapi/strapi").factories;
 
-module.exports = createCoreService('api::petition.petition');
+module.exports = createCoreService("api::petition.petition");

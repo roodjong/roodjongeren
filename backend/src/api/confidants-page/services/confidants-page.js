@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * confidants-page service.
  */
 
-const { createCoreService } = require('@strapi/strapi').factories;
+const { createCoreService } = require("@strapi/strapi").factories;
 
-module.exports = createCoreService('api::confidants-page.confidants-page');
+module.exports = createCoreService("api::confidants-page.confidants-page");

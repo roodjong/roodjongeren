@@ -10,7 +10,9 @@ werken.
 De eerste stap van een petitie maken is en Post maken. Alle informatie van de
 petitiepagina komt namelijk gewoon van een normale Post.
 
-Denk er aan om de "soort" van je post op "Petitie" te zetten. Onderin het scherm kan je een Petitie koppelen, maar die heb je nog niet gemaakt dus kan je voor nu leeg laten. Druk daarna op "Save" maar nog niet op "Publish".
+Denk er aan om de "soort" van je post op "Petitie" te zetten. Onderin het scherm
+kan je een Petitie koppelen, maar die heb je nog niet gemaakt dus kan je voor nu
+leeg laten. Druk daarna op "Save" maar nog niet op "Publish".
 
 ![voorbeeldscherm van de admin pagina van Posts](howto-petitie-1.png)
 
@@ -100,7 +102,8 @@ allemaal goed moeten gaan. Dit is een voorbeeld met vier vragen:
 ]
 ```
 
-De website kan errors geven over de syntax van het `extraQuestions` veld, dan staat er "This doesn't match the JSON format". Dit betekent dat de computer
+De website kan errors geven over de syntax van het `extraQuestions` veld, dan
+staat er "This doesn't match the JSON format". Dit betekent dat de computer
 je informatie niet correct vindt. Helaas kunnen computers (nog) geen
 gedachten lezen en moet je alles precies invullen zoals die verwacht.
 

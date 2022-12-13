@@ -1,12 +1,12 @@
 export interface StrapiListResponse<T> {
-    data: StrapiCollection<T>[],
+    data: StrapiCollection<T>[];
     meta: {
-        pagination: StrapiPagination
+        pagination: StrapiPagination;
     };
 }
 
 export interface StrapiResponse<T> {
-    data: StrapiCollection<T>,
+    data: StrapiCollection<T>;
     meta: {};
 }
 
@@ -26,5 +26,4 @@ export interface StrapiImage {
     url: string;
     width: number;
     height: number;
-
 }

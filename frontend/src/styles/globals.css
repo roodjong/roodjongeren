@@ -2,27 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
-    font-family: 'Bebas Neue Pro';
-    src: url('/fonts/BebasNeuePro-Book.woff2') format('woff2'),
-    url('/fonts/BebasNeuePro-Book.woff') format('woff');
+    font-family: "Bebas Neue Pro";
+    src: url("/fonts/BebasNeuePro-Book.woff2") format("woff2"),
+        url("/fonts/BebasNeuePro-Book.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Bebas Neue Pro';
-    src: url('/fonts/BebasNeuePro-Light.woff2') format('woff2'),
-    url('/fonts/BebasNeuePro-Light.woff') format('woff');
+    font-family: "Bebas Neue Pro";
+    src: url("/fonts/BebasNeuePro-Light.woff2") format("woff2"),
+        url("/fonts/BebasNeuePro-Light.woff") format("woff");
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'Bebas Neue Pro';
-    src: url('/fonts/BebasNeuePro-Bold.woff2') format('woff2'),
-    url('/fonts/BebasNeuePro-Bold.woff') format('woff');
+    font-family: "Bebas Neue Pro";
+    src: url("/fonts/BebasNeuePro-Bold.woff2") format("woff2"),
+        url("/fonts/BebasNeuePro-Bold.woff") format("woff");
     font-weight: bold;
     font-style: normal;
 }
@@ -43,7 +42,7 @@
     }
 
     .container {
-        @apply py-4
+        @apply py-4;
     }
 }
 
