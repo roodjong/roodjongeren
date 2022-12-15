@@ -44,6 +44,8 @@ Strapi.
 
 To view the website, open `localhost`. To go to the Strapi admin console, open `localhost/backend/admin`.
 
+You can login with the email `admin@roodjongeren.nl` and password `admindebaas`.
+
 ## Deploying
 
 ### Starting a production stack
