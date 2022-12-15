@@ -28,19 +28,19 @@ enum State {
 
 const SESSION_KEY = "petitionData";
 
-function ensureSessionStorage(): { [key: string]: boolean } {
-    const data = sessionStorage.getItem(SESSION_KEY);
+function ensureLocalStorage(): { [key: string]: boolean } {
+    const data = localStorage.getItem(SESSION_KEY);
     if (!data) {
-        sessionStorage.setItem(SESSION_KEY, JSON.stringify({}));
+        localStorage.setItem(SESSION_KEY, JSON.stringify({}));
         return {};
     }
     return JSON.parse(data);
 }
 
 function savePetition(petition: PetitionDetail) {
-    let data = ensureSessionStorage();
+    let data = ensureLocalStorage();
     data[petition.id] = true;
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    localStorage.setItem(SESSION_KEY, JSON.stringify(data));
 }
 
 async function handleSubmit(
@@ -151,7 +151,7 @@ export default function PetitionCard(props: Props) {
     const petition = props.petition;
     const [state, setState] = useState(State.Initial);
     useEffect(() => {
-        if (state != State.Success && ensureSessionStorage()[petition.id]) {
+        if (state != State.Success && ensureLocalStorage()[petition.id]) {
             setState(State.Existed);
         }
     }, [state, petition.id]);
