@@ -17,7 +17,7 @@
     "@strapi/provider-email-nodemailer": "^4.4.3",
     "@strapi/strapi": "4.5.2",
     "crypto-random-string": "^5.0.0",
-    "pg": "^8.7.3"
+    "pg": "^8.8.0"
   },
   "author": {
     "name": "Jordi van Os"
