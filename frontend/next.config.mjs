@@ -10,7 +10,9 @@ const backendBaseUrl =
   process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "";
 const backend = axios.create({
   baseURL: `${backendBaseUrl}/api`,
-  paramsSerializer: (params) => qs.stringify(params),
+  paramsSerializer: {
+    serialize: (params) => qs.stringify(params, { arrayFormat: "brackets" }),
+  },
 });
 
 const postsToRedirect = [
