@@ -22,7 +22,9 @@ export const backendBaseUrl =
 
 export const backend = axios.create({
     baseURL: joinPaths(backendBaseUrl, "/api"),
-    paramsSerializer: (params) => qs.stringify(params),
+    paramsSerializer: {
+        serialize: (params) => qs.stringify(params, { arrayFormat: "brackets" }),
+    },
 });
 
 export async function fetchFallback(): Promise<Fallback> {
