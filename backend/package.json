@@ -14,7 +14,7 @@
   "dependencies": {
     "@strapi/plugin-i18n": "4.5.2",
     "@strapi/plugin-users-permissions": "4.5.4",
-    "@strapi/provider-email-nodemailer": "^4.4.3",
+    "@strapi/provider-email-nodemailer": "^4.5.4",
     "@strapi/strapi": "4.5.2",
     "crypto-random-string": "^5.0.0",
     "pg": "^8.8.0"
