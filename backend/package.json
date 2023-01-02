@@ -13,7 +13,7 @@
   "devDependencies": {},
   "dependencies": {
     "@strapi/plugin-i18n": "4.5.4",
-    "@strapi/plugin-users-permissions": "4.5.4",
+    "@strapi/plugin-users-permissions": "4.5.5",
     "@strapi/provider-email-nodemailer": "^4.5.4",
     "@strapi/strapi": "4.5.4",
     "crypto-random-string": "^5.0.0",
