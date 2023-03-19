@@ -9,7 +9,6 @@ import PostTypeDisplay from "./PostTypeDisplay";
 
 interface Props {
     post: Post;
-    showPostType?: boolean;
 }
 
 export default function PostItem(props: Props) {
@@ -19,56 +18,49 @@ export default function PostItem(props: Props) {
 
     const router = useRouter();
 
-    const handleClick = useCallback(() => {
-        router.push(link).then();
-    }, [router, link]);
-
-    const stopPropagation = useCallback((e: MouseEvent) => e.stopPropagation(), []);
+    const handleAuthorClick = useCallback(
+        (e: MouseEvent) => {
+            e.stopPropagation();
+            router.push(`/auteur/${encodeURIComponent(post.author)}`).then();
+        },
+        [router, post.author]
+    );
 
     return (
-        <div
-            onClick={handleClick}
-            className="shadow shadow-[#0004] bg-gray-50 hover:shadow-lg hover:shadow-[#0004] transition-shadow rounded flex flex-col md:flex-row items-stretch cursor-pointer"
-        >
-            <div
-                className={`p-4 flex flex-col basis-2/3 gap-4 justify-between items-start ${
-                    post.banner ? "basis-2/3" : "basis-full"
-                }`}
-            >
-                <div>
-                    <h1 className="font-title text-3xl font-bold">{post.title}</h1>
-                    <p className="text-faded">
-                        {props.showPostType && (
-                            <>
-                                <PostTypeDisplay type={post.type} />
-                                <span className="mx-2">&#xB7;</span>
-                            </>
-                        )}
-                        <span>
-                            <Link
-                                href={`/auteur/${encodeURIComponent(post.author)}`}
-                                className="hover:underline hover:text-primary transition-colors"
-                                onClick={stopPropagation}
-                            >
-                                {post.author}
-                            </Link>
-                        </span>
-                        <span className="mx-2">&#xB7;</span>
-                        <span>{dateToText(new Date(post.publishedAt))}</span>
-                    </p>
-                </div>
-            </div>
-            {post.banner && (
-                <div className="relative basis-1/3 min-h-[12rem] md:min-h-0">
+        <Link href={link}>
+            <div className="relative w-full h-[10rem] rounded overflow-hidden">
+                {post.banner ? (
                     <Image
                         loader={imageLoader}
                         src={post.banner}
-                        alt="Artikel-banner"
+                        alt=""
                         fill
                         className="object-cover"
                     />
-                </div>
-            )}
-        </div>
+                ) : (
+                    <Image
+                        src="/images/rood-logo.svg"
+                        alt=""
+                        fill
+                        className="object-contain opacity-10"
+                    />
+                )}
+            </div>
+            <div className="p-2">
+                <h2 className="font-title text-2xl font-bold">{post.title}</h2>
+                <p className="text-faded flex flex-col">
+                    <span>
+                        <PostTypeDisplay type={post.type} />
+                        {dateToText(new Date(post.publishedAt))}
+                    </span>
+                    <span
+                        className="hover:underline hover:text-primary transition-colors inline-block"
+                        onClick={handleAuthorClick}
+                    >
+                        {post.author}
+                    </span>
+                </p>
+            </div>
+        </Link>
     );
 }

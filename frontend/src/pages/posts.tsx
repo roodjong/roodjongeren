@@ -11,7 +11,7 @@ import Search from "../components/Search";
 import { useCallback, useEffect, useState } from "react";
 import HeadPage from "../components/HeadPage";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 16;
 
 interface Props {
     pageBanner: string;
@@ -52,6 +52,8 @@ export default function PostsPage(props: Props) {
         }
     }, [searchString, page, props]);
 
+    console.log(posts);
+
     return (
         <div>
             <HeadPage
@@ -71,9 +73,9 @@ export default function PostsPage(props: Props) {
                     pageItems={posts.length}
                     onChangePage={setPage}
                 >
-                    <div className="flex flex-col gap-6 py-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
                         {posts.map((post) => (
-                            <PostItem key={post.slug} post={post} showPostType />
+                            <PostItem key={post.slug} post={post} />
                         ))}
                     </div>
                 </CollectionViewer>

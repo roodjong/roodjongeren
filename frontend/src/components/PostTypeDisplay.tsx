@@ -9,26 +9,11 @@ type Props = {
 export default function PostTypeDisplay(props: Props) {
     switch (props.type) {
         case PostType.NEWS:
-            return (
-                <span>
-                    <FaNewspaper className="inline mr-2" />
-                    Nieuwsbericht
-                </span>
-            );
+            return <FaNewspaper className="inline mr-2" title="Nieuwsbericht" />;
         case PostType.SUBMISSION:
-            return (
-                <span>
-                    <FaComment className="inline mr-2" />
-                    Inzending
-                </span>
-            );
+            return <FaComment className="inline mr-2" title="Inzending" />;
         case PostType.PETITION:
-            return (
-                <span>
-                    <FaCommentDots className="inline mr-2" />
-                    Petitie
-                </span>
-            );
+            return <FaCommentDots className="inline mr-2" title="Petitie" />;
         default:
             return <span>Onbekend type</span>;
     }

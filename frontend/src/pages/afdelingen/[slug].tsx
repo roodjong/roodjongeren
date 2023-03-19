@@ -93,7 +93,7 @@ export default function AfdelingPage(props: Props) {
                 <EndlessPostsLoader
                     posts={props.posts}
                     afdeling={props.afdeling.slug}
-                    showPostType
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 my-4"
                 />
             </div>
         </div>
@@ -119,7 +119,7 @@ export async function getStaticProps(
     const [{ pageBanner }, afdeling, { posts }] = await Promise.all([
         fetchFallback(),
         fetchAfdeling(params.slug),
-        fetchPosts(undefined, undefined, params.slug, 1, 4),
+        fetchPosts(undefined, undefined, params.slug, 1, 8),
     ]);
 
     return {

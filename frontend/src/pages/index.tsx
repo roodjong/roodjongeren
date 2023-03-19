@@ -51,6 +51,7 @@ export default function HomePage(props: Props) {
                         <EndlessPostsLoader
                             postType={PostType.NEWS}
                             posts={props.latestNews}
+                            className="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8"
                         />
                     </div>
                     <div className="basis-1/3">
@@ -58,6 +59,7 @@ export default function HomePage(props: Props) {
                         <EndlessPostsLoader
                             postType={PostType.SUBMISSION}
                             posts={props.latestSubmissions}
+                            className="mt-4 grid grid-cols-1 gap-x-4 gap-y-8"
                         />
                     </div>
                 </div>

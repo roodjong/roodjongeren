@@ -37,13 +37,6 @@ export default function PostPage(props: Props) {
             <HeadArticle post={post} />
             <Banner
                 title={post.title}
-                subtitle={
-                    <>
-                        {post.author}
-                        <span className="mx-2">&#xB7;</span>
-                        {dateToText(new Date(post.publishedAt))}
-                    </>
-                }
                 background={post.banner ?? props.fallbackBanner}
                 compact
             />

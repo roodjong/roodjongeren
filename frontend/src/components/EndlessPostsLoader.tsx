@@ -8,8 +8,8 @@ interface Props {
     postType: PostType | null;
     author: string | null;
     afdeling: string | null;
-    showPostType?: boolean;
     frontpageOnly: boolean | null;
+    className?: string;
 }
 
 EndlessPostsLoader.defaultProps = {
@@ -47,11 +47,13 @@ export default function EndlessPostsLoader(props: Props) {
     }
 
     return (
-        <div className="flex flex-col gap-6 pb-4 mt-4">
-            {posts.map((post) => (
-                <PostItem key={post.slug} post={post} showPostType={props.showPostType} />
-            ))}
-            <div className="text-center">
+        <>
+            <div className={props.className}>
+                {posts.map((post) => (
+                    <PostItem key={post.slug} post={post} />
+                ))}
+            </div>
+            <div className="text-center mt-4">
                 {posts.length === 0 ? (
                     <p className="text-faded">
                         <i>Nog geen nieuwsberichten</i>
@@ -69,6 +71,6 @@ export default function EndlessPostsLoader(props: Props) {
                     </button>
                 )}
             </div>
-        </div>
+        </>
     );
 }
