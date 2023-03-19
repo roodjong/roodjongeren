@@ -17,9 +17,8 @@ export default function ConfidantCard(props: Props) {
             <div className="float-right relative md:min-w-[20rem] h-[20rem] rounded shadow-lg overflow-hidden">
                 <Image
                     src={confidant.photo}
-                    objectFit="cover"
-                    objectPosition="center"
-                    layout="fill"
+                    fill
+                    className="object-cover"
                     loader={imageLoader}
                     alt={`Foto van ${confidant.name}`}
                 />

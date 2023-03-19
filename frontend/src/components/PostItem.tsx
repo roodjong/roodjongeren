@@ -64,9 +64,8 @@ export default function PostItem(props: Props) {
                         loader={imageLoader}
                         src={post.banner}
                         alt="Artikel-banner"
-                        objectFit={post.banner ? "cover" : "scale-down"}
-                        objectPosition="center"
-                        layout="fill"
+                        fill
+                        className="object-cover"
                     />
                 </div>
             )}

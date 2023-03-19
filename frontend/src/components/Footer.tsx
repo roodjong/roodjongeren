@@ -14,14 +14,12 @@ export default function Footer() {
     return (
         <footer className="bg-primary text-white">
             <div className="container flex flex-col py-12 sm:flex-row gap-8 sm:gap-4 items-center text-center sm:text-left justify-between">
-                <div>
-                    <Image
-                        src="/images/rood-logo-white.svg"
-                        width="128"
-                        height="128"
-                        alt="Logo ROOD"
-                    />
-                </div>
+                <Image
+                    src="/images/rood-logo-white.svg"
+                    width="128"
+                    height="128"
+                    alt="Logo ROOD"
+                />
                 <div className="flex flex-col gap-2">
                     <a
                         href="/backend/admin"

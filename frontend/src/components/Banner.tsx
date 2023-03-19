@@ -18,12 +18,10 @@ export default function Banner(props: Props) {
         >
             <Image
                 src={props.background}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
+                fill
                 loader={imageLoader}
                 alt="Banner"
-                className={props.compact ? "blur" : undefined}
+                className="blur object-cover"
             />
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary via-transparent to-transparent mix-blend-darken" />
             <div
