@@ -16,6 +16,8 @@ export default function AfdelingenMap(props: Props) {
             center={[52.1, 5.3]}
             zoom={props.compact ? 7 : 8}
             scrollWheelZoom={false}
+            dragging={!props.compact}
+            zoomControl={!props.compact}
             className={props.compact ? "h-[32rem] !bg-secondary" : "h-[52rem]"}
         >
             <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png" />

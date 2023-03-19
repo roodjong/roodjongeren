@@ -34,14 +34,14 @@ export default function Banner(props: Props) {
                 className="absolute top-0 left-0 w-full h-full bg-primary"
                 style={{ clipPath: "polygon(0% 85%, 0% 101%, 60% 101%)" }}
             />
-            <div className="w-full px-4 pt-[128px] pb-16 text-white font-bold text-center relative font-extralight uppercase font-title">
+            <div className="w-full px-4 pt-[128px] pb-16 text-white text-center relative uppercase font-title">
                 <h1
                     className="text-[4rem] sm:text-[6rem] md:text-[7rem] font-bold leading-none text-outline"
                     style={{ wordBreak: "break-word" }}
                 >
                     {props.title}
                 </h1>
-                <h2 className="text-5xl text-outline">{props.subtitle}</h2>
+                <h2 className="text-6xl text-outline">{props.subtitle}</h2>
                 <ContentLink />
             </div>
         </div>

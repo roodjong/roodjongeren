@@ -30,7 +30,7 @@ export default function AboutUsShort(props: Props) {
                                     <FaFistRaised />
                                 </Link>
                                 <Link
-                                    href="/steun-ons"
+                                    href="/word-lid#steun-ons"
                                     className="button-primary text-3xl"
                                 >
                                     Steun ons
