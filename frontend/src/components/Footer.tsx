@@ -24,19 +24,25 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col gap-2">
                     <a
-                        href="mailto:info@roodjongeren.nl"
-                        className="hover:underline umami--click--footer-email"
+                        href="/backend/admin"
+                        className="hover:underline umami--click--footer-de-socialisten"
                     >
-                        info@roodjongeren.nl
+                        Admin
                     </a>
                     <Link href="/privacybeleid" className="hover:underline">
                         Privacybeleid
                     </Link>
                     <a
-                        href="https://mijn.roodjongeren.nl"
-                        className="hover:underline umami--click--footer-mijnrood"
+                        href="https://socialisten.org/"
+                        className="hover:underline umami--click--footer-de-socialisten"
                     >
-                        mijnROOD
+                        De Socialisten
+                    </a>
+                    <a
+                        href="mailto:info@roodjongeren.nl"
+                        className="hover:underline umami--click--footer-email"
+                    >
+                        info@roodjongeren.nl
                     </a>
                     <p>KVK: 24349986</p>
                     <a
@@ -62,13 +68,6 @@ export default function Footer() {
                             Twitter
                         </a>
                         <a
-                            href="https://www.facebook.com/ROODjongSP"
-                            className="hover:underline group umami--click--footer-facebook"
-                        >
-                            <FaFacebook />
-                            Facebook
-                        </a>
-                        <a
                             href="https://www.instagram.com/roodsocialistischejongeren"
                             className="hover:underline group umami--click--footer-instagram"
                         >
@@ -88,13 +87,6 @@ export default function Footer() {
                         >
                             <FaGithub />
                             GitHub
-                        </a>
-                        <a
-                            href="https://reddit.com/r/Poldersocialisme/"
-                            className="hover:underline group umami--click--footer-reddit"
-                        >
-                            <FaReddit />
-                            Reddit
                         </a>
                     </IconContext.Provider>
                 </div>
