@@ -33,7 +33,7 @@ export default function EndlessPostsLoader(props: Props) {
             props.afdeling,
             page + 1,
             props.posts.length,
-            null
+            props.frontpageOnly
         )
             .then(({ posts, pagination }) => {
                 if (posts.length === 0) {
