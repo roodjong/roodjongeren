@@ -32,7 +32,7 @@ export default function Header() {
                 <div className="flex gap-4 justify-between items-center">
                     <Link href="/" passHref legacyBehavior>
                         <div
-                            className={`hover:skew-x-3 flex py-2 mr-4 cursor-pointer transition-all min-w-[64px] ${
+                            className={`flex py-2 mr-4 cursor-pointer transition-all min-w-[64px] ${
                                 hasScrolled ? "w-[64px]" : "w-[64px] md:w-[128px]"
                             }`}
                         >
@@ -64,24 +64,30 @@ export default function Header() {
                     <HeaderLink href="/" exact>
                         Home
                     </HeaderLink>
-                    <HeaderDropdown title="Organisatie">
-                        <HeaderLink href="/over-ons">Over Ons</HeaderLink>
+                    <HeaderDropdown title="Over ons">
+                        <HeaderLink href="/over-ons">Organisatie</HeaderLink>
+                        <HeaderLink href="/programma">Programma</HeaderLink>
                         <HeaderLink href="/afdelingen">Afdelingen</HeaderLink>
                         <HeaderLink href="/werkgroepen">Werkgroepen</HeaderLink>
-                        <HeaderLink href="/programma">Programma</HeaderLink>
                         <HeaderLink href="/vertrouwenspersonen">
                             Vertrouwenspersonen
                         </HeaderLink>
                     </HeaderDropdown>
-                    <HeaderLink href="/actueel">Actueel</HeaderLink>
+                    <HeaderLink href="/posts">Posts</HeaderLink>
                     <HeaderLink href="/word-lid">Word lid</HeaderLink>
-                    <HeaderLink href="/steun-ons">Steun ons</HeaderLink>
                     <HeaderLink
                         href="https://derodelap.nl/"
                         externalLink
                         className="umami--click--header-shop"
                     >
                         Shop
+                    </HeaderLink>
+                    <HeaderLink
+                        href="https://mijn.roodjongeren.nl"
+                        externalLink
+                        className="umami--click--header-inloggen"
+                    >
+                        Inloggen
                     </HeaderLink>
                 </div>
             </nav>

@@ -19,7 +19,7 @@ interface Props {
     pagination: StrapiPagination;
 }
 
-export default function ActueelPage(props: Props) {
+export default function PostsPage(props: Props) {
     const [posts, setPosts] = useState(props.posts);
     const [pagination, setPagination] = useState(props.pagination);
     const [isLoading, setLoading] = useState(false);
@@ -55,11 +55,11 @@ export default function ActueelPage(props: Props) {
     return (
         <div>
             <HeadPage
-                title="Actueel"
+                title="Posts"
                 description="Overzicht van alle nieuwsberichten en inzendingen van ROOD"
-                url="https://roodjongeren.nl/actueel"
+                url="https://roodjongeren.nl/posts"
             />
-            <Banner title="Actueel" background={props.pageBanner} compact />
+            <Banner title="Posts" background={props.pageBanner} compact />
             <Main className="container">
                 <Search
                     onChange={handleSearch}
