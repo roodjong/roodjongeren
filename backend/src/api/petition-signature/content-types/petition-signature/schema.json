@@ -1,40 +1,40 @@
 {
-  "kind": "collectionType",
-  "collectionName": "petition_signatures",
-  "info": {
-    "singularName": "petition-signature",
-    "pluralName": "petition-signatures",
-    "displayName": "Petitie-ondertekening",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": false,
-    "comment": ""
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "name": {
-      "type": "string"
+    "kind": "collectionType",
+    "collectionName": "petition_signatures",
+    "info": {
+        "singularName": "petition-signature",
+        "pluralName": "petition-signatures",
+        "displayName": "Petitie-ondertekening",
+        "description": ""
     },
-    "email": {
-      "type": "email"
+    "options": {
+        "draftAndPublish": false,
+        "comment": ""
     },
-    "confirmationCode": {
-      "type": "string",
-      "unique": true,
-      "private": true
-    },
-    "confirmed": {
-      "type": "boolean"
-    },
-    "petition": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::petition.petition",
-      "inversedBy": "signatures"
-    },
-    "questionAnswers": {
-      "type": "json"
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string"
+        },
+        "email": {
+            "type": "email"
+        },
+        "confirmationCode": {
+            "type": "string",
+            "unique": true,
+            "private": true
+        },
+        "confirmed": {
+            "type": "boolean"
+        },
+        "petition": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::petition.petition",
+            "inversedBy": "signatures"
+        },
+        "questionAnswers": {
+            "type": "json"
+        }
     }
-  }
 }

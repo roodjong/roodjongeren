@@ -1,3 +1,0 @@
-[*.{js,jsx,ts,tsx,css}]
-tab_width = 4
-max_line_length = 90

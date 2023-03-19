@@ -1,64 +1,64 @@
 {
-  "kind": "collectionType",
-  "collectionName": "posts",
-  "info": {
-    "singularName": "post",
-    "pluralName": "posts",
-    "displayName": "Post",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "title": {
-      "type": "string",
-      "required": true,
-      "maxLength": 100,
-      "unique": true
+    "kind": "collectionType",
+    "collectionName": "posts",
+    "info": {
+        "singularName": "post",
+        "pluralName": "posts",
+        "displayName": "Post",
+        "description": ""
     },
-    "content": {
-      "type": "richtext",
-      "required": true
+    "options": {
+        "draftAndPublish": true
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title",
-      "required": true
-    },
-    "afdeling": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::afdeling.afdeling",
-      "inversedBy": "posts"
-    },
-    "author": {
-      "type": "string",
-      "required": true,
-      "maxLength": 100,
-      "default": "ROOD"
-    },
-    "banner": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": ["images"]
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": ["nieuws", "inzending", "petitie"],
-      "required": true
-    },
-    "frontpage": {
-      "type": "boolean",
-      "required": true
-    },
-    "petition": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::petition.petition",
-      "mappedBy": "post"
+    "pluginOptions": {},
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true,
+            "maxLength": 100,
+            "unique": true
+        },
+        "content": {
+            "type": "richtext",
+            "required": true
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "title",
+            "required": true
+        },
+        "afdeling": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::afdeling.afdeling",
+            "inversedBy": "posts"
+        },
+        "author": {
+            "type": "string",
+            "required": true,
+            "maxLength": 100,
+            "default": "ROOD"
+        },
+        "banner": {
+            "type": "media",
+            "multiple": false,
+            "required": false,
+            "allowedTypes": ["images"]
+        },
+        "type": {
+            "type": "enumeration",
+            "enum": ["nieuws", "inzending", "petitie"],
+            "required": true
+        },
+        "frontpage": {
+            "type": "boolean",
+            "required": true
+        },
+        "petition": {
+            "type": "relation",
+            "relation": "oneToOne",
+            "target": "api::petition.petition",
+            "mappedBy": "post"
+        }
     }
-  }
 }

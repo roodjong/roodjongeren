@@ -11,8 +11,7 @@ const backendBaseUrl =
 const backend = axios.create({
     baseURL: `${backendBaseUrl}/api`,
     paramsSerializer: {
-        serialize: (params) =>
-            qs.stringify(params, { arrayFormat: "brackets" }),
+        serialize: (params) => qs.stringify(params, { arrayFormat: "brackets" }),
     },
 });
 
