@@ -45,13 +45,12 @@ export default function PostItem(props: Props) {
                             </>
                         )}
                         <span>
-                            <Link href={`/auteur/${encodeURIComponent(post.author)}`}>
-                                <a
-                                    className="hover:underline hover:text-primary transition-colors"
-                                    onClick={stopPropagation}
-                                >
-                                    {post.author}
-                                </a>
+                            <Link
+                                href={`/auteur/${encodeURIComponent(post.author)}`}
+                                className="hover:underline hover:text-primary transition-colors"
+                                onClick={stopPropagation}
+                            >
+                                {post.author}
                             </Link>
                         </span>
                         <span className="mx-2">&#xB7;</span>

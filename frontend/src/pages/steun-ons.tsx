@@ -32,10 +32,8 @@ export default function SupportUsPage(props: Props) {
                     <FaHandHoldingHeart className="inline align-baseline ml-2" />
                 </a>
                 <p className="mt-4">
-                    <Link href="/word-lid">
-                        <a className="text-primary underline">
-                            Jong en strijdbaar? Word normaal lid!
-                        </a>
+                    <Link href="/word-lid" className="text-primary underline">
+                        Jong en strijdbaar? Word normaal lid!
                     </Link>
                 </p>
             </Main>

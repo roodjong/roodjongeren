@@ -30,16 +30,16 @@ export default function Header() {
             <SkipToContent />
             <nav className="container py-0 flex lg:gap-4 flex-col lg:flex-row items-stretch max-h-screen">
                 <div className="flex gap-4 justify-between items-center">
-                    <Link href="/" passHref>
+                    <Link href="/" passHref legacyBehavior>
                         <div
-                            className={`hover:skew-x-3 transition-transform flex py-2 mr-4 cursor-pointer transition-all min-w-[64px] ${
+                            className={`hover:skew-x-3 flex py-2 mr-4 cursor-pointer transition-all min-w-[64px] ${
                                 hasScrolled ? "w-[64px]" : "w-[64px] md:w-[128px]"
                             }`}
                         >
                             <Image
                                 src="/images/rood-logo.svg"
-                                width="128px"
-                                height="128px"
+                                width="128"
+                                height="128"
                                 alt="Logo ROOD"
                             />
                         </div>

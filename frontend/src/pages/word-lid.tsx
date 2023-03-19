@@ -31,10 +31,8 @@ export default function JoinUsPage(props: Props) {
                     Inschrijven <FaFistRaised className="inline align-baseline ml-2" />
                 </a>
                 <p className="mt-4">
-                    <Link href="/steun-ons">
-                        <a className="text-primary underline">
-                            Te oud voor ROOD? Word steunlid!
-                        </a>
+                    <Link href="/steun-ons" className="text-primary underline">
+                        Te oud voor ROOD? Word steunlid!
                     </Link>
                 </p>
             </Main>

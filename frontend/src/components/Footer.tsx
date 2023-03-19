@@ -17,8 +17,8 @@ export default function Footer() {
                 <div>
                     <Image
                         src="/images/rood-logo-white.svg"
-                        width="128px"
-                        height="128px"
+                        width="128"
+                        height="128"
                         alt="Logo ROOD"
                     />
                 </div>
@@ -29,8 +29,8 @@ export default function Footer() {
                     >
                         info@roodjongeren.nl
                     </a>
-                    <Link href="/privacybeleid">
-                        <a className="hover:underline">Privacybeleid</a>
+                    <Link href="/privacybeleid" className="hover:underline">
+                        Privacybeleid
                     </Link>
                     <a
                         href="https://mijn.roodjongeren.nl"

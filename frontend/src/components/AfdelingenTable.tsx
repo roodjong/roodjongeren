@@ -57,10 +57,11 @@ function AfdelingRow({ afdeling }: { afdeling: Afdeling }) {
             </TableCell>
             <TableCell className="sm:table-cell hidden">
                 <div className="text-right w-full">
-                    <Link href={link}>
-                        <a className="button-primary text-xl py-1 inline-block">
-                            Details
-                        </a>
+                    <Link
+                        href={link}
+                        className="button-primary text-xl py-1 inline-block"
+                    >
+                        Details
                     </Link>
                 </div>
             </TableCell>
