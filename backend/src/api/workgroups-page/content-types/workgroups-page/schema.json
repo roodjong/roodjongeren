@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "workgroups_pages",
+  "info": {
+    "singularName": "workgroups-page",
+    "pluralName": "workgroups-pages",
+    "displayName": "Werkgroepen-pagina",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "banner": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "content": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}
