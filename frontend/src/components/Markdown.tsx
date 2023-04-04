@@ -40,15 +40,15 @@ export default function Markdown(props: Props) {
 }
 
 function MarkdownHeader1(props: PropsWithChildren<HeadingProps>) {
-    return <Subheader>{props.children}</Subheader>;
+    return <Subheader className="mt-8 mb-4">{props.children}</Subheader>;
 }
 
 function MarkdownHeader2(props: PropsWithChildren<HeadingProps>) {
-    return <h3 className="my-4 font-title font-bold text-3xl">{props.children}</h3>;
+    return <h3 className="mt-6 mb-2 font-title font-bold text-3xl">{props.children}</h3>;
 }
 
 function MarkdownHeader3(props: PropsWithChildren<HeadingProps>) {
-    return <h4 className="my-4 font-title font-bold text-2xl">{props.children}</h4>;
+    return <h4 className="mt-4 mb-2 font-title font-bold text-2xl">{props.children}</h4>;
 }
 
 function MarkdownBlockquote(props: PropsWithChildren<any>) {
@@ -61,11 +61,11 @@ function MarkdownBlockquote(props: PropsWithChildren<any>) {
 }
 
 function MarkdownUnorderedList(props: PropsWithChildren<UnorderedListProps>) {
-    return <ul className="list-inside list-star my-4 space-y-4">{props.children}</ul>;
+    return <ul className="list-inside list-star my-4 space-y-2">{props.children}</ul>;
 }
 
 function MarkdownOrderedList(props: PropsWithChildren<OrderedListProps>) {
-    return <ol className="list-inside list-decimal my-4 space-y-4">{props.children}</ol>;
+    return <ol className="list-inside list-decimal my-4 space-y-2">{props.children}</ol>;
 }
 
 function MarkdownAnchor(props: PropsWithChildren<any>) {
@@ -89,7 +89,7 @@ function MarkdownImage(props: PropsWithChildren<any>) {
 }
 
 function MarkdownParagraph(props: PropsWithChildren<any>) {
-    return <p className="my-4">{props.children}</p>;
+    return <p className="my-2">{props.children}</p>;
 }
 
 function MarkdownTableHead(props: PropsWithChildren<any>) {

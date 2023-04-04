@@ -14,18 +14,17 @@ export default function PostBody(props: Props) {
     const post = props.post;
     return (
         <Main className="container">
-            <p className="text-faded mb-4">
-                <PostTypeDisplay type={props.post.type} />
-                <span className="mx-2">&#xB7;</span>
-                <span>
-                    <Link href={`/auteur/${encodeURIComponent(post.author)}`}>
-                        <a className="hover:underline hover:text-primary transition-colors">
-                            {post.author}
-                        </a>
-                    </Link>
-                </span>
-                <span className="mx-2">&#xB7;</span>
-                <span>{dateToText(new Date(post.publishedAt))}</span>
+            <div className="text-faded mb-2">
+                <p>
+                    <PostTypeDisplay type={post.type} />
+                    {dateToText(new Date(post.publishedAt))}
+                </p>
+                <Link
+                    href={`/auteur/${encodeURIComponent(post.author)}`}
+                    className="hover:underline hover:text-primary transition-colors"
+                >
+                    {post.author}
+                </Link>
                 {post.type === PostType.SUBMISSION && (
                     <p className="mt-4">
                         <i>
@@ -44,7 +43,7 @@ export default function PostBody(props: Props) {
                         </i>
                     </p>
                 )}
-            </p>
+            </div>
             <Markdown content={post.content} />
         </Main>
     );

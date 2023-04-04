@@ -11,7 +11,7 @@ import Search from "../components/Search";
 import { useCallback, useEffect, useState } from "react";
 import HeadPage from "../components/HeadPage";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 16;
 
 interface Props {
     pageBanner: string;
@@ -19,7 +19,7 @@ interface Props {
     pagination: StrapiPagination;
 }
 
-export default function ActueelPage(props: Props) {
+export default function PostsPage(props: Props) {
     const [posts, setPosts] = useState(props.posts);
     const [pagination, setPagination] = useState(props.pagination);
     const [isLoading, setLoading] = useState(false);
@@ -52,14 +52,16 @@ export default function ActueelPage(props: Props) {
         }
     }, [searchString, page, props]);
 
+    console.log(posts);
+
     return (
         <div>
             <HeadPage
-                title="Actueel"
+                title="Posts"
                 description="Overzicht van alle nieuwsberichten en inzendingen van ROOD"
-                url="https://roodjongeren.nl/actueel"
+                url="https://roodjongeren.nl/posts"
             />
-            <Banner title="Actueel" background={props.pageBanner} compact />
+            <Banner title="Posts" background={props.pageBanner} compact />
             <Main className="container">
                 <Search
                     onChange={handleSearch}
@@ -71,9 +73,9 @@ export default function ActueelPage(props: Props) {
                     pageItems={posts.length}
                     onChangePage={setPage}
                 >
-                    <div className="flex flex-col gap-6 py-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
                         {posts.map((post) => (
-                            <PostItem key={post.slug} post={post} showPostType />
+                            <PostItem key={post.slug} post={post} />
                         ))}
                     </div>
                 </CollectionViewer>

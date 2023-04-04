@@ -1,29 +1,29 @@
 {
-  "kind": "collectionType",
-  "collectionName": "workgroups",
-  "info": {
-    "singularName": "workgroup",
-    "pluralName": "workgroups",
-    "displayName": "Werkgroep",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
+    "kind": "collectionType",
+    "collectionName": "workgroups",
+    "info": {
+        "singularName": "workgroup",
+        "pluralName": "workgroups",
+        "displayName": "Werkgroep",
+        "description": ""
     },
-    "about": {
-      "type": "richtext",
-      "required": true
+    "options": {
+        "draftAndPublish": true
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "name",
-      "required": false
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "about": {
+            "type": "richtext",
+            "required": true
+        },
+        "slug": {
+            "type": "uid",
+            "targetField": "name",
+            "required": false
+        }
     }
-  }
 }

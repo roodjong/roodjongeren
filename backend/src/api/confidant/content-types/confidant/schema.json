@@ -1,38 +1,38 @@
 {
-  "kind": "collectionType",
-  "collectionName": "confidants",
-  "info": {
-    "singularName": "confidant",
-    "pluralName": "confidants",
-    "displayName": "Vertrouwenspersonen",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
+    "kind": "collectionType",
+    "collectionName": "confidants",
+    "info": {
+        "singularName": "confidant",
+        "pluralName": "confidants",
+        "displayName": "Vertrouwenspersonen",
+        "description": ""
     },
-    "email": {
-      "type": "email",
-      "required": true
+    "options": {
+        "draftAndPublish": true
     },
-    "phone": {
-      "type": "string",
-      "required": true
-    },
-    "photo": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": ["images"]
-    },
-    "about": {
-      "type": "richtext",
-      "required": true
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "email": {
+            "type": "email",
+            "required": true
+        },
+        "phone": {
+            "type": "string",
+            "required": true
+        },
+        "photo": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": ["images"]
+        },
+        "about": {
+            "type": "richtext",
+            "required": true
+        }
     }
-  }
 }

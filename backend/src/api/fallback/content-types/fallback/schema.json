@@ -1,22 +1,22 @@
 {
-  "kind": "singleType",
-  "collectionName": "fallbacks",
-  "info": {
-    "singularName": "fallback",
-    "pluralName": "fallbacks",
-    "displayName": "Fallback",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": false
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "pageBanner": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": ["images"]
+    "kind": "singleType",
+    "collectionName": "fallbacks",
+    "info": {
+        "singularName": "fallback",
+        "pluralName": "fallbacks",
+        "displayName": "Fallback",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "pageBanner": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": ["images"]
+        }
     }
-  }
 }

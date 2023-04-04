@@ -16,6 +16,7 @@ import joinPaths from "./paths";
 import ProgramContent from "../models/ProgramContent";
 import Fallback from "../models/Fallback";
 import { PetitionDetail } from "../models/Petition";
+import WorkgroupPageContent from "../models/WorkgroupPageContent";
 
 export const backendBaseUrl =
     process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "";
@@ -23,7 +24,7 @@ export const backendBaseUrl =
 export const backend = axios.create({
     baseURL: joinPaths(backendBaseUrl, "/api"),
     paramsSerializer: {
-        serialize: (params) => qs.stringify(params, { arrayFormat: "brackets" }),
+        serialize: (params) => qs.stringify(params, { arrayFormat: "indices" }),
     },
 });
 
@@ -361,6 +362,28 @@ export async function fetchConfidants(): Promise<Confidant[]> {
     return response.data.data.map((it) => sanitise(it.attributes));
 }
 
+export async function fetchWorkgroupsPage(): Promise<WorkgroupPageContent> {
+    const response = await backend.get<StrapiResponse<WorkgroupPageContent>>(
+        "/workgroups-page",
+        {
+            params: {
+                populate: {
+                    banner: {
+                        fields: ["url"],
+                    },
+                },
+            },
+        }
+    );
+
+    function sanitise(content: any) {
+        content.banner = content.banner.data.attributes.url;
+        return content;
+    }
+
+    return sanitise(response.data.data.attributes);
+}
+
 export async function fetchWorkgroups(): Promise<Workgroup[]> {
     const response = await backend.get<StrapiListResponse<Workgroup>>("/workgroups", {
         params: {
@@ -369,7 +392,6 @@ export async function fetchWorkgroups(): Promise<Workgroup[]> {
     });
 
     function sanitise(confidant: any): Workgroup {
-        // confidant.photo = confidant.photo.data?.attributes?.url ?? null;
         return confidant;
     }
 

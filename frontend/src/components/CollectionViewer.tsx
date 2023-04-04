@@ -1,5 +1,5 @@
 import { StrapiPagination } from "../models/strapi";
-import { ReactNode, useCallback } from "react";
+import { ReactNode, useCallback, useMemo } from "react";
 import { FaEllipsisH } from "react-icons/fa";
 
 interface Props {
@@ -11,11 +11,45 @@ interface Props {
 
 const navigationRange = 3;
 
-export default function CollectionViewer(props: Props) {
-    const pagination = props.pagination;
+export default function CollectionViewer({
+    pagination,
+    pageItems,
+    children,
+    onChangePage,
+}: Props) {
+    const paginationControls = useMemo(
+        () => (
+            <PaginationControls
+                pagination={pagination}
+                pageItems={pageItems}
+                onChangePage={onChangePage}
+            />
+        ),
+        [pagination, pageItems, onChangePage]
+    );
 
+    return (
+        <>
+            {paginationControls}
+            <div className="my-6">{children}</div>
+            {pageItems > 0 && paginationControls}
+        </>
+    );
+}
+
+interface PaginationControlsProps {
+    pagination: StrapiPagination;
+    pageItems: number;
+    onChangePage: (page: number) => void;
+}
+
+function PaginationControls({
+    pagination,
+    pageItems,
+    onChangePage,
+}: PaginationControlsProps) {
     const firstItemIndex = (pagination.page - 1) * pagination.pageSize;
-    const lastItemIndex = firstItemIndex + props.pageItems;
+    const lastItemIndex = firstItemIndex + pageItems;
 
     const leftPageIndex = Math.max(pagination.page - navigationRange, 1);
     const rightPageIndex = Math.min(
@@ -27,43 +61,37 @@ export default function CollectionViewer(props: Props) {
     );
 
     return (
-        <div>
-            <div className="flex justify-between">
-                <div className="text-faded">
-                    {props.pageItems === 0 ? (
-                        <p>Geen items</p>
-                    ) : (
-                        <p>
-                            Toont {firstItemIndex + 1} tot {lastItemIndex} van de{" "}
-                            {pagination.total}
-                        </p>
-                    )}
-                </div>
-                <div className="flex gap-2 items-end">
-                    {leftPageIndex !== 1 && (
-                        <PageButton page={1} onChangePage={props.onChangePage} />
-                    )}
-                    {leftPageIndex > 2 && <FaEllipsisH className="text-xs" />}
-                    {navigationPages.map((it) => (
-                        <PageButton
-                            key={it}
-                            onChangePage={props.onChangePage}
-                            page={it}
-                            active={it === pagination.page}
-                        />
-                    ))}
-                    {rightPageIndex < pagination.pageCount - 2 && (
-                        <FaEllipsisH className="text-xs" />
-                    )}
-                    {rightPageIndex !== pagination.pageCount && (
-                        <PageButton
-                            onChangePage={props.onChangePage}
-                            page={pagination.pageCount}
-                        />
-                    )}
-                </div>
+        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-2">
+            <div className="text-faded">
+                {pageItems === 0 ? (
+                    <p>Geen posts</p>
+                ) : (
+                    <p>
+                        Toont {firstItemIndex + 1} t/m {lastItemIndex} van de{" "}
+                        {pagination.total}
+                    </p>
+                )}
             </div>
-            {props.children}
+            <div className="flex gap-2 items-end">
+                {leftPageIndex !== 1 && (
+                    <PageButton page={1} onChangePage={onChangePage} />
+                )}
+                {leftPageIndex > 2 && <FaEllipsisH className="text-xs" />}
+                {navigationPages.map((it) => (
+                    <PageButton
+                        key={it}
+                        onChangePage={onChangePage}
+                        page={it}
+                        active={it === pagination.page}
+                    />
+                ))}
+                {rightPageIndex < pagination.pageCount - 2 && (
+                    <FaEllipsisH className="text-xs" />
+                )}
+                {rightPageIndex !== pagination.pageCount && (
+                    <PageButton onChangePage={onChangePage} page={pagination.pageCount} />
+                )}
+            </div>
         </div>
     );
 }

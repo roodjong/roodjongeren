@@ -1,33 +1,33 @@
 {
-  "kind": "singleType",
-  "collectionName": "homes",
-  "info": {
-    "singularName": "home",
-    "pluralName": "homes",
-    "displayName": "Home"
-  },
-  "options": {
-    "draftAndPublish": false
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "banner": {
-      "allowedTypes": ["images"],
-      "type": "media",
-      "multiple": false,
-      "required": true
+    "kind": "singleType",
+    "collectionName": "homes",
+    "info": {
+        "singularName": "home",
+        "pluralName": "homes",
+        "displayName": "Home"
     },
-    "bannerTitle": {
-      "type": "string",
-      "required": true
+    "options": {
+        "draftAndPublish": false
     },
-    "bannerSubtitle": {
-      "type": "string",
-      "required": true
-    },
-    "shortAboutUs": {
-      "type": "richtext",
-      "required": true
+    "pluginOptions": {},
+    "attributes": {
+        "banner": {
+            "allowedTypes": ["images"],
+            "type": "media",
+            "multiple": false,
+            "required": true
+        },
+        "bannerTitle": {
+            "type": "string",
+            "required": true
+        },
+        "bannerSubtitle": {
+            "type": "string",
+            "required": true
+        },
+        "shortAboutUs": {
+            "type": "richtext",
+            "required": true
+        }
     }
-  }
 }

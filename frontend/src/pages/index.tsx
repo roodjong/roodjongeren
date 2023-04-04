@@ -46,18 +46,22 @@ export default function HomePage(props: Props) {
                 <AboutUsShort content={content.shortAboutUs} />
                 <AfdelingenMap afdelingen={props.afdelingen} compact />
                 <div className="container flex sm:flex-row flex-col gap-8 mt-4">
-                    <div className="basis-2/3">
+                    <div className="basis-3/4">
                         <Subheader>Laatste nieuws</Subheader>
                         <EndlessPostsLoader
                             postType={PostType.NEWS}
+                            frontpageOnly
                             posts={props.latestNews}
+                            className="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-8"
                         />
                     </div>
-                    <div className="basis-1/3">
+                    <div className="basis-1/4">
                         <Subheader>Laatste inzendingen</Subheader>
                         <EndlessPostsLoader
                             postType={PostType.SUBMISSION}
+                            frontpageOnly
                             posts={props.latestSubmissions}
+                            className="mt-4 grid grid-cols-1 gap-x-4 gap-y-8"
                         />
                     </div>
                 </div>
@@ -70,8 +74,8 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
     const [homeContent, afdelingen, news, submissions] = await Promise.all([
         fetchHome(),
         fetchAfdelingen(),
-        fetchPosts(PostType.NEWS, null, null, 1, 6, true),
-        fetchPosts(PostType.SUBMISSION, null, null, 1, 6, true),
+        fetchPosts(PostType.NEWS, null, null, 1, 8, true),
+        fetchPosts(PostType.SUBMISSION, null, null, 1, 4, true),
     ]);
 
     return {

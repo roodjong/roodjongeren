@@ -1,7 +1,7 @@
 import { fetchJoinUs } from "../utils/backend";
 import Markdown from "../components/Markdown";
 import JoinUsContent from "../models/JoinUsContent";
-import { FaFistRaised } from "react-icons/fa";
+import { FaFistRaised, FaHandHoldingHeart } from "react-icons/fa";
 import Link from "next/link";
 import Banner from "../components/Banner";
 import Main from "../components/Main";
@@ -24,19 +24,21 @@ export default function JoinUsPage(props: Props) {
             <Banner title="Word lid" background={props.content.banner} compact />
             <Main className="container">
                 <Markdown content={props.content.content} />
-                <a
-                    className="button-primary inline-block text-3xl umami--click--word-lid"
-                    href="https://mijn.roodjongeren.nl/aanmelden"
-                >
-                    Inschrijven <FaFistRaised className="inline align-baseline ml-2" />
-                </a>
-                <p className="mt-4">
-                    <Link href="/steun-ons">
-                        <a className="text-primary underline">
-                            Te oud voor ROOD? Word steunlid!
-                        </a>
-                    </Link>
-                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                    <a
+                        className="button-primary inline-block text-3xl umami--click--word-lid"
+                        href="https://mijn.roodjongeren.nl/aanmelden"
+                    >
+                        Lid worden <FaFistRaised className="inline align-baseline ml-2" />
+                    </a>
+                    <a
+                        className="button-primary inline-block text-3xl umami--click--steunlid-worden"
+                        href="https://mijn.roodjongeren.nl/steunlid-worden"
+                    >
+                        Steunlid worden{" "}
+                        <FaHandHoldingHeart className="inline align-baseline ml-2" />
+                    </a>
+                </div>
             </Main>
         </div>
     );

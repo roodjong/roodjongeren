@@ -20,7 +20,11 @@ export default function Header(props: Props) {
     return (
         <ConditionalWrapper
             wrap={!props.externalLink}
-            wrapper={(children) => <Link href={props.href}>{children}</Link>}
+            wrapper={(children) => (
+                <Link href={props.href} legacyBehavior>
+                    {children}
+                </Link>
+            )}
         >
             <a
                 href={props.href}

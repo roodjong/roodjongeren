@@ -1,26 +1,26 @@
 {
-  "kind": "singleType",
-  "collectionName": "about_uses",
-  "info": {
-    "singularName": "about-us",
-    "pluralName": "about-uses",
-    "displayName": "Over ons",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": false
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "content": {
-      "type": "richtext",
-      "required": true
+    "kind": "singleType",
+    "collectionName": "about_uses",
+    "info": {
+        "singularName": "about-us",
+        "pluralName": "about-uses",
+        "displayName": "Over ons",
+        "description": ""
     },
-    "banner": {
-      "allowedTypes": ["images"],
-      "type": "media",
-      "multiple": false,
-      "required": true
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "content": {
+            "type": "richtext",
+            "required": true
+        },
+        "banner": {
+            "allowedTypes": ["images"],
+            "type": "media",
+            "multiple": false,
+            "required": true
+        }
     }
-  }
 }

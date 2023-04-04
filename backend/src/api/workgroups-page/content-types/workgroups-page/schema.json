@@ -1,10 +1,10 @@
 {
     "kind": "singleType",
-    "collectionName": "join_uses",
+    "collectionName": "workgroups_pages",
     "info": {
-        "singularName": "join-us",
-        "pluralName": "join-uses",
-        "displayName": "Word lid",
+        "singularName": "workgroups-page",
+        "pluralName": "workgroups-pages",
+        "displayName": "Werkgroepen-pagina",
         "description": ""
     },
     "options": {
@@ -12,15 +12,15 @@
     },
     "pluginOptions": {},
     "attributes": {
-        "content": {
-            "type": "richtext",
-            "required": true
-        },
         "banner": {
             "type": "media",
             "multiple": false,
             "required": true,
             "allowedTypes": ["images"]
+        },
+        "content": {
+            "type": "richtext",
+            "required": true
         }
     }
 }

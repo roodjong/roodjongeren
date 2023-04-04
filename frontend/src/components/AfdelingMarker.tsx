@@ -36,10 +36,11 @@ export default function AfdelingMarker(props: Props) {
                 >
                     {afdeling.email}
                 </a>
-                <Link href={`/afdelingen/${afdeling.slug}`}>
-                    <a className="button-primary block text-2xl !text-white w-full my-3 py-2">
-                        Lees meer
-                    </a>
+                <Link
+                    href={`/afdelingen/${afdeling.slug}`}
+                    className="button-primary block text-2xl !text-white w-full my-3 py-2"
+                >
+                    Lees meer
                 </Link>
                 <div className="flex text-base justify-end mt-2 gap-3">
                     <IconContext.Provider

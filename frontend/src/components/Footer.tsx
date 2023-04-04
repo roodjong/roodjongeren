@@ -14,29 +14,33 @@ export default function Footer() {
     return (
         <footer className="bg-primary text-white">
             <div className="container flex flex-col py-12 sm:flex-row gap-8 sm:gap-4 items-center text-center sm:text-left justify-between">
-                <div>
-                    <Image
-                        src="/images/rood-logo-white.svg"
-                        width="128px"
-                        height="128px"
-                        alt="Logo ROOD"
-                    />
-                </div>
+                <Image
+                    src="/images/rood-logo-white.svg"
+                    width="128"
+                    height="128"
+                    alt="Logo ROOD"
+                />
                 <div className="flex flex-col gap-2">
+                    <a
+                        href="/backend/admin"
+                        className="hover:underline umami--click--footer-de-socialisten"
+                    >
+                        Admin
+                    </a>
+                    <Link href="/privacybeleid" className="hover:underline">
+                        Privacybeleid
+                    </Link>
+                    <a
+                        href="https://socialisten.org/"
+                        className="hover:underline umami--click--footer-de-socialisten"
+                    >
+                        De Socialisten
+                    </a>
                     <a
                         href="mailto:info@roodjongeren.nl"
                         className="hover:underline umami--click--footer-email"
                     >
                         info@roodjongeren.nl
-                    </a>
-                    <Link href="/privacybeleid">
-                        <a className="hover:underline">Privacybeleid</a>
-                    </Link>
-                    <a
-                        href="https://mijn.roodjongeren.nl"
-                        className="hover:underline umami--click--footer-mijnrood"
-                    >
-                        mijnROOD
                     </a>
                     <p>KVK: 24349986</p>
                     <a
@@ -62,13 +66,6 @@ export default function Footer() {
                             Twitter
                         </a>
                         <a
-                            href="https://www.facebook.com/ROODjongSP"
-                            className="hover:underline group umami--click--footer-facebook"
-                        >
-                            <FaFacebook />
-                            Facebook
-                        </a>
-                        <a
                             href="https://www.instagram.com/roodsocialistischejongeren"
                             className="hover:underline group umami--click--footer-instagram"
                         >
@@ -88,13 +85,6 @@ export default function Footer() {
                         >
                             <FaGithub />
                             GitHub
-                        </a>
-                        <a
-                            href="https://reddit.com/r/Poldersocialisme/"
-                            className="hover:underline group umami--click--footer-reddit"
-                        >
-                            <FaReddit />
-                            Reddit
                         </a>
                     </IconContext.Provider>
                 </div>

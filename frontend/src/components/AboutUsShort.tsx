@@ -22,15 +22,19 @@ export default function AboutUsShort(props: Props) {
                             }}
                         >
                             <div className="flex flex-col gap-8">
-                                <Link href="/word-lid">
-                                    <a className="button-primary text-3xl">
-                                        Word lid <FaFistRaised />
-                                    </a>
+                                <Link
+                                    href="/word-lid"
+                                    className="button-primary text-3xl"
+                                >
+                                    Word lid
+                                    <FaFistRaised />
                                 </Link>
-                                <Link href="/steun-ons">
-                                    <a className="button-primary text-3xl">
-                                        Steun ons <FaHandHoldingHeart />
-                                    </a>
+                                <Link
+                                    href="/word-lid#steun-ons"
+                                    className="button-primary text-3xl"
+                                >
+                                    Steun ons
+                                    <FaHandHoldingHeart />
                                 </Link>
                             </div>
                         </IconContext.Provider>

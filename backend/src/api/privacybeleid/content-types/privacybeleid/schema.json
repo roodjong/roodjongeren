@@ -1,20 +1,20 @@
 {
-  "kind": "singleType",
-  "collectionName": "privacybeleids",
-  "info": {
-    "singularName": "privacybeleid",
-    "pluralName": "privacybeleids",
-    "displayName": "Privacybeleid",
-    "description": ""
-  },
-  "options": {
-    "draftAndPublish": false
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "content": {
-      "type": "richtext",
-      "required": true
+    "kind": "singleType",
+    "collectionName": "privacybeleids",
+    "info": {
+        "singularName": "privacybeleid",
+        "pluralName": "privacybeleids",
+        "displayName": "Privacybeleid",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "content": {
+            "type": "richtext",
+            "required": true
+        }
     }
-  }
 }
