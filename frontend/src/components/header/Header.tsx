@@ -76,7 +76,7 @@ export default function Header() {
                     <HeaderLink href="/posts">Posts</HeaderLink>
                     <HeaderLink href="/word-lid">Word lid</HeaderLink>
                     <HeaderLink
-                        href="https://derodelap.nl/"
+                        href="https://shop.roodjongeren.nl/"
                         externalLink
                         className="umami--click--header-shop"
                     >
