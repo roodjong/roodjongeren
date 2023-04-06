@@ -21,7 +21,7 @@ The application consists of:
 First, start Postgres and Nginx using Docker Compose. Go to the root directory and run:
 
 ```bash
-docker-compose -f docker/roodjongeren_dev/docker-compose.yml up -d
+docker compose -f docker/roodjongeren_dev/docker-compose.yml up -d
 ```
 
 Then start the Strapi backend. Go to `/backend` and run:
