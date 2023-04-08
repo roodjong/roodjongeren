@@ -18,6 +18,7 @@ export default function ConfidantCard(props: Props) {
                 <Image
                     src={confidant.photo}
                     fill
+                    sizes="20rem"
                     className="object-cover"
                     loader={imageLoader}
                     alt={`Foto van ${confidant.name}`}
