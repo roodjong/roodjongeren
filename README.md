@@ -84,13 +84,13 @@ Pull the latest changes from GitHub via `sudo git pull`.
 
 Afterwards `cd ..` back into the folder with your docker compose file and
 run `sudo docker compose build [service] [--no-cache]` to create new docker images.
-Deploy them with `sudo docker compose up`.
+Deploy them with `sudo docker compose up -d`.
 
 ### Backing Up
 
 You can back up the database and Strapi assets using `import.sh` on the production instance.
 This will export all data to a compressed file named `roodjongeren-export.tar.gz`.
-You can use `strapi import` to import the back up locally.
+You can use `yarn strapi import` to import the back up locally.
 
 ### Configuring SSL
 
