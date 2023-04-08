@@ -1,6 +1,7 @@
 import joinPaths from "../utils/paths";
 import Head from "next/head";
 import { PostDetail } from "../models/Post";
+import RemoveMarkdown from "remove-markdown";
 
 const DESCRIPTION_LENGTH = 160;
 
@@ -9,7 +10,7 @@ interface Props {
 }
 
 export default function HeadArticle({ post }: Props) {
-    let description = post.content.slice(
+    let description = RemoveMarkdown(post.content).slice(
         0,
         Math.min(DESCRIPTION_LENGTH, post.content.length)
     );
