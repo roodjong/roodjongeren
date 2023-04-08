@@ -84,27 +84,13 @@ Pull the latest changes from GitHub via `sudo git pull`.
 
 Afterwards `cd ..` back into the folder with your docker compose file and
 run `sudo docker compose build [service] [--no-cache]` to create new docker images.
-Deploy them with `sudo docker compose up`.
+Deploy them with `sudo docker compose up -d`.
 
-### Backing Up & Restoring Database
+### Backing Up
 
-You can back up a database from the host machine using the following command:
-
-```bash
-docker exec -t rood_postgres pg_dump -c -U rood rood > dump_rood.sql
-```
-
-To restore the backup of the database into a running Postgres container, use the following:
-
-```bash
-cat dump_rood.sql | docker exec -i rood_postgres psql -U rood -d rood
-```
-
-To back up images and files uploaded to Strapi, you can run `docker cp` in the instance:
-
-```bash
-sudo docker cp rood_strapi:/usr/src/app/public/uploads/ uploads_backup/
-```
+You can back up the database and Strapi assets using `import.sh` on the production instance.
+This will export all data to a compressed file named `roodjongeren-export.tar.gz`.
+You can use `yarn strapi import` to import the back up locally.
 
 ### Configuring SSL
 

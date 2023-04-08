@@ -74,8 +74,8 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<Props>> {
     const [homeContent, afdelingen, news, submissions] = await Promise.all([
         fetchHome(),
         fetchAfdelingen(),
-        fetchPosts(PostType.NEWS, null, null, 1, 8, true),
-        fetchPosts(PostType.SUBMISSION, null, null, 1, 4, true),
+        fetchPosts(PostType.NEWS, null, null, 1, 9, true),
+        fetchPosts(PostType.SUBMISSION, null, null, 1, 3, true),
     ]);
 
     return {

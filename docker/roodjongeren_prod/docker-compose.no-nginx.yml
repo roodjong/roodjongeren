@@ -47,7 +47,7 @@ services:
     build: ./roodjongeren/frontend
     restart: unless-stopped
     environment:
-      - BACKEND_URL=http://strapi:1337
+      - BACKEND_URL=$STRAPI_URL
       - NEXT_PUBLIC_BACKEND_URL=/backend
     depends_on:
       - strapi

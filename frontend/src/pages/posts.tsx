@@ -52,8 +52,6 @@ export default function PostsPage(props: Props) {
         }
     }, [searchString, page, props]);
 
-    console.log(posts);
-
     return (
         <div>
             <HeadPage

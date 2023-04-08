@@ -35,6 +35,7 @@ export default function PostItem(props: Props) {
                         src={post.banner}
                         alt=""
                         fill
+                        sizes="10rem"
                         className="object-cover"
                     />
                 ) : (
@@ -42,6 +43,7 @@ export default function PostItem(props: Props) {
                         src="/images/rood-logo.svg"
                         alt=""
                         fill
+                        sizes="10rem"
                         className="object-contain opacity-10"
                     />
                 )}

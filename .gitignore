@@ -1,4 +1,5 @@
 .idea/
 docker/roodjongeren_prod/.env.prod
 dump_rood*.sql
+roodjongeren-export*
 node_modules/

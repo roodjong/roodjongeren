@@ -1,4 +1,4 @@
-FROM arm64v8/node:19.8-alpine AS dependencies
+FROM arm64v8/node:16.14-alpine AS dependencies
 
 ENV NODE_ENV=production
 
