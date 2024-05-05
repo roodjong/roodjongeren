@@ -8,11 +8,12 @@ module.exports = ({ env }) => ({
             provider: "nodemailer",
             providerOptions: {
                 host: env("SMTP_HOST", "mail.zxcs.nl"),
-                port: env("SMTP_PORT", 465),
+                port: env("SMTP_PORT", 587),
                 auth: {
                     user: env("SMTP_USERNAME"),
                     pass: env("SMTP_PASSWORD"),
                 },
+                secure: env("SMTP_TLS", "1") != "0",
             },
             settings: {
                 defaultFrom: "noreply-website@roodjongeren.nl",
