@@ -235,7 +235,7 @@ export default function PetitionCard(props: Props) {
                     </p>
                 )}
                 <div>
-                    <label htmlFor={nameId}>Naam:</label>
+                    <label htmlFor={nameId}>Volledige naam:</label>
                 </div>
                 <div>
                     <input
