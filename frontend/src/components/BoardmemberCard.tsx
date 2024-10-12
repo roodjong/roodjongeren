@@ -15,14 +15,16 @@ export default function BoardmemberCard(props: Props) {
     return (
         <div className="flex flex-col md:flex-row gap-8 mb-8 shadow-inner bg-gray-50 p-4 rounded">
             <div className="float-right relative md:min-w-[10rem] h-[10rem] rounded shadow-lg overflow-hidden">
-                <Image
-                    src={boardmember.photo}
-                    fill
-                    sizes="10rem"
-                    className="object-cover"
-                    loader={imageLoader}
-                    alt={`Foto van ${boardmember.name}`}
-                />
+                {boardmember.photo && (
+                    <Image
+                        src={boardmember.photo}
+                        fill
+                        sizes="10rem"
+                        className="object-cover"
+                        loader={imageLoader}
+                        alt={`Foto van ${boardmember.name}`}
+                    />
+                )}
             </div>
             <div>
                 <Subheader>{boardmember.name}</Subheader>
@@ -39,7 +41,7 @@ export default function BoardmemberCard(props: Props) {
                                 className="group hover:underline"
                                 href={`mailto:${boardmember.email}`}
                             >
-                                <FaEnvelope />
+                                {boardmember.email && <FaEnvelope />}
                                 {boardmember.email}
                             </a>
                         </p>

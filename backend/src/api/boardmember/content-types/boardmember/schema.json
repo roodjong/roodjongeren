@@ -18,11 +18,11 @@
         },
         "role": {
             "type": "string",
-            "required": true
+            "required": false
         },
         "email": {
             "type": "email",
-            "required": true
+            "required": false
         },
         "extra": {
             "type": "richtext"
@@ -30,7 +30,7 @@
         "photo": {
             "type": "media",
             "multiple": false,
-            "required": true,
+            "required": false,
             "allowedTypes": ["images"]
         },
         "order": {
