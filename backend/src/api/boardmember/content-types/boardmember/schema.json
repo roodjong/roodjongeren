@@ -1,0 +1,42 @@
+{
+    "kind": "collectionType",
+    "collectionName": "boardmembers",
+    "info": {
+        "singularName": "boardmember",
+        "pluralName": "boardmembers",
+        "displayName": "Bestuurslid",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "name": {
+            "type": "string",
+            "required": true
+        },
+        "role": {
+            "type": "string",
+            "required": true
+        },
+        "email": {
+            "type": "email",
+            "required": true
+        },
+        "extra": {
+            "type": "richtext"
+        },
+        "photo": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": ["images"]
+        },
+        "order": {
+            "type": "integer",
+            "required": true,
+            "default": 10
+        }
+    }
+}
