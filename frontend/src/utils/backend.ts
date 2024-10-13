@@ -17,6 +17,7 @@ import ProgramContent from "../models/ProgramContent";
 import Fallback from "../models/Fallback";
 import { PetitionDetail } from "../models/Petition";
 import WorkgroupPageContent from "../models/WorkgroupPageContent";
+import { Boardmember } from "../models/Boardmember";
 
 export const backendBaseUrl =
     process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "";
@@ -82,6 +83,26 @@ export async function fetchAboutUs(): Promise<AboutUsContent> {
     }
 
     return sanitise(response.data.data.attributes);
+}
+
+export async function fetchBoardmembers(): Promise<Boardmember[]> {
+    const response = await backend.get<StrapiListResponse<Boardmember>>("/boardmembers", {
+        params: {
+            sort: "order",
+            populate: {
+                photo: {
+                    fields: ["url"],
+                },
+            },
+        },
+    });
+
+    function sanitise(boardmember: any): Boardmember {
+        boardmember.photo = boardmember.photo.data?.attributes?.url ?? null;
+        return boardmember;
+    }
+
+    return response.data.data.map((it) => sanitise(it.attributes));
 }
 
 export async function fetchProgram(): Promise<ProgramContent> {
