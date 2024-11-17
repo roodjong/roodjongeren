@@ -34,6 +34,7 @@ services:
       - umami_postgres_volume:/var/lib/postgresql/data
   umami:
     container_name: umami
+    image: ghcr.io/umami-software/umami:postgresql-latest
     build:
       context: ../umami
       args:
