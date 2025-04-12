@@ -82,7 +82,9 @@ export default function Header() {
                     >
                         Shop
                     </HeaderLink>
-                    <HeaderLink href="https://navoneedankje.nl">Anti-NAVO-Campagne</HeaderLink>
+                    <HeaderLink href="https://navoneedankje.nl">
+                        Anti-NAVO-Campagne
+                    </HeaderLink>
                     <HeaderLink
                         href="https://mijn.roodjongeren.nl"
                         externalLink
