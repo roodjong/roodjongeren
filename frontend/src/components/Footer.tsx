@@ -31,7 +31,7 @@ export default function Footer() {
                         Privacybeleid
                     </Link>
                     <a
-                        href="https://socialisten.org/"
+                        href="https://rsp.nu/"
                         className="hover:underline umami--click--footer-de-socialisten"
                     >
                         De Revolutionair Socialistische Partij
