@@ -31,10 +31,10 @@ export default function Footer() {
                         Privacybeleid
                     </Link>
                     <a
-                        href="https://socialisten.org/"
+                        href="https://rsp.nu/"
                         className="hover:underline umami--click--footer-de-socialisten"
                     >
-                        De Socialisten
+                        De Revolutionair Socialistische Partij
                     </a>
                     <a
                         href="mailto:info@roodjongeren.nl"
