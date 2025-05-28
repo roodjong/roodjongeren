@@ -49,3 +49,7 @@
 html {
     @apply scroll-smooth scroll-pt-[64px];
 }
+
+.leaflet-control-attribution .leaflet-attribution-flag {
+    display: none !important;
+}
