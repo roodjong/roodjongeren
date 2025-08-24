@@ -11,14 +11,17 @@
         "strapi": "strapi",
         "import-backup": "strapi import --file ../roodjongeren-export.tar.gz"
     },
-    "devDependencies": {},
     "dependencies": {
-        "@strapi/plugin-i18n": "4.9.0",
-        "@strapi/plugin-users-permissions": "4.9.0",
-        "@strapi/provider-email-nodemailer": "^4.9.0",
-        "@strapi/strapi": "4.9.0",
+        "@strapi/plugin-i18n": "4.25.13",
+        "@strapi/plugin-users-permissions": "4.25.13",
+        "@strapi/provider-email-nodemailer": "^4.25.13",
+        "@strapi/strapi": "4.25.13",
         "crypto-random-string": "^5.0.0",
-        "pg": "^8.10.0"
+        "pg": "^8.10.0",
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1",
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.2.1"
     },
     "author": {
         "name": "Jordi van Os"
@@ -27,7 +30,7 @@
         "uuid": "e7e79fab-5830-48d6-a35f-c4e1440e1955"
     },
     "engines": {
-        "node": ">=12.x.x <=19.x.x",
+        "node": ">=12.x.x <=20.x.x",
         "npm": ">=6.0.0"
     },
     "license": "MIT"
