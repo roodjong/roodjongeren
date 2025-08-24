@@ -7,6 +7,7 @@ import {
     FaReddit,
     FaTiktok,
     FaTwitter,
+    FaMastodon,
 } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
@@ -59,11 +60,19 @@ export default function Footer() {
                         }}
                     >
                         <a
+                            rel="me"
+                            href="https://mastodon.nl/@roodsocialistischejongeren"
+                            className="hover:underline group umami--click--footer-mastodon"
+                        >
+                            <FaMastodon />
+                            Mastodon
+                        </a>
+                        <a
                             href="https://twitter.com/ROODjong"
                             className="hover:underline group umami--click--footer-twitter"
                         >
                             <FaTwitter />
-                            Twitter
+                            <span className="line-through">Twitter</span>
                         </a>
                         <a
                             href="https://www.instagram.com/roodsocialistischejongeren"
