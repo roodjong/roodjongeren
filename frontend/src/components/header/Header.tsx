@@ -15,7 +15,7 @@ export default function Header() {
     useEffect(() => {
         const handleScroll = () =>
             setHasScrolled((prevState) =>
-                prevState ? window.scrollY > 0 : window.scrollY > 50
+                prevState ? window.scrollY > 0 : window.scrollY > 50,
             );
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
@@ -82,9 +82,7 @@ export default function Header() {
                     >
                         Shop
                     </HeaderLink>
-                    <HeaderLink href="https://navoneedankje.nl">
-                        Anti-NAVO-Campagne
-                    </HeaderLink>
+                    <HeaderLink href="https://rsp.nu">RSP</HeaderLink>
                     <HeaderLink
                         href="https://mijn.roodjongeren.nl"
                         externalLink
