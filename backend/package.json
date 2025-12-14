@@ -15,7 +15,7 @@
         "@strapi/plugin-i18n": "4.26.0",
         "@strapi/plugin-users-permissions": "4.26.0",
         "@strapi/provider-email-nodemailer": "4.26.0",
-        "@strapi/strapi": "4.26.0",
+        "@strapi/strapi": "5.24.2",
         "@babel/core": "^7.0.0",
         "@babel/runtime": "^7.11.0",
         "@codemirror/state": "^6.0.0",
