@@ -12,16 +12,28 @@
         "import-backup": "strapi import --file ../roodjongeren-export.tar.gz"
     },
     "dependencies": {
-        "@strapi/plugin-i18n": "4.25.23",
-        "@strapi/plugin-users-permissions": "4.25.23",
-        "@strapi/provider-email-nodemailer": "^4.25.23",
-        "@strapi/strapi": "4.25.23",
+        "@strapi/plugin-i18n": "4.26.0",
+        "@strapi/plugin-users-permissions": "4.26.0",
+        "@strapi/provider-email-nodemailer": "4.26.0",
+        "@strapi/strapi": "4.26.0",
+        "@babel/core": "^7.0.0",
+        "@babel/runtime": "^7.11.0",
+        "@codemirror/state": "^6.0.0",
+        "@codemirror/theme-one-dark": "^6.0.0",
+        "@codemirror/view": "^6.0.0",
+        "codemirror": "^6.0.0",
+        "@codemirror/autocomplete": "^6.0.0",
+        "@codemirror/language": "^6.0.0",
+        "@codemirror/lint": "^6.0.0",
+        "@codemirror/search": "^6.0.0",
         "crypto-random-string": "^5.0.0",
         "pg": "^8.10.0",
         "react": "^18.0.0",
         "react-dom": "^18.0.0",
+        "react-is": "^18.0.0",
         "react-router-dom": "^5.2.0",
-        "styled-components": "^5.2.1"
+        "styled-components": "5.3.3",
+        "@types/react": "*"
     },
     "author": {
         "name": "Jordi van Os"
