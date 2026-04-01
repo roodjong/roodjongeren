@@ -11,7 +11,7 @@ services:
       - '5432:5432'
     volumes:
       - postgres_volume:/var/lib/postgresql/data
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:z
   nginx:
     container_name: rood_nginx
     image: nginx:1.21.6-alpine
@@ -20,7 +20,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro,z
     extra_hosts:
       - "host.docker.internal:host-gateway"
   mailcatcher:
