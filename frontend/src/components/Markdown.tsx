@@ -8,6 +8,7 @@ import {
 } from "react-markdown/lib/ast-to-react";
 import { FaQuoteLeft } from "react-icons/fa";
 import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 
 interface Props {
     content: string;
@@ -17,7 +18,7 @@ export default function Markdown(props: Props) {
     return (
         <div className="overflow-hidden">
             <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
+                remarkPlugins={[remarkGfm, remarkBreaks]}
                 includeElementIndex
                 components={{
                     h1: MarkdownHeader1,
