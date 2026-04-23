@@ -11,12 +11,10 @@ import JoinUsContent from "../models/JoinUsContent";
 import SupportUsContent from "../models/SupportUsContent";
 import { Confidant } from "../models/Confidant";
 import ConfidantsPageContent from "../models/ConfidantsPageContent";
-import { Workgroup } from "../models/Workgroup";
 import joinPaths from "./paths";
 import ProgramContent from "../models/ProgramContent";
 import Fallback from "../models/Fallback";
 import { PetitionDetail } from "../models/Petition";
-import WorkgroupPageContent from "../models/WorkgroupPageContent";
 import { Boardmember } from "../models/Boardmember";
 
 export const backendBaseUrl =
@@ -377,42 +375,6 @@ export async function fetchConfidants(): Promise<Confidant[]> {
 
     function sanitise(confidant: any): Confidant {
         confidant.photo = confidant.photo.data?.attributes?.url ?? null;
-        return confidant;
-    }
-
-    return response.data.data.map((it) => sanitise(it.attributes));
-}
-
-export async function fetchWorkgroupsPage(): Promise<WorkgroupPageContent> {
-    const response = await backend.get<StrapiResponse<WorkgroupPageContent>>(
-        "/workgroups-page",
-        {
-            params: {
-                populate: {
-                    banner: {
-                        fields: ["url"],
-                    },
-                },
-            },
-        }
-    );
-
-    function sanitise(content: any) {
-        content.banner = content.banner.data.attributes.url;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
-}
-
-export async function fetchWorkgroups(): Promise<Workgroup[]> {
-    const response = await backend.get<StrapiListResponse<Workgroup>>("/workgroups", {
-        params: {
-            sort: "name",
-        },
-    });
-
-    function sanitise(confidant: any): Workgroup {
         return confidant;
     }
 
