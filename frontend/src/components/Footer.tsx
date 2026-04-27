@@ -22,31 +22,22 @@ export default function Footer() {
                     alt="Logo ROOD"
                 />
                 <div className="flex flex-col gap-2">
-                    <a
-                        href="/backend/admin"
-                        className="hover:underline umami--click--footer-de-socialisten"
-                    >
+                    <a href="/backend/admin" className="hover:underline">
                         Admin
                     </a>
                     <Link href="/privacybeleid" className="hover:underline">
                         Privacybeleid
                     </Link>
-                    <a
-                        href="https://rsp.nu/"
-                        className="hover:underline umami--click--footer-de-socialisten"
-                    >
+                    <a href="https://rsp.nu/" className="hover:underline">
                         De Revolutionair Socialistische Partij
                     </a>
-                    <a
-                        href="mailto:info@roodjongeren.nl"
-                        className="hover:underline umami--click--footer-email"
-                    >
+                    <a href="mailto:info@roodjongeren.nl" className="hover:underline">
                         info@roodjongeren.nl
                     </a>
                     <p>KVK: 24349986</p>
                     <a
                         href="https://www.google.nl/maps/place/Gaffelstraat+61B,+3014+RC+Rotterdam"
-                        className="hover:underline umami--click--footer-adres"
+                        className="hover:underline"
                     >
                         <p>Gaffelstraat 61B</p>
                         <p>3014 RC Rotterdam</p>
@@ -62,35 +53,35 @@ export default function Footer() {
                         <a
                             rel="me"
                             href="https://mastodon.nl/@roodsocialistischejongeren"
-                            className="hover:underline group umami--click--footer-mastodon"
+                            className="hover:underline group"
                         >
                             <FaMastodon />
                             Mastodon
                         </a>
                         <a
                             href="https://twitter.com/ROODjong"
-                            className="hover:underline group umami--click--footer-twitter"
+                            className="hover:underline group"
                         >
                             <FaTwitter />
                             <span className="line-through">Twitter</span>
                         </a>
                         <a
                             href="https://www.instagram.com/roodsocialistischejongeren"
-                            className="hover:underline group umami--click--footer-instagram"
+                            className="hover:underline group"
                         >
                             <FaInstagram />
                             Instagram
                         </a>
                         <a
                             href="https://www.tiktok.com/@roodjong"
-                            className="hover:underline group umami--click--footer-tiktok"
+                            className="hover:underline group"
                         >
                             <FaTiktok />
                             Tiktok
                         </a>
                         <a
                             href="https://github.com/roodjong"
-                            className="hover:underline group umami--click--footer-github"
+                            className="hover:underline group"
                         >
                             <FaGithub />
                             GitHub

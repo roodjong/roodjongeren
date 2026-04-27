@@ -26,13 +26,13 @@ export default function JoinUsPage(props: Props) {
                 <Markdown content={props.content.content} />
                 <div className="flex flex-col sm:flex-row gap-4">
                     <a
-                        className="button-primary inline-block text-3xl umami--click--word-lid"
+                        className="button-primary inline-block text-3xl"
                         href="https://mijn.roodjongeren.nl/aanmelden"
                     >
                         Lid worden <FaFistRaised className="inline align-baseline ml-2" />
                     </a>
                     <a
-                        className="button-primary inline-block text-3xl umami--click--steunlid-worden"
+                        className="button-primary inline-block text-3xl"
                         href="https://mijn.roodjongeren.nl/steunlid-worden"
                     >
                         Steunlid worden{" "}

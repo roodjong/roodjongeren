@@ -75,19 +75,11 @@ export default function Header() {
                     </HeaderDropdown>
                     <HeaderLink href="/posts">Posts</HeaderLink>
                     <HeaderLink href="/word-lid">Word lid</HeaderLink>
-                    <HeaderLink
-                        href="https://shop.roodjongeren.nl/"
-                        externalLink
-                        className="umami--click--header-shop"
-                    >
+                    <HeaderLink href="https://shop.roodjongeren.nl/" externalLink>
                         Shop
                     </HeaderLink>
                     <HeaderLink href="https://rsp.nu">RSP</HeaderLink>
-                    <HeaderLink
-                        href="https://mijn.roodjongeren.nl"
-                        externalLink
-                        className="umami--click--header-inloggen"
-                    >
+                    <HeaderLink href="https://mijn.roodjongeren.nl" externalLink>
                         Inloggen
                     </HeaderLink>
                 </div>

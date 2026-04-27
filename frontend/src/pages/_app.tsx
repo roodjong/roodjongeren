@@ -10,12 +10,6 @@ export default function RoodJongerenApp({ Component, pageProps }: AppProps) {
             <Head>
                 <title>ROOD, Socialistische Jongeren</title>
             </Head>
-            <Script
-                async
-                defer
-                data-website-id="96e32064-8d01-434b-98ab-7a14c468669c"
-                src="/umami/stasi.js"
-            />
             <Component {...pageProps} />
         </Layout>
     );

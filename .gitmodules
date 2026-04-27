@@ -1,3 +1,0 @@
-[submodule "docker/umami"]
-	path = docker/umami
-	url = https://github.com/umami-software/umami.git
