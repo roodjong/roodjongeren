@@ -66,46 +66,10 @@ services:
       - strapi
     logging:
       driver: "local"
-  umami_postgres:
-    container_name: umami_postgres
-    image: postgres:14.1
-    restart: unless-stopped
-    environment:
-      - POSTGRES_USER=$UMAMI_DATABASE_USER
-      - POSTGRES_PASSWORD=$UMAMI_DATABASE_PASSWORD
-      - POSTGRES_DB=$UMAMI_DATABASE_NAME
-    volumes:
-      - umami_postgres_volume:/var/lib/postgresql/data
-    logging:
-      driver: "local"
-  umami:
-    container_name: umami
-    build:
-      context: ../umami
-      args:
-        - BASE_PATH=/umami
-        - DATABASE_TYPE=postgresql
-    restart: unless-stopped
-    depends_on:
-      - umami_postgres
-    networks:
-      - roodjongeren_network
-    environment:
-      - DATABASE_URL=postgresql://${UMAMI_DATABASE_USER}:${UMAMI_DATABASE_PASSWORD}@umami_postgres:5432/${UMAMI_DATABASE_NAME}
-      - BASE_PATH=/umami
-      # Allows us to change the name of the generated JS file
-      # A custom name reduces the chance of ad blockers preventing our analytics from working
-      - TRACKER_SCRIPT_NAME=stasi
-      - COLLECT_API_ENDPOINT=/stasi/knock
-    logging:
-      driver: "local"
 volumes:
   postgres_volume:
     name: rood_postgres_volume
     driver: local
   strapi_uploads_volume:
     name: rood_strapi_volume
-    driver: local
-  umami_postgres_volume:
-    name: umami_postgres_volume
     driver: local
