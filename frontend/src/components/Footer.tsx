@@ -29,7 +29,7 @@ export default function Footer() {
                         Privacybeleid
                     </Link>
                     <a href="https://rsp.nu/" className="hover:underline">
-                        De Revolutionair Socialistische Partij
+                        Revolutionair Socialistische Partij
                     </a>
                     <a href="mailto:info@roodjongeren.nl" className="hover:underline">
                         info@roodjongeren.nl
@@ -51,21 +51,6 @@ export default function Footer() {
                         }}
                     >
                         <a
-                            rel="me"
-                            href="https://mastodon.nl/@roodsocialistischejongeren"
-                            className="hover:underline group"
-                        >
-                            <FaMastodon />
-                            Mastodon
-                        </a>
-                        <a
-                            href="https://twitter.com/ROODjong"
-                            className="hover:underline group"
-                        >
-                            <FaTwitter />
-                            <span className="line-through">Twitter</span>
-                        </a>
-                        <a
                             href="https://www.instagram.com/roodsocialistischejongeren"
                             className="hover:underline group"
                         >
@@ -78,6 +63,14 @@ export default function Footer() {
                         >
                             <FaTiktok />
                             Tiktok
+                        </a>
+                        <a
+                            rel="me"
+                            href="https://mastodon.nl/@roodsocialistischejongeren"
+                            className="hover:underline group"
+                        >
+                            <FaMastodon />
+                            Mastodon
                         </a>
                         <a
                             href="https://github.com/roodjong"
