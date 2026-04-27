@@ -37,6 +37,6 @@
         "typescript": "5.9.2"
     },
     "devDependencies": {
-        "postcss": "^8.4.21"
+        "postcss": "^8.5.10"
     }
 }
