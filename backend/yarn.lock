@@ -179,10 +179,10 @@
   dependencies:
     "@ucast/mongo2js" "^1.3.0"
 
-"@codemirror/autocomplete@^6.0.0":
-  version "6.20.1"
-  resolved "https://registry.yarnpkg.com/@codemirror/autocomplete/-/autocomplete-6.20.1.tgz#4cfbc8b2e1e25f890ec34a081037e58b4e44143e"
-  integrity sha512-1cvg3Vz1dSSToCNlJfRA2WSI4ht3K+WplO0UMOgmUYPivCyy2oueZY6Lx7M9wThm7SDUBViRmuT+OG/i8+ON9A==
+"@codemirror/autocomplete@^6.0.0", "@codemirror/autocomplete@^6.20.2":
+  version "6.20.2"
+  resolved "https://registry.yarnpkg.com/@codemirror/autocomplete/-/autocomplete-6.20.2.tgz#36200d33f3e403ef4f76cf67b4cc7ec560e61c7b"
+  integrity sha512-G5FPkgIiLjOgZMjqVjvuKQ1rGPtHogLldJr33eFJdVLtmwY+giGrlv/ewljLz6b9BSQLkjxuwBc6g6omDM+YxQ==
   dependencies:
     "@codemirror/language" "^6.0.0"
     "@codemirror/state" "^6.0.0"
