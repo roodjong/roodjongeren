@@ -106,6 +106,28 @@ For local development, add a `license.txt` file to `backend/`. Place the Strapi 
 
 For production instances, assign the license to the `STRAPI_LICENSE` key in your deployed .env file.
 
+## Strapi 4 → 5 migration
+
+`scripts/smoke-test.sh` records JSON snapshots of every public `/api/*`
+endpoint we consume. Run it once before the upgrade (against Strapi 4) and
+once after (against Strapi 5 with the v4 response-shape shim enabled) and
+`diff` the snapshot directories. An empty diff means the shim is producing
+v4-compatible responses; any divergence is a regression to fix before
+merging the upgrade. Requires `jq` and `curl`.
+
+```bash
+# Baseline on main (Strapi 4)
+scripts/smoke-test.sh snapshots/v4 http://localhost/backend
+
+# After checking out the Strapi 5 upgrade branch
+scripts/smoke-test.sh snapshots/v5 http://localhost/backend
+
+diff -ruN snapshots/v4 snapshots/v5
+```
+
+Fixture slugs (a real afdeling and post) are read from `AFDELING_SLUG` and
+`POST_SLUG` env vars; defaults are in the script header.
+
 ## Planned improvements
 
 - Add a WYSIWYG editor

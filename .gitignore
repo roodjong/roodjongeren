@@ -5,3 +5,4 @@ roodjongeren-export*
 node_modules/
 backend/.strapi
 backend/types
+snapshots/
