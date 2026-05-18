@@ -8,7 +8,7 @@ services:
       - POSTGRES_PASSWORD=$DATABASE_PASSWORD
       - POSTGRES_DB=$DATABASE_NAME
     ports:
-      - '5432:5432'
+      - '${POSTGRES_HOST_PORT:-5432}:5432'
     volumes:
       - postgres_volume:/var/lib/postgresql/data
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
@@ -18,7 +18,7 @@ services:
     environment:
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
     ports:
-      - "80:80"
+      - '${NGINX_HOST_PORT:-80}:80'
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
     extra_hosts:
@@ -27,8 +27,8 @@ services:
     container_name: rood_mailcatcher
     image: sj26/mailcatcher:v0.8.1
     ports:
-      - "1025:1025"
-      - "1080:1080"
+      - '${MAILCATCHER_SMTP_HOST_PORT:-1025}:1025'
+      - '${MAILCATCHER_WEB_HOST_PORT:-1080}:1080'
 volumes:
   postgres_volume:
     name: rood_postgres_volume
