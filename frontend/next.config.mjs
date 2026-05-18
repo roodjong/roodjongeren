@@ -292,11 +292,58 @@ const postsToRedirect = [
     "voorwaarts-naar-een-vrije-dag-van-de-arbeid",
 ];
 
+const csp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob: https://*.openstreetmap.org https://roodjongeren.nl https://*.roodjongeren.nl",
+    "font-src 'self' data:",
+    "connect-src 'self' https://roodjongeren.nl https://*.roodjongeren.nl",
+    "frame-ancestors 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+].join("; ");
+
+const securityHeaders = [
+    {
+        key: "Content-Security-Policy-Report-Only",
+        value: csp,
+    },
+    {
+        key: "Strict-Transport-Security",
+        value: "max-age=63072000; includeSubDomains; preload",
+    },
+    {
+        key: "X-Content-Type-Options",
+        value: "nosniff",
+    },
+    {
+        key: "Referrer-Policy",
+        value: "strict-origin-when-cross-origin",
+    },
+    {
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=(), payment=()",
+    },
+    {
+        key: "X-Frame-Options",
+        value: "DENY",
+    },
+];
+
 export default withTM({
     reactStrictMode: true,
     // Pin the trace root to this directory. The repo root has a prettier-only
     // `yarn.lock` that confuses Next's workspace inference.
     outputFileTracingRoot: __dirname,
+    async headers() {
+        return [
+            {
+                source: "/:path*",
+                headers: securityHeaders,
+            },
+        ];
+    },
     async rewrites() {
         return [
             { source: "/nieuws", destination: "/actueel" },
