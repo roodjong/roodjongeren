@@ -43,8 +43,9 @@
         "uuid": "e7e79fab-5830-48d6-a35f-c4e1440e1955"
     },
     "engines": {
-        "node": ">=12.x.x <=20.x.x",
-        "npm": ">=6.0.0"
+        "node": ">=20.18 <21",
+        "npm": ">=10.0.0"
     },
+    "packageManager": "yarn@1.22.22",
     "license": "MIT"
 }
