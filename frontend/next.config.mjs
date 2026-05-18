@@ -3,6 +3,10 @@
 import transpile from "next-transpile-modules";
 import axios from "axios";
 import qs from "qs";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const withTM = transpile(["react-icons/fa", "react-icons/lib"]);
 
@@ -290,6 +294,9 @@ const postsToRedirect = [
 
 export default withTM({
     reactStrictMode: true,
+    // Pin the trace root to this directory. The repo root has a prettier-only
+    // `yarn.lock` that confuses Next's workspace inference.
+    outputFileTracingRoot: __dirname,
     async rewrites() {
         return [
             { source: "/nieuws", destination: "/actueel" },

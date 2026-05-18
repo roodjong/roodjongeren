@@ -18,6 +18,17 @@ import Fallback from "../models/Fallback";
 import { PetitionDetail } from "../models/Petition";
 import WorkgroupPageContent from "../models/WorkgroupPageContent";
 import { Boardmember } from "../models/Boardmember";
+import {
+    pickLargestMediaFormatUrl,
+    unwrapEntity,
+    unwrapFirstEntity,
+    unwrapList,
+    unwrapMediaFormats,
+    unwrapMediaUrl,
+    unwrapPagination,
+    unwrapRelation,
+    unwrapRelationWithId,
+} from "./strapi-response";
 
 export const backendBaseUrl =
     process.env.BACKEND_URL ?? process.env.NEXT_PUBLIC_BACKEND_URL ?? "";
@@ -40,10 +51,13 @@ export async function fetchFallback(): Promise<Fallback> {
         },
     });
 
-    const content = response.data.data.attributes;
-
+    const content = unwrapEntity(response);
     return {
-        pageBanner: content.pageBanner.data.attributes?.url ?? null,
+        // `pageBanner` is typed as `string` but is nullable at runtime when
+        // no fallback banner is set in Strapi. Fixing the type cascades into
+        // `Banner` and every page that reads `pageBanner`, so the cast stays
+        // until that wider cleanup happens.
+        pageBanner: unwrapMediaUrl(content.pageBanner) as string,
     };
 }
 
@@ -58,12 +72,9 @@ export async function fetchHome(): Promise<HomeContent> {
         },
     });
 
-    function sanitise(content: any) {
-        content.banner = content.banner.data?.attributes?.url ?? null;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
 }
 
 export async function fetchAboutUs(): Promise<AboutUsContent> {
@@ -77,12 +88,9 @@ export async function fetchAboutUs(): Promise<AboutUsContent> {
         },
     });
 
-    function sanitise(content: any) {
-        content.banner = content.banner.data.attributes.url;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
 }
 
 export async function fetchBoardmembers(): Promise<Boardmember[]> {
@@ -97,12 +105,10 @@ export async function fetchBoardmembers(): Promise<Boardmember[]> {
         },
     });
 
-    function sanitise(boardmember: any): Boardmember {
-        boardmember.photo = boardmember.photo.data?.attributes?.url ?? null;
+    return unwrapList<any>(response).map((boardmember) => {
+        boardmember.photo = unwrapMediaUrl(boardmember.photo);
         return boardmember;
-    }
-
-    return response.data.data.map((it) => sanitise(it.attributes));
+    });
 }
 
 export async function fetchProgram(): Promise<ProgramContent> {
@@ -116,12 +122,9 @@ export async function fetchProgram(): Promise<ProgramContent> {
         },
     });
 
-    function sanitise(content: any) {
-        content.banner = content.banner.data.attributes.url;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
 }
 
 export async function fetchJoinUs(): Promise<JoinUsContent> {
@@ -135,12 +138,9 @@ export async function fetchJoinUs(): Promise<JoinUsContent> {
         },
     });
 
-    function sanitise(content: any) {
-        content.banner = content.banner.data.attributes.url;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
 }
 
 export async function fetchSupportUs(): Promise<SupportUsContent> {
@@ -154,19 +154,16 @@ export async function fetchSupportUs(): Promise<SupportUsContent> {
         },
     });
 
-    function sanitise(content: any) {
-        content.banner = content.banner.data.attributes.url;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
 }
 
 export async function fetchPrivacybeleid(): Promise<PrivacybeleidContent> {
     const response = await backend.get<StrapiResponse<PrivacybeleidContent>>(
         "/privacybeleid"
     );
-    return response.data.data.attributes;
+    return unwrapEntity(response);
 }
 
 export async function fetchAfdelingen(): Promise<Afdeling[]> {
@@ -185,7 +182,7 @@ export async function fetchAfdelingen(): Promise<Afdeling[]> {
             ],
         },
     });
-    return response.data.data.map((it) => it.attributes);
+    return unwrapList(response);
 }
 
 export async function fetchAfdeling(slug: string): Promise<AfdelingDetail> {
@@ -202,12 +199,12 @@ export async function fetchAfdeling(slug: string): Promise<AfdelingDetail> {
         },
     });
 
-    function sanitise(afdeling: any): Afdeling {
-        afdeling.banner = afdeling.banner.data?.attributes?.url ?? null;
-        return afdeling;
+    const afdeling = unwrapFirstEntity<any>(response);
+    if (!afdeling) {
+        throw new Error(`Afdeling not found: ${slug}`);
     }
-
-    return sanitise(response.data.data[0].attributes);
+    afdeling.banner = unwrapMediaUrl(afdeling.banner);
+    return afdeling;
 }
 
 export async function fetchPostSlugs(): Promise<{
@@ -222,8 +219,8 @@ export async function fetchPostSlugs(): Promise<{
     });
 
     return {
-        slugs: response.data.data.map((it) => it.attributes.slug),
-        pagination: response.data.meta.pagination,
+        slugs: unwrapList(response).map((it) => it.slug),
+        pagination: unwrapPagination(response),
     };
 }
 
@@ -282,17 +279,15 @@ export async function fetchPosts(
         },
     });
 
-    function sanitise(post: any): Post {
-        post.afdeling = post.afdeling.data?.attributes ?? null;
-        const formats = post.banner.data?.attributes?.formats;
-        const format = formats?.large ?? formats?.small ?? formats?.thumbnail;
-        post.banner = format?.url ?? null;
+    const posts = unwrapList<any>(response).map((post): Post => {
+        post.afdeling = unwrapRelation(post.afdeling);
+        post.banner = pickLargestMediaFormatUrl(unwrapMediaFormats(post.banner));
         return post;
-    }
+    });
 
     return {
-        posts: response.data.data.map((it) => sanitise(it.attributes)),
-        pagination: response.data.meta.pagination,
+        posts,
+        pagination: unwrapPagination(response),
     };
 }
 
@@ -304,8 +299,7 @@ export async function fetchAuthors(): Promise<string[]> {
         },
     });
 
-    const uniqueAuthors = new Set(response.data.data.map((it) => it.attributes.author));
-
+    const uniqueAuthors = new Set(unwrapList(response).map((it) => it.author));
     return [...uniqueAuthors];
 }
 
@@ -329,16 +323,17 @@ export async function fetchPost(slug: string): Promise<PostDetail> {
         },
     });
 
-    async function sanitise(post: any) {
-        post.afdeling = post.afdeling.data?.attributes ?? null;
-        post.banner = post.banner.data?.attributes?.url ?? null;
-        if (post.petition && post.petition.data) {
-            post.petition = await fetchPetition(post.petition.data.id);
-        }
-        return post;
+    const post = unwrapFirstEntity<any>(response);
+    if (!post) {
+        throw new Error(`Post not found: ${slug}`);
     }
-
-    return sanitise(response.data.data[0].attributes);
+    post.afdeling = unwrapRelation(post.afdeling);
+    post.banner = unwrapMediaUrl(post.banner);
+    const petitionRef = unwrapRelationWithId<unknown>(post.petition);
+    if (petitionRef) {
+        post.petition = await fetchPetition(petitionRef.id);
+    }
+    return post;
 }
 
 export async function fetchConfidantsPage(): Promise<ConfidantsPageContent> {
@@ -355,12 +350,9 @@ export async function fetchConfidantsPage(): Promise<ConfidantsPageContent> {
         }
     );
 
-    function sanitise(content: any) {
-        content.banner = content.banner.data.attributes.url;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
 }
 
 export async function fetchConfidants(): Promise<Confidant[]> {
@@ -375,12 +367,10 @@ export async function fetchConfidants(): Promise<Confidant[]> {
         },
     });
 
-    function sanitise(confidant: any): Confidant {
-        confidant.photo = confidant.photo.data?.attributes?.url ?? null;
+    return unwrapList<any>(response).map((confidant) => {
+        confidant.photo = unwrapMediaUrl(confidant.photo);
         return confidant;
-    }
-
-    return response.data.data.map((it) => sanitise(it.attributes));
+    });
 }
 
 export async function fetchWorkgroupsPage(): Promise<WorkgroupPageContent> {
@@ -397,12 +387,9 @@ export async function fetchWorkgroupsPage(): Promise<WorkgroupPageContent> {
         }
     );
 
-    function sanitise(content: any) {
-        content.banner = content.banner.data.attributes.url;
-        return content;
-    }
-
-    return sanitise(response.data.data.attributes);
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
 }
 
 export async function fetchWorkgroups(): Promise<Workgroup[]> {
@@ -412,11 +399,7 @@ export async function fetchWorkgroups(): Promise<Workgroup[]> {
         },
     });
 
-    function sanitise(confidant: any): Workgroup {
-        return confidant;
-    }
-
-    return response.data.data.map((it) => sanitise(it.attributes));
+    return unwrapList(response);
 }
 
 export async function fetchPetitionSlugs(): Promise<{
@@ -434,8 +417,8 @@ export async function fetchPetitionSlugs(): Promise<{
     });
 
     return {
-        slugs: response.data.data.map((it) => it.attributes.slug),
-        pagination: response.data.meta.pagination,
+        slugs: unwrapList(response).map((it) => it.slug),
+        pagination: unwrapPagination(response),
     };
 }
 
