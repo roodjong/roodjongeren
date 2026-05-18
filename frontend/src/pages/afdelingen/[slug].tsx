@@ -116,9 +116,15 @@ export async function getStaticProps(
 ): Promise<GetStaticPropsResult<Props>> {
     const params = context.params as Params;
 
-    const [{ pageBanner }, afdeling, { posts }] = await Promise.all([
+    let afdeling: Afdeling;
+    try {
+        afdeling = await fetchAfdeling(params.slug);
+    } catch {
+        return { notFound: true, revalidate };
+    }
+
+    const [{ pageBanner }, { posts }] = await Promise.all([
         fetchFallback(),
-        fetchAfdeling(params.slug),
         fetchPosts(undefined, undefined, params.slug, 1, 8),
     ]);
 

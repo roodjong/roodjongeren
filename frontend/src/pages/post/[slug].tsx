@@ -61,10 +61,13 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 export async function getStaticProps(context: GetStaticPropsContext) {
     const params = context.params as Params;
 
-    const [post, { pageBanner }] = await Promise.all([
-        fetchPost(params.slug),
-        fetchFallback(),
-    ]);
+    let post: PostDetail;
+    try {
+        post = await fetchPost(params.slug);
+    } catch {
+        return { notFound: true, revalidate };
+    }
+    const { pageBanner } = await fetchFallback();
 
     return {
         props: { post, fallbackBanner: pageBanner },
