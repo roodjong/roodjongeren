@@ -9,7 +9,8 @@
         "build": "strapi build",
         "start-prod": "strapi build && strapi start",
         "strapi": "strapi",
-        "import-backup": "strapi import --file ../roodjongeren-export.tar.gz"
+        "import-backup": "strapi import --file ../roodjongeren-export.tar.gz",
+        "test": "node --test tests/*.test.js"
     },
     "dependencies": {
         "@babel/core": "^7.0.0",
