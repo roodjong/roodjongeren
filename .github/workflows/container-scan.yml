@@ -1,0 +1,65 @@
+name: Container scan
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        paths:
+            - "frontend/Dockerfile"
+            - "backend/Dockerfile"
+            - "frontend/package.json"
+            - "frontend/yarn.lock"
+            - "backend/package.json"
+            - "backend/yarn.lock"
+            - ".github/workflows/container-scan.yml"
+    schedule:
+        # Weekly so newly-published CVEs against pinned versions still surface.
+        - cron: "0 7 * * 1"
+
+# Findings go to the Security tab. Read-only otherwise.
+permissions:
+    contents: read
+    security-events: write
+
+jobs:
+    scan:
+        name: Trivy (${{ matrix.image }})
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                image: [frontend, backend]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@v3
+
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+
+            - name: Build image
+              # Dockerfiles pin arm64v8/node to match the prod arch. CI
+              # runners are amd64, so emulate via QEMU.
+              run: docker buildx build --platform linux/arm64 --load -t rood-${{ matrix.image }}:scan ./${{ matrix.image }}
+
+            - name: Run Trivy
+              uses: aquasecurity/trivy-action@v0.36.0
+              with:
+                  image-ref: rood-${{ matrix.image }}:scan
+                  format: sarif
+                  output: trivy-${{ matrix.image }}.sarif
+                  severity: HIGH,CRITICAL
+                  # Don't fail the build on findings yet. Switch to `exit-code: 1`
+                  # once the security tab is clean and we're committed to keeping
+                  # it that way.
+                  exit-code: "0"
+                  ignore-unfixed: true
+
+            - name: Upload SARIF to GitHub Security
+              uses: github/codeql-action/upload-sarif@v3
+              with:
+                  sarif_file: trivy-${{ matrix.image }}.sarif
+                  category: trivy-${{ matrix.image }}
