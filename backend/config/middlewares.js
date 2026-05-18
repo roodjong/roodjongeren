@@ -9,4 +9,8 @@ module.exports = [
     "strapi::session",
     "strapi::favicon",
     "strapi::public",
+    {
+        name: "global::strapi-v4-response-shape",
+        config: { enabled: false },
+    },
 ];
