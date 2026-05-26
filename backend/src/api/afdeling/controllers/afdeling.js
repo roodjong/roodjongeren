@@ -19,9 +19,8 @@ module.exports = createCoreController("api::afdeling.afdeling", ({ strapi }) => 
                     },
                 },
             });
-        const response = this.transformResponse(results, { pagination });
-        response.data.forEach(sanitiseContactpersonen);
-        return response;
+        results.forEach(sanitiseContactpersonen);
+        return { data: results, meta: { pagination } };
     },
 
     async findOne(ctx) {
@@ -36,20 +35,21 @@ module.exports = createCoreController("api::afdeling.afdeling", ({ strapi }) => 
                     },
                 },
             });
-        const response = this.transformResponse(result);
-        sanitiseContactpersonen(response.data);
-        return response;
+        if (result) sanitiseContactpersonen(result);
+        return { data: result, meta: {} };
     },
 }));
 
 function sanitiseContactpersonen(afdeling) {
-    afdeling.attributes.contactpersonen = afdeling.attributes.contactpersonen.data.map(
-        (it) => {
-            return {
-                firstname: it.attributes.firstname,
-                lastname: it.attributes.lastname,
-                phone: it.attributes.phone,
-            };
-        }
-    );
+    // In Strapi 5 the service returns relations inline as a flat array, not
+    // wrapped as `{ data: [...] }`. The v4-response-shape middleware
+    // re-wraps the response after this controller returns, so we strip down
+    // to plain fields here and let the middleware do the final envelope
+    // shaping.
+    const contactpersonen = afdeling.contactpersonen ?? [];
+    afdeling.contactpersonen = contactpersonen.map((it) => ({
+        firstname: it.firstname,
+        lastname: it.lastname,
+        phone: it.phone,
+    }));
 }
