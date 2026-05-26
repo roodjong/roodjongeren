@@ -56,7 +56,6 @@ ENDPOINTS=(
     "about-us|/api/about-us?populate[banner][fields][0]=url"
     "program|/api/program?populate[banner][fields][0]=url"
     "join-us|/api/join-us?populate[banner][fields][0]=url"
-    "support-us|/api/support-us?populate[banner][fields][0]=url"
     "privacybeleid|/api/privacybeleid"
     "confidants-page|/api/confidants-page?populate[banner][fields][0]=url"
     "workgroups-page|/api/workgroups-page?populate[banner][fields][0]=url"
@@ -116,7 +115,10 @@ snapshot() {
 
     printf '%-22s GET %s\n' "$name" "$url"
 
-    local curl_flags=(-sS -H "Accept: application/json")
+    # `-g` disables curl's URL-globbing so `[` and `]` (used in Strapi v4
+    # query syntax, e.g. `populate[banner][fields][0]=url`) are sent
+    # literally instead of being treated as a range expression.
+    local curl_flags=(-sS -g -H "Accept: application/json")
     if [[ $mode == "fail" ]]; then
         curl_flags+=(-f)
     fi
