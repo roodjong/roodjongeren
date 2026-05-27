@@ -52,7 +52,12 @@ export default function Banner(props: Props) {
 function ContentLink() {
     return (
         <div className="mt-12">
-            <a href="#main-content" className="inline-block group" tabIndex={-1}>
+            <a
+                href="#main-content"
+                className="inline-block group"
+                tabIndex={-1}
+                aria-label="Naar de inhoud"
+            >
                 <div className="flex mt-12 opacity-80 group-hover:opacity-100 transition-opacity">
                     <div className="h-[3px] w-14 bg-white transition-colors origin-right rotate-45" />
                     <div className="h-[3px] w-14 bg-white transition-colors origin-left -rotate-45" />

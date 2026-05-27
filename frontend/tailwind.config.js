@@ -13,7 +13,7 @@ module.exports = {
                 primary: "#C2000B",
                 secondary: "#111111",
                 regular: "#565656",
-                faded: "#9b9b9b",
+                faded: "#737373",
             },
             backgroundImage: {
                 banner: "url('/images/banner.webp')",
