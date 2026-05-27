@@ -1,0 +1,69 @@
+name: Backend
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        paths:
+            - "backend/**"
+            - ".github/workflows/backend.yml"
+
+jobs:
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: backend
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.18"
+                  cache: "yarn"
+                  cache-dependency-path: backend/yarn.lock
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run tests
+              run: yarn test
+
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: backend
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.18"
+                  cache: "yarn"
+                  cache-dependency-path: backend/yarn.lock
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Strapi build
+              run: yarn build
+              env:
+                  # Strapi build inspects env vars even when no DB connection
+                  # happens. Provide enough placeholders so it doesn't error.
+                  HOST: 0.0.0.0
+                  PORT: 1337
+                  APP_KEYS: ci-key-a,ci-key-b
+                  JWT_SECRET: ci-jwt-secret
+                  ADMIN_JWT_SECRET: ci-admin-jwt-secret
+                  API_TOKEN_SALT: ci-api-token-salt
+                  TRANSFER_TOKEN_SALT: ci-transfer-token-salt
+                  DATABASE_CLIENT: sqlite
+                  DATABASE_FILENAME: .tmp/build.db
