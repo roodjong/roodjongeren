@@ -5,6 +5,7 @@ import {
     SetStateAction,
     useCallback,
     useEffect,
+    useId,
     useState,
 } from "react";
 import { FaSpinner } from "react-icons/fa";
@@ -163,8 +164,8 @@ export default function PetitionCard(props: Props) {
         (petition.extraQuestions ?? []).map((q) => ({ value: "", ...q }))
     );
 
-    const nameId = "name-field"; // CHANGEME: update to useId in react 18
-    const emailId = "email-field"; // CHANGEME: update to useId in react 18
+    const nameId = useId();
+    const emailId = useId();
 
     const [nameInput, setNameInput] = useState("");
     const [emailInput, setEmailInput] = useState("");
@@ -239,8 +240,9 @@ export default function PetitionCard(props: Props) {
                 </div>
                 <div>
                     <input
-                        id={emailId}
+                        id={nameId}
                         type="text"
+                        autoComplete="name"
                         required
                         className="w-full h-8 rounded-md text-black p-2"
                         value={nameInput}
@@ -256,6 +258,7 @@ export default function PetitionCard(props: Props) {
                     <input
                         id={emailId}
                         type="email"
+                        autoComplete="email"
                         required
                         className="w-full h-8 rounded-md text-black p-2"
                         value={emailInput}
