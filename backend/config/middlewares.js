@@ -11,6 +11,6 @@ module.exports = [
     "strapi::public",
     {
         name: "global::strapi-v4-response-shape",
-        config: { enabled: false },
+        config: { enabled: true },
     },
 ];

@@ -15,9 +15,12 @@ module.exports = createCoreController(
                 ctx.throw(400, "Missing parameters");
                 return;
             }
+            // Frontend posts the petition's public id, which is the v5
+            // documentId (string) once the v4 response-shape shim exposes it
+            // as `id` to consumers.
             const petition = await strapi
-                .query("api::petition.petition")
-                .findOne({ where: { id: { $eq: petitionId } } });
+                .documents("api::petition.petition")
+                .findOne({ documentId: petitionId });
             if (!petition) {
                 ctx.throw(404, "Petition not found");
                 return;
@@ -34,21 +37,21 @@ module.exports = createCoreController(
                 return;
             }
 
-            const signatureCount = await strapi.entityService.count(
-                "api::petition-signature.petition-signature",
-                {
+            const signatureCount = await strapi
+                .documents("api::petition-signature.petition-signature")
+                .count({
                     filters: {
-                        petition: petitionId,
+                        petition: { documentId: petition.documentId },
                         email: { $eq: email },
                     },
-                }
-            );
+                });
 
             if (signatureCount > 1) {
-                await strapi.entityService.delete(
-                    "api::petition-signature.petition-signature",
-                    result.id
-                );
+                await strapi
+                    .documents("api::petition-signature.petition-signature")
+                    .delete({
+                        documentId: result.documentId,
+                    });
                 ctx.send({ existed: true });
                 return;
             }
@@ -68,24 +71,34 @@ module.exports = createCoreController(
                 return;
             }
 
-            const signature = await strapi.db
-                .query("api::petition-signature.petition-signature")
-                .findOne({
-                    where: { confirmationCode },
-                    populate: true,
+            const [signature] = await strapi
+                .documents("api::petition-signature.petition-signature")
+                .findMany({
+                    filters: { confirmationCode },
+                    populate: ["petition"],
+                    limit: 1,
                 });
             if (!signature) {
                 ctx.throw(404, "Deze code kon niet gevonden worden");
                 return;
             }
-            await strapi.entityService.update(
-                "api::petition-signature.petition-signature",
-                signature.id,
-                { data: { confirmed: true } }
-            );
-            const post = await strapi.db.query("api::post.post").findOne({
-                where: { petition: signature.petition.id },
+            await strapi.documents("api::petition-signature.petition-signature").update({
+                documentId: signature.documentId,
+                data: { confirmed: true },
             });
+            if (!signature.petition) {
+                // Orphaned signature — confirmation succeeded, but we cannot
+                // redirect anywhere meaningful. Send back to the homepage.
+                return ctx.redirect("/");
+            }
+            const [post] = await strapi.documents("api::post.post").findMany({
+                filters: { petition: { documentId: signature.petition.documentId } },
+                fields: ["slug"],
+                limit: 1,
+            });
+            if (!post) {
+                return ctx.redirect("/");
+            }
             ctx.redirect(`/petitie/${post.slug}#thanks`);
         },
     })

@@ -23,7 +23,10 @@ module.exports = createCoreService(
                 type: "alphanumeric",
             });
             return {
-                petition: petition.id,
+                // Strapi 5 documents API links relations by documentId, not
+                // the numeric id. Passing `petition.id` here would create an
+                // orphaned signature with no FK to the petition row.
+                petition: petition.documentId,
                 name: name,
                 email: email,
                 confirmationCode,
@@ -41,12 +44,15 @@ module.exports = createCoreService(
                 `/api/petition-signatures/confirm/${petitionSignature.confirmationCode}`
             );
 
-            await strapi.plugins["email"].services.email.send({
-                to: email,
-                subject: "Verifieer je email om deze petitie te ondertekenen",
-                text: `Ga naar deze link om je mail te verifieren: ${confirmUrl}`,
-                html: `Klik hier om je mail te verifieren: <a href="${confirmUrl}">Verifieer email</a>`,
-            });
+            await strapi
+                .plugin("email")
+                .service("email")
+                .send({
+                    to: email,
+                    subject: "Verifieer je email om deze petitie te ondertekenen",
+                    text: `Ga naar deze link om je mail te verifieren: ${confirmUrl}`,
+                    html: `Klik hier om je mail te verifieren: <a href="${confirmUrl}">Verifieer email</a>`,
+                });
         },
     })
 );
