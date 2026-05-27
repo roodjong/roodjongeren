@@ -31,6 +31,17 @@ module.exports = createCoreController("api::petition.petition", ({ strapi }) => 
                 },
             });
 
-        return { signatureCount: count, ...response };
+        // Mirror the v4-shim convention: expose `documentId` as the `id` field
+        // so the frontend's `petition.id` keeps working as the public
+        // identifier post-upgrade. Without this, the frontend posts the
+        // numeric internal id back to /petition-signatures, which then looks
+        // up by documentId and 404s.
+        const { id: _internalId, documentId: responseDocId, ...rest } = response;
+        return {
+            signatureCount: count,
+            id: responseDocId,
+            documentId: responseDocId,
+            ...rest,
+        };
     },
 }));
