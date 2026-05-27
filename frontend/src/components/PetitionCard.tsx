@@ -35,7 +35,10 @@ function ensureLocalStorage(): { [key: string]: boolean } {
         localStorage.setItem(SESSION_KEY, JSON.stringify({}));
         return {};
     }
-    return JSON.parse(data);
+    // ts-reset makes JSON.parse return `unknown`. The shape is whatever this
+    // function previously wrote via `JSON.stringify(data)`, so the cast is
+    // safe-ish; a stricter validator would be overkill for a localStorage cache.
+    return JSON.parse(data) as { [key: string]: boolean };
 }
 
 function savePetition(petition: PetitionDetail) {
