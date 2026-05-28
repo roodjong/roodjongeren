@@ -2659,14 +2659,14 @@
     qs "6.15.0"
     sift "16.0.1"
 
-"@strapi/plugin-users-permissions@5.46.0":
-  version "5.46.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-5.46.0.tgz#674f8ea805fbcdfd88307f35b33883c11cf40090"
-  integrity sha512-y0uFoPMKtrbnKazjJbwZF68YtglqEjgAouRa/1x+ONZ0Ar7/R5vHnCkb8OPKXq85sLtvtZFk7FbpIyUA9oyjTw==
+"@strapi/plugin-users-permissions@5.46.1":
+  version "5.46.1"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-5.46.1.tgz#8adf2c0f053738dd8fe38329227cb23aec8769e9"
+  integrity sha512-cRFNu9Q7FIRmF26i0JlphibD2XOcxZN4pPAtubycQ630HMacdlJVd4EMG+wfLQPo6YEwBFHkST0gNm1cSsAw6g==
   dependencies:
     "@strapi/design-system" "2.2.0"
     "@strapi/icons" "2.2.0"
-    "@strapi/utils" "5.46.0"
+    "@strapi/utils" "5.46.1"
     bcryptjs "2.4.3"
     formik "2.4.5"
     grant "5.4.24"
