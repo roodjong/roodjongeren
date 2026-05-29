@@ -25,6 +25,15 @@ export default function Header() {
         setMenuOpen(false);
     }, [router.pathname]);
 
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setMenuOpen(false);
+        };
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, [isMenuOpen]);
+
     return (
         <header className="fixed w-full top-0 z-[2000] shadow-[#0002] shadow-md bg-white overflow-y-auto md:overflow-visible">
             <SkipToContent />
@@ -44,18 +53,23 @@ export default function Header() {
                             />
                         </div>
                     </Link>
-                    <div
-                        className="lg:hidden text-2xl inline-block mr-4"
+                    <button
+                        type="button"
+                        className="lg:hidden text-2xl inline-block mr-4 focus-visible:outline-2 focus-visible:outline-primary"
                         onClick={() => setMenuOpen(!isMenuOpen)}
+                        aria-expanded={isMenuOpen}
+                        aria-controls="primary-navigation"
+                        aria-label={isMenuOpen ? "Sluit menu" : "Open menu"}
                     >
                         {isMenuOpen ? (
-                            <FaTimes className="inline-block" />
+                            <FaTimes className="inline-block" aria-hidden="true" />
                         ) : (
-                            <FaBars className="inline-block" />
+                            <FaBars className="inline-block" aria-hidden="true" />
                         )}
-                    </div>
+                    </button>
                 </div>
                 <div
+                    id="primary-navigation"
                     className={`grow flex flex-col lg:flex-row items-stretch duration-500 easy-in-out
                              lg:max-h-full ${
                                  isMenuOpen ? "max-h-screen" : "max-h-0 overflow-hidden"
