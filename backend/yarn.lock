@@ -2659,14 +2659,14 @@
     qs "6.15.0"
     sift "16.0.1"
 
-"@strapi/plugin-users-permissions@5.46.1":
-  version "5.46.1"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-5.46.1.tgz#8adf2c0f053738dd8fe38329227cb23aec8769e9"
-  integrity sha512-cRFNu9Q7FIRmF26i0JlphibD2XOcxZN4pPAtubycQ630HMacdlJVd4EMG+wfLQPo6YEwBFHkST0gNm1cSsAw6g==
+"@strapi/plugin-users-permissions@5.47.1":
+  version "5.47.1"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-5.47.1.tgz#aac159e06d2bc174a8b282be84b8c2689381b81f"
+  integrity sha512-k2jsctRRr+Ta1bkqUm3Dp3t7iXNsmD7VB/lRNbtqjHLkiFL8CnHQ1aoDrAI5nsq0LRtlNz2qeG4xUklWBWqIPQ==
   dependencies:
     "@strapi/design-system" "2.2.0"
     "@strapi/icons" "2.2.0"
-    "@strapi/utils" "5.46.1"
+    "@strapi/utils" "5.47.1"
     bcryptjs "2.4.3"
     formik "2.4.5"
     grant "5.4.24"
@@ -2889,10 +2889,10 @@
     yup "0.32.9"
     zod "3.25.67"
 
-"@strapi/utils@5.46.0":
-  version "5.46.0"
-  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.46.0.tgz#56138326434860494c3b3eebce395b3e50043f12"
-  integrity sha512-3Bt8cei+JDRc/Gp+YUuQ7ulpQJ48943eCnoJh7s25ttVkecKnU87ClX33dtSxGxgQkQBgpmiXXXBUupMdadNPA==
+"@strapi/utils@5.46.1":
+  version "5.46.1"
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.46.1.tgz#73144e803b809d72003f4ccf33615d266da3bc66"
+  integrity sha512-n3BSWgqXS+k5igl6+K4dYVVl6rLVa+JgOr2c7a0v0akhS2ucvqvKw1deDsMT15HjEIGtbJP2v3sp/yoTykrKOg==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
@@ -2905,10 +2905,10 @@
     yup "0.32.9"
     zod "3.25.67"
 
-"@strapi/utils@5.46.1":
-  version "5.46.1"
-  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.46.1.tgz#73144e803b809d72003f4ccf33615d266da3bc66"
-  integrity sha512-n3BSWgqXS+k5igl6+K4dYVVl6rLVa+JgOr2c7a0v0akhS2ucvqvKw1deDsMT15HjEIGtbJP2v3sp/yoTykrKOg==
+"@strapi/utils@5.47.1":
+  version "5.47.1"
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.47.1.tgz#c6d0503d0146e3a10921fdeae4cbd223a92adaa8"
+  integrity sha512-HwcetuuxqM26IWBpcFgn3t+rhxAh/Sw16I431MOPc0oGQ1gHqF1D7oB8RPhNtk1+/9b+Ec/AACXSgwib4TQp6w==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
