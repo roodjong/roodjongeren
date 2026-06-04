@@ -2685,10 +2685,10 @@
     yup "0.32.9"
     zod "3.25.67"
 
-"@strapi/provider-email-nodemailer@5.46.1":
-  version "5.46.1"
-  resolved "https://registry.yarnpkg.com/@strapi/provider-email-nodemailer/-/provider-email-nodemailer-5.46.1.tgz#ec41a432d42b53d260181596a86dfd305346d751"
-  integrity sha512-8IIsqwuBEkJOeiFnujJc5McSEWTZO/ikS+9eTJSS+5hjZYEt/W3uMJ8Bh3IH8PrM8Sz2RF7sTMP3pzFtRF+GmQ==
+"@strapi/provider-email-nodemailer@5.47.1":
+  version "5.47.1"
+  resolved "https://registry.yarnpkg.com/@strapi/provider-email-nodemailer/-/provider-email-nodemailer-5.47.1.tgz#590ad9b90584f2510f47bbc973bf19b273c329d6"
+  integrity sha512-bQHyMFKbNgIIQ8+qD1ncp6qjrI4U47mGc6cTiOtBVqmm4XoHP9L7N81qv8gLa9YEe2jMrH0y0qCAmRihIw9MMA==
   dependencies:
     nodemailer "8.0.5"
 
@@ -2886,22 +2886,6 @@
     react-redux "8.1.3"
     react-select "5.8.0"
     sharp "0.33.5"
-    yup "0.32.9"
-    zod "3.25.67"
-
-"@strapi/utils@5.46.0":
-  version "5.46.0"
-  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.46.0.tgz#56138326434860494c3b3eebce395b3e50043f12"
-  integrity sha512-3Bt8cei+JDRc/Gp+YUuQ7ulpQJ48943eCnoJh7s25ttVkecKnU87ClX33dtSxGxgQkQBgpmiXXXBUupMdadNPA==
-  dependencies:
-    "@sindresorhus/slugify" "1.1.0"
-    date-fns "2.30.0"
-    execa "5.1.1"
-    http-errors "2.0.0"
-    lodash "4.18.1"
-    node-machine-id "1.1.12"
-    p-map "4.0.0"
-    preferred-pm "3.1.3"
     yup "0.32.9"
     zod "3.25.67"
 
