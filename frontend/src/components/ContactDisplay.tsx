@@ -15,7 +15,7 @@ export default function ContactDisplay(props: Props) {
                         "inline mr-2 origin-center group-hover:scale-125 transition-transform",
                 }}
             >
-                <h2 className="font-title font-bold text-2xl">Contactpersoon(nen)</h2>
+                <h2 className="font-title font-bold text-2xl">Contactpersoon</h2>
                 <div className="divide-y divide-solid">
                     {props.afdeling.contactpersonen.map((contactpersoon, i) => (
                         <div key={i} className="py-2 last:pb-0 first:pt-0">

@@ -17,7 +17,7 @@ export default function AfdelingenTable(props: Props) {
         <Table>
             <TableHead>
                 <TableHeadCell>Naam</TableHeadCell>
-                <TableHeadCell>Contactpersoon(en)</TableHeadCell>
+                <TableHeadCell>Contactpersoon</TableHeadCell>
                 <TableHeadCell className="sm:table-cell hidden">E-mail</TableHeadCell>
                 <TableHeadCell className="sm:table-cell hidden" />
             </TableHead>
