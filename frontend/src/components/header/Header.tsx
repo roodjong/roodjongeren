@@ -82,7 +82,7 @@ export default function Header() {
                         <HeaderLink href="/over-ons">Organisatie</HeaderLink>
                         <HeaderLink href="/programma">Programma</HeaderLink>
                         <HeaderLink href="/afdelingen">Afdelingen</HeaderLink>
-                        <HeaderLink href="/werkgroepen">Werkgroepen</HeaderLink>
+                        {/*<HeaderLink href="/werkgroepen">Werkgroepen</HeaderLink>*/}
                         <HeaderLink href="/vertrouwenspersonen">
                             Vertrouwenspersonen
                         </HeaderLink>
