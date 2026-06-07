@@ -1,5 +1,6 @@
 import {
     Dispatch,
+    Fragment,
     FormEvent,
     ReactNode,
     SetStateAction,
@@ -79,13 +80,15 @@ async function handleSubmit(
 function renderInputForQuestion(
     questions: Array<Question & { value: string }>,
     setQuestions: Dispatch<SetStateAction<Array<Question & { value: string }>>>,
-    index: number
+    index: number,
+    inputId: string
 ) {
     const q = questions[index];
     if ("choices" in q) {
         const emptyOption = <option key="empty" value=""></option>;
         return (
             <select
+                id={inputId}
                 className="w-full h-8 rounded-md text-black p-2"
                 onChange={(e) => {
                     setQuestions(
@@ -113,16 +116,14 @@ function renderInputForQuestion(
     }
     return (
         <input
+            id={inputId}
+            type="text"
             className="w-full h-8 rounded-md text-black p-2"
             value={q.value}
             onInput={(e) => {
                 setQuestions(
                     questions.map((q, i) => {
                         if (i === index) {
-                            return {
-                                ...q,
-                                value: (e.target as HTMLInputElement).value,
-                            };
                             return {
                                 ...q,
                                 value: (e.target as HTMLInputElement).value,
@@ -140,18 +141,20 @@ function renderInputForQuestion(
 
 function renderExtraQuestions(
     questions: Array<Question & { value: string }>,
-    setQuestions: Dispatch<SetStateAction<Array<Question & { value: string }>>>
+    setQuestions: Dispatch<SetStateAction<Array<Question & { value: string }>>>,
+    idPrefix: string
 ) {
-    return questions.map((q, i) => (
-        <>
-            <div key={`label-${i.toString()}`}>
-                <label>{q.question}</label>
-            </div>
-            <div key={`input-${i.toString()}`}>
-                {renderInputForQuestion(questions, setQuestions, i)}
-            </div>
-        </>
-    ));
+    return questions.map((q, i) => {
+        const inputId = `${idPrefix}-q${i}`;
+        return (
+            <Fragment key={i.toString()}>
+                <div>
+                    <label htmlFor={inputId}>{q.question}</label>
+                </div>
+                <div>{renderInputForQuestion(questions, setQuestions, i, inputId)}</div>
+            </Fragment>
+        );
+    });
 }
 
 export default function PetitionCard(props: Props) {
@@ -167,6 +170,7 @@ export default function PetitionCard(props: Props) {
         (petition.extraQuestions ?? []).map((q) => ({ value: "", ...q }))
     );
 
+    const formId = useId();
     const nameId = useId();
     const emailId = useId();
 
@@ -270,7 +274,7 @@ export default function PetitionCard(props: Props) {
                         }
                     />
                 </div>
-                {renderExtraQuestions(extraQuestions, setExtraQuestions)}
+                {renderExtraQuestions(extraQuestions, setExtraQuestions, formId)}
                 <label>
                     <input type="checkbox" required /> Ik ga akkoord dat mijn gegevens
                     verwerkt worden voor deze petitie
