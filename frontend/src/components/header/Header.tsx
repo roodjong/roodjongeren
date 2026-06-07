@@ -35,7 +35,7 @@ export default function Header() {
     }, [isMenuOpen]);
 
     return (
-        <header className="fixed w-full top-0 z-[2000] shadow-[#0002] shadow-md bg-white overflow-y-auto md:overflow-visible">
+        <header className="fixed w-full top-0 z-[2000] shadow-[#0002] shadow-md bg-white overflow-y-auto lg:overflow-visible">
             <SkipToContent />
             <nav className="container py-0 flex lg:gap-4 flex-col lg:flex-row items-stretch max-h-screen">
                 <div className="flex gap-4 justify-between items-center">
