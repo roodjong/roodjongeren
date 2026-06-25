@@ -35,6 +35,10 @@ export default function Footer() {
                         info@roodjongeren.nl
                     </a>
                     <p>KVK: 24349986</p>
+                    <p>
+                        IBAN:{" "}
+                        <span className="whitespace-nowrap">NL35 RABO 0321 5128 12</span>
+                    </p>
                     <a
                         href="https://www.google.nl/maps/place/Gaffelstraat+61B,+3014+RC+Rotterdam"
                         className="hover:underline"
@@ -81,6 +85,20 @@ export default function Footer() {
                         </a>
                     </IconContext.Provider>
                 </div>
+            </div>
+            <div className="container border-t border-white/20 py-4 text-center text-sm">
+                <p>
+                    &copy; {new Date().getFullYear()} ROOD, Socialistische Jongeren.
+                    Tenzij anders vermeld, is alle inhoud op deze site beschikbaar onder
+                    een{" "}
+                    <a
+                        href="https://creativecommons.org/licenses/by-sa/4.0/deed.nl"
+                        className="underline"
+                    >
+                        Creative Commons Naamsvermelding-GelijkDelen 4.0 licentie
+                    </a>
+                    .
+                </p>
             </div>
         </footer>
     );
