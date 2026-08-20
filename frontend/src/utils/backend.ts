@@ -14,6 +14,7 @@ import ConfidantsPageContent from "../models/ConfidantsPageContent";
 import { Workgroup } from "../models/Workgroup";
 import joinPaths from "./paths";
 import ProgramContent from "../models/ProgramContent";
+import InternationalContent from "../models/InternationalContent";
 import Fallback from "../models/Fallback";
 import { PetitionDetail } from "../models/Petition";
 import WorkgroupPageContent from "../models/WorkgroupPageContent";
@@ -121,6 +122,25 @@ export async function fetchProgram(): Promise<ProgramContent> {
             },
         },
     });
+
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
+}
+
+export async function fetchInternational(): Promise<InternationalContent> {
+    const response = await backend.get<StrapiResponse<InternationalContent>>(
+        "/international",
+        {
+            params: {
+                populate: {
+                    banner: {
+                        fields: ["url"],
+                    },
+                },
+            },
+        }
+    );
 
     const content = unwrapEntity<any>(response);
     content.banner = unwrapMediaUrl(content.banner);
