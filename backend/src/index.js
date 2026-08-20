@@ -16,5 +16,29 @@ module.exports = {
      * This gives you an opportunity to set up your data model,
      * run jobs, or perform some special logic.
      */
-    bootstrap(/*{ strapi }*/) {},
+    async bootstrap({ strapi }) {
+        const uid = "api::international.international";
+        const role = await strapi.db
+            .query("plugin::users-permissions.role")
+            .findOne({ where: { type: "public" } });
+
+        if (!role) return;
+
+        const actions = [`${uid}.find`, `${uid}.findOne`];
+
+        for (const action of actions) {
+            const existing = await strapi.db
+                .query("plugin::users-permissions.permission")
+                .findOne({ where: { action, role: role.id } });
+
+            if (!existing) {
+                await strapi.db.query("plugin::users-permissions.permission").create({
+                    data: {
+                        action,
+                        role: role.id,
+                    },
+                });
+            }
+        }
+    },
 };
