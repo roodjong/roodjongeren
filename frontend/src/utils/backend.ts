@@ -129,15 +129,18 @@ export async function fetchProgram(): Promise<ProgramContent> {
 }
 
 export async function fetchInternational(): Promise<InternationalContent> {
-    const response = await backend.get<StrapiResponse<InternationalContent>>("/international", {
-        params: {
-            populate: {
-                banner: {
-                    fields: ["url"],
+    const response = await backend.get<StrapiResponse<InternationalContent>>(
+        "/international",
+        {
+            params: {
+                populate: {
+                    banner: {
+                        fields: ["url"],
+                    },
                 },
             },
-        },
-    });
+        }
+    );
 
     const content = unwrapEntity<any>(response);
     content.banner = unwrapMediaUrl(content.banner);
