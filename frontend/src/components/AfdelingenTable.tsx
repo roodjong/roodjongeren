@@ -48,7 +48,7 @@ function AfdelingRow({ afdeling }: { afdeling: Afdeling }) {
             </TableCell>
             <TableCell className="sm:table-cell hidden">
                 <a
-                    href={`mailto:afdeling.email`}
+                    href={`mailto:${afdeling.email}`}
                     className="hover:underline text-primary"
                     onClick={(e) => e.stopPropagation()}
                 >
