@@ -14,7 +14,7 @@ export default function BoardmemberCard(props: Props) {
     const boardmember = props.boardmember;
     return (
         <div className="flex flex-col md:flex-row gap-8 mb-8 shadow-inner bg-gray-50 p-4 rounded">
-            <div className="float-right relative md:min-w-[10rem] h-[10rem] rounded shadow-lg overflow-hidden">
+            <div className="float-right relative w-full max-w-[10rem] md:min-w-[10rem] h-[10rem] rounded shadow-lg overflow-hidden">
                 {boardmember.photo && (
                     <Image
                         src={boardmember.photo}
