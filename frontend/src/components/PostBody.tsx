@@ -25,6 +25,17 @@ export default function PostBody(props: Props) {
                 >
                     {post.author}
                 </Link>
+                {post.afdeling && (
+                    <>
+                        {" · "}
+                        <Link
+                            href={`/afdelingen/${post.afdeling.slug}`}
+                            className="hover:underline hover:text-primary transition-colors"
+                        >
+                            Afdeling {post.afdeling.name}
+                        </Link>
+                    </>
+                )}
                 {post.type === PostType.SUBMISSION && (
                     <p className="mt-4">
                         <i>
