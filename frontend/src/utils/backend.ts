@@ -11,12 +11,10 @@ import JoinUsContent from "../models/JoinUsContent";
 import SupportUsContent from "../models/SupportUsContent";
 import { Confidant } from "../models/Confidant";
 import ConfidantsPageContent from "../models/ConfidantsPageContent";
-import { Workgroup } from "../models/Workgroup";
 import joinPaths from "./paths";
 import ProgramContent from "../models/ProgramContent";
 import Fallback from "../models/Fallback";
 import { PetitionDetail } from "../models/Petition";
-import WorkgroupPageContent from "../models/WorkgroupPageContent";
 import { Boardmember } from "../models/Boardmember";
 import {
     pickLargestMediaFormatUrl,
@@ -371,35 +369,6 @@ export async function fetchConfidants(): Promise<Confidant[]> {
         confidant.photo = unwrapMediaUrl(confidant.photo);
         return confidant;
     });
-}
-
-export async function fetchWorkgroupsPage(): Promise<WorkgroupPageContent> {
-    const response = await backend.get<StrapiResponse<WorkgroupPageContent>>(
-        "/workgroups-page",
-        {
-            params: {
-                populate: {
-                    banner: {
-                        fields: ["url"],
-                    },
-                },
-            },
-        }
-    );
-
-    const content = unwrapEntity<any>(response);
-    content.banner = unwrapMediaUrl(content.banner);
-    return content;
-}
-
-export async function fetchWorkgroups(): Promise<Workgroup[]> {
-    const response = await backend.get<StrapiListResponse<Workgroup>>("/workgroups", {
-        params: {
-            sort: "name",
-        },
-    });
-
-    return unwrapList(response);
 }
 
 export async function fetchPetitionSlugs(): Promise<{

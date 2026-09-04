@@ -1,14 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-    FaFacebook,
-    FaGithub,
-    FaInstagram,
-    FaReddit,
-    FaTiktok,
-    FaTwitter,
-    FaMastodon,
-} from "react-icons/fa";
+import { FaGithub, FaInstagram, FaTiktok, FaMastodon, FaYoutube } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
 export default function Footer() {
@@ -67,6 +59,13 @@ export default function Footer() {
                         >
                             <FaTiktok />
                             Tiktok
+                        </a>
+                        <a
+                            href="https://www.youtube.com/@ROOD-Socialistischejongeren"
+                            className="hover:underline group"
+                        >
+                            <FaYoutube />
+                            YouTube
                         </a>
                         <a
                             rel="me"
