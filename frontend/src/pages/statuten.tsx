@@ -24,9 +24,9 @@ export default function StatutenPage(props: Props) {
             <Banner title="Statuten" background={props.pageBanner} compact />
             <Main className="container max-w-4xl">
                 <p className="mt-8 text-xl">
-                    De statuten zijn de formele regels van ROOD, Socialistische
-                    Jongeren. Ze zijn voor het laatst gewijzigd op de Algemene
-                    Ledenvergadering van 23 april 2026 in Utrecht.
+                    De statuten zijn de formele regels van ROOD, Socialistische Jongeren.
+                    Ze zijn voor het laatst gewijzigd op de Algemene Ledenvergadering van
+                    23 april 2026 in Utrecht.
                 </p>
                 <a
                     href={statutesUrl}
