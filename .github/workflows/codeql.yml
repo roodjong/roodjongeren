@@ -7,9 +7,9 @@ on:
     pull_request:
         branches:
             - main
-    schedule:
-        # Weekly Monday 06:00 UTC. Catches new CodeQL rules even on quiet weeks.
-        - cron: "0 6 * * 1"
+    # Keep an explicit option to scan when the repository is being maintained,
+    # without creating a weekly monitoring obligation.
+    workflow_dispatch:
 
 jobs:
     analyze:
