@@ -13,9 +13,9 @@ on:
             - "backend/package.json"
             - "backend/yarn.lock"
             - ".github/workflows/container-scan.yml"
-    schedule:
-        # Weekly so newly-published CVEs against pinned versions still surface.
-        - cron: "0 7 * * 1"
+    # Allow a deliberate scan during maintenance without creating a weekly
+    # monitoring obligation.
+    workflow_dispatch:
 
 # Findings go to the Security tab. Read-only otherwise.
 permissions:
