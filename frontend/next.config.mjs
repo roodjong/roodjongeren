@@ -333,6 +333,7 @@ const securityHeaders = [
 
 export default withTM({
     reactStrictMode: true,
+    output: "standalone",
     // Pin the trace root to this directory. The repo root has a prettier-only
     // `yarn.lock` that confuses Next's workspace inference.
     outputFileTracingRoot: __dirname,
