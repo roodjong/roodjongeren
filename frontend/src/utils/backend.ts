@@ -13,6 +13,7 @@ import { Confidant } from "../models/Confidant";
 import ConfidantsPageContent from "../models/ConfidantsPageContent";
 import joinPaths from "./paths";
 import ProgramContent from "../models/ProgramContent";
+import InternationalContent from "../models/InternationalContent";
 import Fallback from "../models/Fallback";
 import { PetitionDetail } from "../models/Petition";
 import { Boardmember } from "../models/Boardmember";
@@ -119,6 +120,25 @@ export async function fetchProgram(): Promise<ProgramContent> {
             },
         },
     });
+
+    const content = unwrapEntity<any>(response);
+    content.banner = unwrapMediaUrl(content.banner);
+    return content;
+}
+
+export async function fetchInternational(): Promise<InternationalContent> {
+    const response = await backend.get<StrapiResponse<InternationalContent>>(
+        "/international",
+        {
+            params: {
+                populate: {
+                    banner: {
+                        fields: ["url"],
+                    },
+                },
+            },
+        }
+    );
 
     const content = unwrapEntity<any>(response);
     content.banner = unwrapMediaUrl(content.banner);

@@ -1,0 +1,26 @@
+{
+    "kind": "singleType",
+    "collectionName": "internationals",
+    "info": {
+        "singularName": "international",
+        "pluralName": "internationals",
+        "displayName": "International",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "pluginOptions": {},
+    "attributes": {
+        "banner": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": ["images"]
+        },
+        "content": {
+            "type": "richtext",
+            "required": true
+        }
+    }
+}
