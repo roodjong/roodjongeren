@@ -1,0 +1,21 @@
+# https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Codeowners are auto-requested for review on PRs that touch their paths.
+# This file is *advisory* until branch protection is configured to require
+# code-owner review (see SECURITY.md).
+
+# Default owner for everything not matched below.
+* @Nowa-Ammerlaan @RubenNijhuis
+
+# Backend (Strapi)
+/backend/                       @Nowa-Ammerlaan @RubenNijhuis
+
+# Frontend (Next.js)
+/frontend/                      @Nowa-Ammerlaan @RubenNijhuis
+
+# Infra & deploy
+/docker/                        @Nowa-Ammerlaan @RubenNijhuis
+/scripts/                       @Nowa-Ammerlaan @RubenNijhuis
+
+# CI / governance
+/.github/                       @Nowa-Ammerlaan @RubenNijhuis
