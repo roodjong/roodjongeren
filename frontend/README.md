@@ -12,6 +12,18 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Production Docker image
+
+The production image uses [Next.js standalone output](https://nextjs.org/docs/app/api-reference/config/next-config-js/output). It contains only the traced runtime files, static assets, and public files; it does not install the full frontend dependency tree at runtime.
+
+Several pages and the department redirects are generated from Strapi. Docker builds happen before the Compose services start, so pass a CMS URL that is reachable from the Docker builder (not the internal `strapi` hostname):
+
+```bash
+docker build --build-arg BACKEND_URL=https://roodjongeren.nl/backend -t roodjongeren-frontend .
+```
+
+The production Compose files set this through `NEXT_BUILD_BACKEND_URL` and default it to the public CMS endpoint. At runtime, `BACKEND_URL` can still point at the internal `strapi` service as configured in Compose.
+
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
