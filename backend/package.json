@@ -13,7 +13,7 @@
         "test": "node --test tests/*.test.js"
     },
     "dependencies": {
-        "@babel/core": "^7.0.0",
+        "@babel/core": "^8.0.7",
         "@babel/runtime": "^7.11.0",
         "@strapi/plugin-users-permissions": "5.50.2",
         "@strapi/provider-email-nodemailer": "5.50.2",
