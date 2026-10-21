@@ -44,7 +44,12 @@ services:
       - "1337:1337"
   nextjs:
     container_name: rood_nextjs
-    build: ./roodjongeren/frontend
+    build:
+      context: ./roodjongeren/frontend
+      args:
+        # Builds precede service startup, so `http://strapi:1337` is not
+        # available here. Override for a different reachable CMS deployment.
+        BACKEND_URL: ${NEXT_BUILD_BACKEND_URL:-https://roodjongeren.nl/backend}
     restart: unless-stopped
     environment:
       - BACKEND_URL=$STRAPI_URL
